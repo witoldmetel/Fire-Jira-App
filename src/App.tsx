@@ -1,9 +1,10 @@
 import { ThemeConfig } from './theme';
+import { Router } from './routes';
 
 function App() {
 	return (
 		<ThemeConfig>
-			<div className="App">React App</div>
+			<Router />
 		</ThemeConfig>
 	);
 }
