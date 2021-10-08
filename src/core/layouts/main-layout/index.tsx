@@ -2,19 +2,22 @@ import { useLocation, Outlet } from 'react-router-dom';
 
 import { Box, Container, Typography } from '@mui/material';
 
+import { MainNavbar } from './MainNavbar';
+import { MainFooter } from './MainFooter';
+
 export function MainLayout() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
 
   return (
     <>
-      <div />
+      <MainNavbar />
       <div>
         <Outlet />
       </div>
 
       {!isHome ? (
-        <div />
+        <MainFooter />
       ) : (
         <Box
           sx={{

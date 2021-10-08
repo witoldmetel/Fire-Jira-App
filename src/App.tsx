@@ -1,4 +1,4 @@
-import { ThemeConfig } from './theme';
+import { ThemeConfig } from './core/theme';
 import { Router } from './routes';
 
 function App() {
