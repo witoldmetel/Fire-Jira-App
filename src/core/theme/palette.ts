@@ -57,11 +57,11 @@ declare module '@mui/material' {
 }
 
 const PRIMARY = {
-  lighter: '#C8FACD',
-  light: '#5BE584',
-  main: '#00AB55',
-  dark: '#007B55',
-  darker: '#005249'
+  lighter: '#FEF4D4',
+  light: '#FED680',
+  main: '#fda92d',
+  dark: '#B66816',
+  darker: '#793908'
 };
 const SECONDARY = {
   lighter: '#D6E4FF',
@@ -138,7 +138,7 @@ const CHART_COLORS = {
 
 const COMMON = {
   common: { black: '#000', white: '#fff' },
-  primary: { ...PRIMARY, contrastText: '#fff' },
+  primary: { ...PRIMARY, contrastText: GREY[800] },
   secondary: { ...SECONDARY, contrastText: '#fff' },
   info: { ...INFO, contrastText: '#fff' },
   success: { ...SUCCESS, contrastText: GREY[800] },

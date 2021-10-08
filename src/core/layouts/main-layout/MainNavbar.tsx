@@ -1,68 +1,44 @@
 import { Link as RouterLink } from 'react-router-dom';
 
-import { styled } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { AppBar, Toolbar, Container, Theme } from '@mui/material';
 
-import { Logo, HiddenComponent } from 'src/core/components';
-
-const APP_BAR_MOBILE = 64;
-const APP_BAR_DESKTOP = 88;
-
-const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
-  height: APP_BAR_MOBILE,
-  transition: theme.transitions.create(['height', 'background-color'], {
-    easing: theme.transitions.easing.easeInOut,
-    duration: theme.transitions.duration.shorter
-  }),
-  [theme.breakpoints.up('md')]: {
-    height: APP_BAR_DESKTOP
-  }
-}));
-
-export type MenuItemProps = {
-  title: string;
-  path: string;
-  icon?: JSX.Element;
-  to?: string;
-  children?: {
-    subheader: string;
-    items: {
-      title: string;
-      path: string;
-    }[];
-  }[];
-};
-
-export type MenuProps = {
-  isOffset: boolean;
-  isHome: boolean;
-  navConfig: MenuItemProps[];
-};
+import { Logo } from 'src/core/components';
 
 export function MainNavbar() {
+  const classes = useStyles();
+
   return (
-    <AppBar sx={{ boxShadow: 0, bgcolor: 'transparent' }}>
-      <ToolbarStyle disableGutters>
-        <Container
-          maxWidth="lg"
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
+    <AppBar className={classes.appBar}>
+      <Toolbar className={classes.toolbar} disableGutters>
+        <Container className={classes.container} maxWidth="lg">
           <RouterLink to="/">
             <Logo />
           </RouterLink>
-          Ts v2.6.0
-          <Box sx={{ flexGrow: 1 }} />
-          <HiddenComponent width="mdDown">Menu Desktop</HiddenComponent>
-          <Button variant="contained" target="_blank" href="https://material-ui.com/store/items/minimal-dashboard/">
-            Purchase Now
-          </Button>
-          <HiddenComponent width="mdUp">Menu Mobile</HiddenComponent>
         </Container>
-      </ToolbarStyle>
+      </Toolbar>
     </AppBar>
   );
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+  appBar: {
+    boxShadow: 'none',
+    backgroundColor: 'transparent'
+  },
+  toolbar: {
+    height: 64,
+    transition: theme.transitions.create(['height', 'background-color'], {
+      easing: theme.transitions.easing.easeInOut,
+      duration: theme.transitions.duration.shorter
+    }),
+    [theme.breakpoints.up('md')]: {
+      height: 88
+    }
+  },
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }
+}));
