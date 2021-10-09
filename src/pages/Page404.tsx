@@ -1,4 +1,4 @@
-import { Container, Theme, Box } from '@mui/material';
+import { Container, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { Page } from 'src/core/components';
@@ -8,9 +8,7 @@ export default function Page404() {
 
   return (
     <Page className={classes.root} title="404 Page Not Found | Fire Jira">
-      <Container>
-        <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>Page 404</Box>
-      </Container>
+      <Container>Page 404</Container>
     </Page>
   );
 }
