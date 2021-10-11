@@ -1,7 +1,7 @@
 import { Link as RouterLink } from 'react-router-dom';
 
 import { makeStyles } from '@mui/styles';
-import { AppBar, Toolbar, Container, Theme } from '@mui/material';
+import { AppBar, Toolbar, Container, Theme, Button } from '@mui/material';
 
 import { Logo } from 'src/core/components';
 
@@ -15,6 +15,8 @@ export function MainNavbar() {
           <RouterLink to="/">
             <Logo />
           </RouterLink>
+
+          <Button variant="outlined">Login</Button>
         </Container>
       </Toolbar>
     </AppBar>
