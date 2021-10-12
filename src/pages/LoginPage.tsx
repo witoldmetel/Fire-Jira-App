@@ -5,11 +5,10 @@ import { Theme } from '@mui/material';
 
 import { Box, Card, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
 
-import { PATH_AUTH } from '../../routes/paths';
-
-import { MainLayout } from '../core/layouts/main-layout';
+import { AuthLayout } from '../core/layouts/auth-layout';
 import { Page, HiddenComponent, LoginForm } from '../core/components';
 import { useAuth } from '../hooks/useAuth';
+import { PATH_AUTH } from '../routes/paths';
 
 export default function LoginPage() {
   const classes = useStyles();
@@ -17,12 +16,12 @@ export default function LoginPage() {
 
   return (
     <Page className={classes.root} title="Login | Minimal-UI">
-      <MainLayout>
+      <AuthLayout>
         Don’t have an account? &nbsp;
         <Link underline="none" variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
           Get started
         </Link>
-      </MainLayout>
+      </AuthLayout>
 
       <HiddenComponent width="mdDown">
         <Card className={classes.section}>

@@ -3,26 +3,33 @@ import { useSnackbar } from 'notistack';
 import { Link as RouterLink } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 
-import { Link, Stack, Alert, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-// routes
+import {
+  Button,
+  Link,
+  Stack,
+  Alert,
+  Checkbox,
+  TextField,
+  IconButton,
+  InputAdornment,
+  FormControlLabel
+} from '@mui/material';
+import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
+
 import { PATH_AUTH } from '../../../routes/paths';
-// hooks
-import useAuth from '../../../hooks/useAuth';
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
-//
-import { MIconButton } from '../../@material-extend';
+import { useAuth } from '../../../hooks/useAuth';
+import { LoginSchema } from './validations';
 
 type InitialValues = {
   email: string;
   password: string;
   remember: boolean;
+
   afterSubmit?: string;
 };
 
 export function LoginForm() {
   const { login } = useAuth();
-  const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,32 +40,25 @@ export function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: async (values, { setErrors, setSubmitting, resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         await login(values.email, values.password);
         enqueueSnackbar('Login success', {
           variant: 'success',
           action: (key) => (
-            <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Icon icon={closeFill} />
-            </MIconButton>
+            <IconButton size="small" onClick={() => closeSnackbar(key)}>
+              <Close />
+            </IconButton>
           )
         });
-        if (isMountedRef.current) {
-          setSubmitting(false);
-        }
       } catch (error) {
         console.error(error);
         resetForm();
-        if (isMountedRef.current) {
-          setSubmitting(false);
-          setErrors({ afterSubmit: error.message });
-        }
       }
     }
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
@@ -90,7 +90,7 @@ export function LoginForm() {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               )
@@ -111,9 +111,9 @@ export function LoginForm() {
           </Link>
         </Stack>
 
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+        <Button fullWidth size="large" type="submit" variant="contained">
           Login
-        </LoadingButton>
+        </Button>
       </Form>
     </FormikProvider>
   );
