@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useReducer, useState } from 'react';
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, DocumentData, doc, getDoc, addDoc, collection } from 'firebase/firestore';
 import {
   getAuth,
@@ -17,7 +17,12 @@ import { StateTypes } from 'src/constants';
 
 const ADMIN_EMAILS = ['firejira.com'];
 
-initializeApp(firebaseConfig);
+if (getApps().length === 0) {
+  console.log(firebaseConfig);
+  initializeApp(firebaseConfig);
+} else {
+  getApp();
+}
 
 const initialState: AuthState = {
   isAuthenticated: false,
