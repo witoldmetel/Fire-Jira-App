@@ -26,13 +26,10 @@ export type FirebaseContextType = {
   isInitialized: boolean;
   user: AuthUser;
   method: 'firebase';
-  login: (email: string, password: string) => Promise<UserCredential>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
-  loginWithGoogle: () => Promise<UserCredential>;
-  loginWithFaceBook: () => Promise<UserCredential>;
+
+  login: (email: string, password: string) => Promise<void | UserCredential>;
+  register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  resetPassword: (email: string) => Promise<void>;
-  updateProfile: VoidFunction;
 };
 
 type FirebaseAuthPayload = {

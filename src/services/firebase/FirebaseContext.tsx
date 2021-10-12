@@ -1,7 +1,15 @@
 import { createContext, ReactNode, useEffect, useReducer, useState } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, DocumentData } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, DocumentData, doc, getDoc, addDoc, collection } from 'firebase/firestore';
+import {
+  getAuth,
+  signOut,
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword
+} from 'firebase/auth';
 
 import { AuthState, FirebaseContextType, FirebaseActions } from './types';
 import { firebaseConfig } from './firebaseConfig';
@@ -9,10 +17,7 @@ import { StateTypes } from 'src/constants';
 
 const ADMIN_EMAILS = ['firejira.com'];
 
-//@todo: add conditon for check if init is already done
 initializeApp(firebaseConfig);
-
-const db = getFirestore();
 
 const initialState: AuthState = {
   isAuthenticated: false,
@@ -37,74 +42,94 @@ const reducer = (state: AuthState, action: FirebaseActions) => {
 const FirebaseContext = createContext<FirebaseContextType | null>(null);
 
 function FirebaseProvider({ children }: { children: ReactNode }) {
+  const db = getFirestore();
+
   const [profile, setProfile] = useState<DocumentData | undefined>();
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // useEffect(
-  //   () =>
-  //     firebase.auth().onAuthStateChanged((user) => {
-  //       if (user) {
-  //         const docRef = firebase.firestore().collection('users').doc(user.uid);
-  //         docRef
-  //           .get()
-  //           .then((doc) => {
-  //             if (doc.exists) {
-  //               setProfile(doc.data());
-  //             }
-  //           })
-  //           .catch((error) => {
-  //             console.error(error);
-  //           });
+  useEffect(() => {
+    const auth = getAuth();
 
-  //         dispatch({
-  //           type: StateTypes.INIT,
-  //           payload: { isAuthenticated: true, user }
-  //         });
-  //       } else {
-  //         dispatch({
-  //           type: StateTypes.INIT,
-  //           payload: { isAuthenticated: false, user: null }
-  //         });
-  //       }
-  //     }),
-  //   [dispatch]
-  // );
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userRef);
 
-  // const login = (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password);
+        if (userSnap.exists()) {
+          console.log('Document data:', userSnap.data());
+          setProfile(userSnap.data());
+        } else {
+          console.log('No such document!');
+        }
 
-  // const loginWithGoogle = () => {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   return firebase.auth().signInWithPopup(provider);
-  // };
+        dispatch({
+          type: StateTypes.INIT,
+          payload: { isAuthenticated: true, user }
+        });
+      } else {
+        dispatch({
+          type: StateTypes.INIT,
+          payload: { isAuthenticated: false, user: null }
+        });
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
-  // const loginWithFaceBook = () => {
-  //   const provider = new firebase.auth.FacebookAuthProvider();
-  //   return firebase.auth().signInWithPopup(provider);
-  // };
+  const register = (email: string, password: string) => {
+    const auth = getAuth();
 
-  // const register = (email: string, password: string, firstName: string, lastName: string) =>
-  //   firebase
-  //     .auth()
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then((res) => {
-  //       firebase
-  //         .firestore()
-  //         .collection('users')
-  //         .doc(res.user?.uid)
-  //         .set({
-  //           uid: res.user?.uid,
-  //           email,
-  //           displayName: `${firstName} ${lastName}`
-  //         });
-  //     });
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        try {
+          await addDoc(collection(db, 'users'), {
+            ...userCredential
+          });
+        } catch (e) {
+          console.error('Error adding user: ', e);
+        }
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        console.error(errorCode);
+        const errorMessage = error.message;
+        console.error(errorMessage);
+      });
+  };
 
-  // const logout = async () => {
-  //   await firebase.auth().signOut();
-  // };
+  const login = (email: string, password: string) => {
+    const auth = getAuth();
 
-  // const resetPassword = async (email: string) => {
-  //   await firebase.auth().sendPasswordResetEmail(email);
-  // };
+    return setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        console.error(errorCode);
+        const errorMessage = error.message;
+        console.error(errorMessage);
+      });
+  };
+
+  const logout = () => {
+    const auth = getAuth();
+
+    return signOut(auth)
+      .then(() => {
+        console.log('Sign-out successful');
+      })
+      .catch((error) => {
+        console.error('An error happened:', error);
+      });
+  };
 
   const auth = { ...state.user };
 
@@ -118,23 +143,11 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           email: auth.email,
           photoURL: auth.photoURL || profile?.photoURL,
           displayName: auth.displayName || profile?.displayName,
-          role: ADMIN_EMAILS.includes(auth.email) ? 'admin' : 'user',
-          phoneNumber: auth.phoneNumber || profile?.phoneNumber || '',
-          country: profile?.country || '',
-          address: profile?.address || '',
-          state: profile?.state || '',
-          city: profile?.city || '',
-          zipCode: profile?.zipCode || '',
-          about: profile?.about || '',
-          isPublic: profile?.isPublic || false
+          role: ADMIN_EMAILS.includes(auth.email) ? 'admin' : 'user'
         },
-        // login,
-        // register,
-        // loginWithGoogle,
-        // loginWithFaceBook,
-        // logout,
-        // resetPassword,
-        updateProfile: () => {}
+        register,
+        login,
+        logout
       }}
     >
       {children}
