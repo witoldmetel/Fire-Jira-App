@@ -5,7 +5,6 @@ import { Theme } from '@mui/material';
 
 import { Box, Card, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
 
-import { AuthLayout } from '../core/layouts/auth-layout';
 import { Page, HiddenComponent, LoginForm } from '../core/components';
 import { useAuth } from '../hooks/useAuth';
 import { PATH_AUTH } from '../routes/paths';
@@ -15,29 +14,13 @@ export default function LoginPage() {
   const { method } = useAuth();
 
   return (
-    <Page className={classes.root} title="Login | Minimal-UI">
-      <AuthLayout>
-        Don’t have an account? &nbsp;
-        <Link underline="none" variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-          Get started
-        </Link>
-      </AuthLayout>
-
-      <HiddenComponent width="mdDown">
-        <Card className={classes.section}>
-          <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
-          </Typography>
-          <img src="/static/illustrations/illustration_login.png" alt="login" />
-        </Card>
-      </HiddenComponent>
-
+    <Page className={classes.root} title="Login | Fire Jira">
       <Container maxWidth="sm">
         <div className={classes.content}>
           <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="h4" gutterBottom>
-                Sign in to Minimal
+                Sign in to Fire Jira
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
             </Box>
@@ -48,7 +31,7 @@ export default function LoginPage() {
           </Stack>
 
           <Alert severity="info" sx={{ mb: 3 }}>
-            Use email : <strong>demo@minimals.cc</strong> / password :<strong>&nbsp;demo1234</strong>
+            Use email : <strong>---</strong> / password :<strong>&nbsp;---</strong>
           </Alert>
 
           <LoginForm />

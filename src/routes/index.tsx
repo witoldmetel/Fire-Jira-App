@@ -17,11 +17,33 @@ const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (p
 /**
  * PAGES
  */
+
+// Authentication
+const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
+
+// Main
 const UnknownPage = Loadable(lazy(() => import('../pages/UnknownPage')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 
 export function Router() {
   return useRoutes([
+    /**
+     * AUTH
+     */
+    {
+      path: 'auth',
+      element: <MainLayout />,
+      children: [
+        {
+          path: 'login',
+          element: <LoginPage />
+        }
+      ]
+    },
+
+    /**
+     * MAIN
+     */
     {
       path: '*',
       element: <MainLayout />,

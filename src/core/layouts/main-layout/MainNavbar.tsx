@@ -1,9 +1,10 @@
 import { Link as RouterLink } from 'react-router-dom';
 
 import { makeStyles } from '@mui/styles';
-import { AppBar, Toolbar, Container, Theme, Button } from '@mui/material';
+import { AppBar, Toolbar, Container, Theme, Button, Link } from '@mui/material';
 
 import { Logo } from 'src/core/components';
+import { PATH_AUTH } from 'src/routes/paths';
 
 export function MainNavbar() {
   const classes = useStyles();
@@ -16,7 +17,11 @@ export function MainNavbar() {
             <Logo />
           </RouterLink>
 
-          <Button variant="outlined">Login</Button>
+          <Button variant="outlined">
+            <Link to={PATH_AUTH.login} component={RouterLink}>
+              Login
+            </Link>
+          </Button>
         </Container>
       </Toolbar>
     </AppBar>

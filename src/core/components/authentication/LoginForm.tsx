@@ -30,7 +30,7 @@ type InitialValues = {
 
 export function LoginForm() {
   const { login } = useAuth();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  // const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik<InitialValues>({
@@ -43,14 +43,14 @@ export function LoginForm() {
     onSubmit: async (values, { resetForm }) => {
       try {
         await login(values.email, values.password);
-        enqueueSnackbar('Login success', {
-          variant: 'success',
-          action: (key) => (
-            <IconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Close />
-            </IconButton>
-          )
-        });
+        // enqueueSnackbar('Login success', {
+        //   variant: 'success',
+        //   action: (key) => (
+        //     <IconButton size="small" onClick={() => closeSnackbar(key)}>
+        //       <Close />
+        //     </IconButton>
+        //   )
+        // });
       } catch (error) {
         console.error(error);
         resetForm();
