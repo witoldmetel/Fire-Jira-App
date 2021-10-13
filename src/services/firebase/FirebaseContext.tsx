@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useReducer, useState } from 'react';
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, DocumentData, doc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, DocumentData, doc, getDoc, setDoc, collection } from 'firebase/firestore';
 import {
   getAuth,
   signOut,
@@ -86,8 +86,9 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     return createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         try {
-          await addDoc(collection(db, 'users'), {
-            ...userCredential
+          await setDoc(doc(db, 'users', userCredential.user.uid), {
+            id: userCredential.user.uid,
+            email: userCredential.user.email
           });
         } catch (error) {
           console.error('Error adding user: ', error);
