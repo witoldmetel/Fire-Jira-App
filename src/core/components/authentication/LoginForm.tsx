@@ -16,8 +16,9 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
 
-import { PATH_AUTH } from '../../../routes/paths';
-import { useAuth } from '../../../hooks/useAuth';
+import { PATH_AUTH } from 'src/routes/paths';
+import { useAuth } from 'src/hooks/useAuth';
+import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { LoginSchema } from './validations';
 
 type InitialValues = {
@@ -30,6 +31,7 @@ type InitialValues = {
 
 export function LoginForm() {
   const { login } = useAuth();
+  const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -37,33 +39,43 @@ export function LoginForm() {
     initialValues: {
       email: '',
       password: '',
-      remember: true
+      remember: false
     },
     validationSchema: LoginSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
-        await login(values.email, values.password);
+        const result = await login(values.email, values.password);
+
+        if (result) {
+          enqueueSnackbar('Login success', {
+            variant: 'success',
+            action: (key) => (
+              <IconButton size="small" onClick={() => closeSnackbar(key)}>
+                <Close />
+              </IconButton>
+            )
+          });
+        }
+
+        if (isMountedRef.current) {
+          setSubmitting(false);
+        }
       } catch (error) {
-        console.error(error);
+        enqueueSnackbar('Unable to login', { variant: 'error' });
         resetForm();
-      } finally {
-        enqueueSnackbar('Login success', {
-          variant: 'success',
-          action: (key) => (
-            <IconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Close />
-            </IconButton>
-          )
-        });
+
+        if (isMountedRef.current) {
+          setSubmitting(false);
+          // todo: Add type
+          setErrors({ afterSubmit: (error as any).message });
+        }
       }
     }
   });
 
   const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
-  const handleShowPassword = () => {
-    setShowPassword((show) => !show);
-  };
+  const handleShowPassword = () => setShowPassword((show) => !show);
 
   return (
     <FormikProvider value={formik}>

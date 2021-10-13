@@ -89,8 +89,8 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           await addDoc(collection(db, 'users'), {
             ...userCredential
           });
-        } catch (e) {
-          console.error('Error adding user: ', e);
+        } catch (error) {
+          console.error('Error adding user: ', error);
         }
       })
       .catch((error) => {
@@ -126,13 +126,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     const auth = getAuth();
 
-    return signOut(auth)
-      .then(() => {
-        console.log('Sign-out successful');
-      })
-      .catch((error) => {
-        console.error('An error happened:', error);
-      });
+    return signOut(auth);
   };
 
   const auth = { ...state.user };
