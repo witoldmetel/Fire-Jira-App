@@ -62,7 +62,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         if (userSnap.exists()) {
           setProfile(userSnap.data());
         } else {
-          console.log('No such document!');
+          console.error('No such document!');
         }
 
         dispatch({
