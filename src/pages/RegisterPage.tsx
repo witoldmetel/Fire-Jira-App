@@ -1,44 +1,40 @@
 import { Link as RouterLink } from 'react-router-dom';
 
+import { Box, Link, Container, Typography, Tooltip, Stack } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
-import { Box, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
-
-import { Page, HiddenComponent, LoginForm } from '../core/components';
+import { Page, HiddenComponent, RegisterForm } from '../core/components';
 import { PATH_AUTH } from '../routes/paths';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const classes = useStyles();
 
   return (
-    <Page className={classes.root} title="Login | Fire Jira">
-      <Container maxWidth="sm">
+    <Page className={classes.root} title="Register | Fire Jira">
+      <Container>
         <div className={classes.content}>
           <Stack className={classes.contentStack} direction="row" alignItems="center">
             <Box className={classes.contentStackBox}>
               <Typography variant="h4" gutterBottom>
-                Sign in to Fire Jira
+                Get started absolutely free.
               </Typography>
-              <Typography className={classes.contentStackBoxTypography}>Enter your details below.</Typography>
+              <Typography className={classes.contentStackBoxTypography}>
+                Free forever. No credit card needed.
+              </Typography>
             </Box>
-
             <Tooltip title={'Firebase'}>
               <Box className={classes.authLogo} component="img" src={'/static/firebase.png'} />
             </Tooltip>
           </Stack>
 
-          <Alert className={classes.infoBar} severity="info">
-            Use email : <strong>joedoe@firejira.com</strong> / password :<strong>&nbsp;firejira</strong>
-          </Alert>
-
-          <LoginForm />
+          <RegisterForm />
 
           <HiddenComponent width="smUp">
-            <Typography className={classes.registerBar} variant="body2" align="center">
-              Don’t have an account?&nbsp;
-              <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-                Get started
+            <Typography className={classes.loginBar} variant="body2" align="center">
+              Already have an account?&nbsp;
+              <Link to={PATH_AUTH.login} component={RouterLink}>
+                Login
               </Link>
             </Typography>
           </HiddenComponent>
@@ -76,10 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 32,
     height: 32
   },
-  infoBar: {
-    marginBottom: theme.spacing(3)
-  },
-  registerBar: {
+  loginBar: {
     marginTop: theme.spacing(3)
   }
 }));

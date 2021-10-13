@@ -47,11 +47,18 @@ export function MainNavbar() {
               Logout
             </Button>
           ) : (
-            <Button variant="outlined">
-              <Link to={PATH_AUTH.login} component={RouterLink}>
-                Login
-              </Link>
-            </Button>
+            <>
+              <Button variant="outlined">
+                <Link to={PATH_AUTH.register} component={RouterLink}>
+                  Register
+                </Link>
+              </Button>
+              <Button variant="outlined">
+                <Link to={PATH_AUTH.login} component={RouterLink}>
+                  Login
+                </Link>
+              </Button>
+            </>
           )}
         </Container>
       </Toolbar>

@@ -1,36 +1,23 @@
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 
-import {
-  Button,
-  Link,
-  Stack,
-  Alert,
-  Checkbox,
-  TextField,
-  IconButton,
-  InputAdornment,
-  FormControlLabel
-} from '@mui/material';
+import { Stack, TextField, IconButton, InputAdornment, Alert, Button } from '@mui/material';
 import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
 
-import { PATH_AUTH } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
-import { LoginSchema } from './validations';
+import { RegisterSchema } from './validations';
 
 type InitialValues = {
   email: string;
   password: string;
-  remember: boolean;
 
   afterSubmit?: string;
 };
 
-export function LoginForm() {
-  const { login } = useAuth();
+export function RegisterForm() {
+  const { register } = useAuth();
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
@@ -38,31 +25,28 @@ export function LoginForm() {
   const formik = useFormik<InitialValues>({
     initialValues: {
       email: '',
-      password: '',
-      remember: false
+      password: ''
     },
-    validationSchema: LoginSchema,
-    onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
+    validationSchema: RegisterSchema,
+    onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
-        const result = await login(values.email, values.password);
+        await register(values.email, values.password);
 
-        if (result) {
-          enqueueSnackbar('Login success', {
-            variant: 'success',
-            action: (key) => (
-              <IconButton size="small" onClick={() => closeSnackbar(key)}>
-                <Close />
-              </IconButton>
-            )
-          });
-        }
+        enqueueSnackbar('Register success', {
+          variant: 'success',
+          action: (key) => (
+            <IconButton size="small" onClick={() => closeSnackbar(key)}>
+              <Close />
+            </IconButton>
+          )
+        });
 
         if (isMountedRef.current) {
           setSubmitting(false);
         }
       } catch (error) {
-        enqueueSnackbar('Unable to login', { variant: 'error' });
-        resetForm();
+        enqueueSnackbar('Unable to register', { variant: 'error' });
+        console.error(error);
 
         if (isMountedRef.current) {
           setSubmitting(false);
@@ -73,7 +57,7 @@ export function LoginForm() {
     }
   });
 
-  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
@@ -111,23 +95,11 @@ export function LoginForm() {
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
+
+          <Button fullWidth size="large" type="submit" variant="contained">
+            Register
+          </Button>
         </Stack>
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-          <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-            label="Remember me"
-            disabled
-          />
-
-          <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.resetPassword}>
-            Forgot password?
-          </Link>
-        </Stack>
-
-        <Button fullWidth size="large" type="submit" variant="contained">
-          Login
-        </Button>
       </Form>
     </FormikProvider>
   );

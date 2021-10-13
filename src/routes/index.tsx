@@ -22,6 +22,7 @@ const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (p
 
 // Authentication
 const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
+const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
 
 // Main
 const UnknownPage = Loadable(lazy(() => import('../pages/UnknownPage')));
@@ -44,6 +45,14 @@ export function Router() {
           element: (
             <GuestGuard>
               <LoginPage />
+            </GuestGuard>
+          )
+        },
+        {
+          path: 'register',
+          element: (
+            <GuestGuard>
+              <RegisterPage />
             </GuestGuard>
           )
         }
