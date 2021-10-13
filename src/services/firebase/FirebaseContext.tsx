@@ -18,7 +18,6 @@ import { StateTypes } from 'src/constants';
 const ADMIN_EMAILS = ['firejira.com'];
 
 if (getApps().length === 0) {
-  console.log(firebaseConfig);
   initializeApp(firebaseConfig);
 } else {
   getApp();
@@ -61,7 +60,6 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          console.log('Document data:', userSnap.data());
           setProfile(userSnap.data());
         } else {
           console.log('No such document!');
@@ -142,7 +140,6 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     <FirebaseContext.Provider
       value={{
         ...state,
-        method: 'firebase',
         user: {
           id: auth.uid,
           email: auth.email,

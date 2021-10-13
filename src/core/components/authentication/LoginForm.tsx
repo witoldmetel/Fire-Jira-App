@@ -90,7 +90,7 @@ export function LoginForm() {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPassword ? <Visibility sx={{ color: 'primary' }} /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               )

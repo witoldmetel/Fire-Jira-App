@@ -25,7 +25,6 @@ export type FirebaseContextType = {
   isAuthenticated: boolean;
   isInitialized: boolean;
   user: AuthUser;
-  method: 'firebase';
 
   login: (email: string, password: string) => Promise<void | UserCredential>;
   register: (email: string, password: string) => Promise<void>;

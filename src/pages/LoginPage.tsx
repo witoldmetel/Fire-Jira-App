@@ -6,13 +6,10 @@ import { Theme } from '@mui/material';
 import { Box, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
 
 import { Page, HiddenComponent, LoginForm } from '../core/components';
-import { useAuth } from '../hooks/useAuth';
 import { PATH_AUTH } from '../routes/paths';
-import { setFirstLetterCapital } from 'src/utils/setFirstLetterCapital';
 
 export default function LoginPage() {
   const classes = useStyles();
-  const { method } = useAuth();
 
   return (
     <Page className={classes.root} title="Login | Fire Jira">
@@ -26,13 +23,13 @@ export default function LoginPage() {
               <Typography className={classes.contentStackBoxTypography}>Enter your details below.</Typography>
             </Box>
 
-            <Tooltip title={setFirstLetterCapital(method)}>
-              <Box className={classes.authLogo} component="img" src={`/static/auth/ic_${method}.png`} />
+            <Tooltip title={'Firebase'}>
+              <Box className={classes.authLogo} component="img" src={'/static/firebase.png'} />
             </Tooltip>
           </Stack>
 
           <Alert className={classes.infoBar} severity="info">
-            Use email : <strong>---</strong> / password :<strong>&nbsp;---</strong>
+            Use email : <strong>joedoe@firejira.com</strong> / password :<strong>&nbsp;firejira</strong>
           </Alert>
 
           <LoginForm />
