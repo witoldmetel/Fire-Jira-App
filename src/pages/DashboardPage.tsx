@@ -3,12 +3,12 @@ import { Box, Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
 
-export default function LandingPage() {
+export default function DashboardPage() {
   const classes = useStyles();
 
   return (
     <Page className={classes.root} title="Fire Jira">
-      <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>Landing Page</Box>
+      <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>Home Page</Box>
     </Page>
   );
 }

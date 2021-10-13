@@ -32,6 +32,7 @@ const initialState: AuthState = {
 const reducer = (state: AuthState, action: FirebaseActions) => {
   if (action.type === StateTypes.INIT) {
     const { isAuthenticated, user } = action.payload;
+
     return {
       ...state,
       isAuthenticated,

@@ -4,7 +4,9 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
 import { MainLayout } from '../core/layouts/main-layout';
-import { PATH_PAGE } from './paths';
+import { PATH_PAGE, PATH_DASHBOARD } from './paths';
+import { GuestGuard } from '../guards/GuestGuard';
+import { AuthGuard } from '../guards/AuthGuard';
 
 const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: JSX.IntrinsicAttributes) => {
   return (
@@ -25,6 +27,9 @@ const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
 const UnknownPage = Loadable(lazy(() => import('../pages/UnknownPage')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 
+// Dashboard
+const DashboardPage = Loadable(lazy(() => import('../pages/DashboardPage')));
+
 export function Router() {
   return useRoutes([
     /**
@@ -36,7 +41,11 @@ export function Router() {
       children: [
         {
           path: 'login',
-          element: <LoginPage />
+          element: (
+            <GuestGuard>
+              <LoginPage />
+            </GuestGuard>
+          )
         }
       ]
     },
@@ -57,6 +66,19 @@ export function Router() {
       element: <MainLayout />,
       children: [{ path: '/', element: <LandingPage /> }]
     },
-    { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> }
+    { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
+
+    /**
+     * DASHBOARD
+     */
+    {
+      path: 'dashboard',
+      element: (
+        <AuthGuard>
+          <MainLayout />
+        </AuthGuard>
+      ),
+      children: [{ path: PATH_DASHBOARD.root, element: <DashboardPage /> }]
+    }
   ]);
 }
