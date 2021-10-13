@@ -4,7 +4,7 @@ export function Logo({ sx }: BoxProps) {
   return (
     <Box sx={{ width: 40, height: 40, ...sx }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="1.008 18.463 180 160.509">
-        <title>Slice 1</title>
+        <title>Fire Jira</title>
         <path fill="#F4A93F" d="M80.95 76l19.202 33.45-24.243-.872L80.95 76z" />
         <path fill="#F4A83E" d="M90.16 82.4l14.234 27.05-29.091-.872L90.16 82.4z" />
         <path fill="#E88634" d="M87.489 87.038L99.94 109.45l-24.333-.243 11.882-22.169z" />

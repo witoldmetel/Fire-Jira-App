@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import App from './App';
+import { FirebaseProvider } from './services/firebase/FirebaseContext';
 
 ReactDOM.render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <App />
+        <FirebaseProvider>
+          <App />
+        </FirebaseProvider>
       </BrowserRouter>
     </HelmetProvider>
   </StrictMode>,

@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 
 import { Page } from 'src/core/components';
 
-export default function Page404() {
+export default function UnknownPage() {
   const classes = useStyles();
 
   return (

@@ -1,10 +1,13 @@
 import { ThemeConfig } from './core/theme';
+import { NotistackProvider } from './core/components';
 import { Router } from './routes';
 
 function App() {
   return (
     <ThemeConfig>
-      <Router />
+      <NotistackProvider>
+        <Router />
+      </NotistackProvider>
     </ThemeConfig>
   );
 }
