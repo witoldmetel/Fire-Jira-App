@@ -6,6 +6,7 @@ import {
   signOut,
   setPersistence,
   signInWithEmailAndPassword,
+  browserLocalPersistence,
   browserSessionPersistence,
   onAuthStateChanged,
   createUserWithEmailAndPassword
@@ -70,12 +71,12 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       });
   };
 
-  const login = (email: string, password: string) => {
+  const login = (email: string, password: string, remember: boolean) => {
     dispatch(startLoading());
 
     const auth = getAuth();
 
-    return setPersistence(auth, browserSessionPersistence)
+    return setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence)
       .then(() => {
         // Existing and future Auth states are now persisted in the current
         // session only. Closing the window would clear any existing state even
