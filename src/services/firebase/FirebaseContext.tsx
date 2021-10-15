@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useEffect, useReducer, useState } from 'react';
+import { createContext, ReactNode, useEffect } from 'react';
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, DocumentData, doc, getDoc, setDoc, collection } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import {
   getAuth,
   signOut,
@@ -11,46 +11,23 @@ import {
   createUserWithEmailAndPassword
 } from 'firebase/auth';
 
-import { AuthState, FirebaseContextType, FirebaseActions } from './types';
+import { FirebaseContextType } from './types';
 import { firebaseConfig } from './firebaseConfig';
-import { StateTypes } from 'src/constants';
+import { dispatch } from 'src/store/store';
+import { startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
 
-const ADMIN_EMAILS = ['firejira.com'];
-
+// check if firebase app has been initialized previously
+// if not, initialize with the config we saved earlier
 if (getApps().length === 0) {
   initializeApp(firebaseConfig);
 } else {
   getApp();
 }
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  isInitialized: false,
-  user: null
-};
-
-const reducer = (state: AuthState, action: FirebaseActions) => {
-  if (action.type === StateTypes.INIT) {
-    const { isAuthenticated, user } = action.payload;
-
-    return {
-      ...state,
-      isAuthenticated,
-      isInitialized: true,
-      user
-    };
-  }
-
-  return state;
-};
-
 const FirebaseContext = createContext<FirebaseContextType | null>(null);
 
 function FirebaseProvider({ children }: { children: ReactNode }) {
   const db = getFirestore();
-
-  const [profile, setProfile] = useState<DocumentData | undefined>();
-  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const auth = getAuth();
@@ -61,26 +38,20 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          setProfile(userSnap.data());
+          dispatch(getUserSuccess(userSnap.data()));
         } else {
-          console.error('No such document!');
+          dispatch(hasError('No such document!'));
         }
-
-        dispatch({
-          type: StateTypes.INIT,
-          payload: { isAuthenticated: true, user }
-        });
       } else {
-        dispatch({
-          type: StateTypes.INIT,
-          payload: { isAuthenticated: false, user: null }
-        });
+        dispatch(getUserReject());
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const register = (email: string, password: string) => {
+    dispatch(startLoading());
+
     const auth = getAuth();
 
     return createUserWithEmailAndPassword(auth, email, password)
@@ -91,19 +62,17 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
             email: userCredential.user.email
           });
         } catch (error) {
-          console.error('Error adding user: ', error);
+          dispatch(hasError(error));
         }
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        console.error(errorCode);
-        const errorMessage = error.message;
-        console.error(errorMessage);
+        dispatch(hasError(error));
       });
   };
 
   const login = (email: string, password: string) => {
+    dispatch(startLoading());
+
     const auth = getAuth();
 
     return setPersistence(auth, browserSessionPersistence)
@@ -116,33 +85,23 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         return signInWithEmailAndPassword(auth, email, password);
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        console.error(errorCode);
-        const errorMessage = error.message;
-        console.error(errorMessage);
+        dispatch(hasError(error));
       });
   };
 
   const logout = () => {
+    dispatch(startLoading());
+
     const auth = getAuth();
 
-    return signOut(auth);
+    return signOut(auth).catch((error) => {
+      dispatch(hasError(error));
+    });
   };
-
-  const auth = { ...state.user };
 
   return (
     <FirebaseContext.Provider
       value={{
-        ...state,
-        user: {
-          id: auth.uid,
-          email: auth.email,
-          photoURL: auth.photoURL || profile?.photoURL,
-          displayName: auth.displayName || profile?.displayName,
-          role: ADMIN_EMAILS.includes(auth.email) ? 'admin' : 'user'
-        },
         register,
         login,
         logout

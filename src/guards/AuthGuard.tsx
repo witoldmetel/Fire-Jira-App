@@ -1,15 +1,16 @@
 import { useState, ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { useAuth } from '../hooks/useAuth';
 import LoginPage from '../pages/LoginPage';
+import { getAuthState } from '../store/slices/auth';
 
 type AuthGuardProps = {
   children: ReactNode;
 };
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useSelector(getAuthState);
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
