@@ -1,4 +1,5 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 
 import { makeStyles } from '@mui/styles';
@@ -8,19 +9,19 @@ import { Close } from '@mui/icons-material';
 import { Logo } from 'src/core/components';
 import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
+import { getAuthState } from 'src/store/slices/auth';
 
 export function MainNavbar() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { logout } = useAuth();
+  const { isAuthenticated } = useSelector(getAuthState);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  // @todo: Check all states for logout
   const handleLogout = async () => {
     try {
       await logout().then(() => navigate('/'));
     } catch (error) {
-      console.error(error);
       enqueueSnackbar('Unable to logout', { variant: 'error' });
     } finally {
       enqueueSnackbar('Logout success', {
