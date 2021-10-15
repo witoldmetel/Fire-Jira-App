@@ -7,7 +7,7 @@ const initialState: AuthState = {
   isInitialized: false,
   isLoading: false,
   isError: false,
-  errorMessage: '',
+  errorMessage: null,
   user: null
 };
 
@@ -17,6 +17,8 @@ const slice = createSlice({
   reducers: {
     startLoading(state) {
       state.isLoading = true;
+      state.isError = false;
+      state.errorMessage = null;
     },
 
     hasError(state, action) {
@@ -28,7 +30,7 @@ const slice = createSlice({
     getUserSuccess(state, action) {
       state.isLoading = false;
       state.isError = false;
-      state.errorMessage = '';
+      state.errorMessage = null;
       state.isInitialized = true;
       state.isAuthenticated = true;
       state.user = action.payload;

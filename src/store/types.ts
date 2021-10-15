@@ -1,3 +1,5 @@
+import { FirebaseError } from 'firebase/app';
+
 import { store } from './store';
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -10,6 +12,6 @@ export type AuthState = {
   isInitialized: boolean;
   isLoading: boolean;
   isError: boolean;
-  errorMessage: string;
+  errorMessage: FirebaseError | null;
   user: AuthUser;
 };

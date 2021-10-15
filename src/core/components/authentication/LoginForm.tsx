@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useFormik, Form, FormikProvider } from 'formik';
 
 import {
@@ -20,6 +21,7 @@ import { PATH_AUTH } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { LoginSchema } from './validations';
+import { getAuthState } from 'src/store/slices/auth';
 
 type InitialValues = {
   email: string;
@@ -31,9 +33,17 @@ type InitialValues = {
 
 export function LoginForm() {
   const { login } = useAuth();
+  const { isError, errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isError) {
+      enqueueSnackbar(errorMessage?.code, { variant: 'error' });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError]);
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -61,19 +71,18 @@ export function LoginForm() {
           setSubmitting(false);
         }
       } catch (error) {
-        enqueueSnackbar('Unable to login', { variant: 'error' });
+        enqueueSnackbar(errorMessage?.code, { variant: 'error' });
         resetForm();
 
         if (isMountedRef.current) {
           setSubmitting(false);
-          // todo: Add type
-          setErrors({ afterSubmit: (error as any).message });
+          setErrors({ afterSubmit: errorMessage?.code });
         }
       }
     }
   });
 
-  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, values, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
@@ -125,7 +134,7 @@ export function LoginForm() {
           </Link>
         </Stack>
 
-        <Button fullWidth size="large" type="submit" variant="contained">
+        <Button fullWidth size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
           Login
         </Button>
       </Form>
