@@ -2,7 +2,8 @@ import { useState, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import LoginPage from '../pages/LoginPage';
+import { CircularProgress } from '@mui/material';
+
 import { getAuthState } from '../store/slices/auth';
 
 type AuthGuardProps = {
@@ -19,7 +20,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
       setRequestedLocation(pathname);
     }
 
-    return <LoginPage />;
+    return <CircularProgress />;
   }
 
   if (requestedLocation && pathname !== requestedLocation) {
