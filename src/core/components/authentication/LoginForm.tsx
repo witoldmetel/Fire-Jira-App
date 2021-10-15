@@ -49,12 +49,12 @@ export function LoginForm() {
     initialValues: {
       email: '',
       password: '',
-      remember: false
+      remember: true
     },
     validationSchema: LoginSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
-        const result = await login(values.email, values.password);
+        const result = await login(values.email, values.password, values.remember);
 
         if (result) {
           enqueueSnackbar('Login success', {
@@ -126,7 +126,6 @@ export function LoginForm() {
           <FormControlLabel
             control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
             label="Remember me"
-            disabled
           />
 
           <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.resetPassword}>
