@@ -15,7 +15,7 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setInitState(state) {
+    resetState(state) {
       state.isLoading = false;
       state.isError = false;
       state.errorMessage = null;
@@ -53,7 +53,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { setInitState, startLoading, hasError, getUserSuccess, getUserReject } = slice.actions;
+export const { resetState, startLoading, hasError, getUserSuccess, getUserReject } = slice.actions;
 
 // Selectors
 const getState = (state: RootState) => state;

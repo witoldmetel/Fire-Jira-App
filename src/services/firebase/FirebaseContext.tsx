@@ -16,7 +16,7 @@ import {
 import { FirebaseContextType } from './types';
 import { firebaseConfig } from './firebaseConfig';
 import { dispatch } from 'src/store/store';
-import { setInitState, startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
+import { resetState, startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
 
 // check if firebase app has been initialized previously
 // if not, initialize with the config we saved earlier
@@ -69,7 +69,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       })
       .catch((error) => {
         dispatch(hasError(error));
-        dispatch(setInitState());
+        dispatch(resetState());
       });
   };
 
@@ -89,7 +89,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       })
       .catch((error) => {
         dispatch(hasError(error));
-        dispatch(setInitState());
+        dispatch(resetState());
       });
   };
 
@@ -106,7 +106,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         dispatch(hasError(error));
       });
 
-    dispatch(setInitState());
+    dispatch(resetState());
   };
 
   const resetPassword = async (email: string, callback: () => void) => {
@@ -122,7 +122,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         dispatch(hasError(error));
       });
 
-    dispatch(setInitState());
+    dispatch(resetState());
   };
 
   return (
