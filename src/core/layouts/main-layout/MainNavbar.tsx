@@ -20,18 +20,20 @@ export function MainNavbar() {
 
   const handleLogout = async () => {
     try {
-      await logout().then(() => navigate('/'));
+      await logout(() =>
+        enqueueSnackbar('Logout success', {
+          variant: 'success',
+          action: (key) => (
+            <IconButton size="small" onClick={() => closeSnackbar(key)}>
+              <Close />
+            </IconButton>
+          )
+        })
+      ).then(() => {
+        navigate('/');
+      });
     } catch (error) {
       enqueueSnackbar('Unable to logout', { variant: 'error' });
-    } finally {
-      enqueueSnackbar('Logout success', {
-        variant: 'success',
-        action: (key) => (
-          <IconButton size="small" onClick={() => closeSnackbar(key)}>
-            <Close />
-          </IconButton>
-        )
-      });
     }
   };
 

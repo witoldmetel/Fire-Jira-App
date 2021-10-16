@@ -9,7 +9,8 @@ import {
   browserLocalPersistence,
   browserSessionPersistence,
   onAuthStateChanged,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 
 import { FirebaseContextType } from './types';
@@ -90,14 +91,32 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       });
   };
 
-  const logout = () => {
+  const logout = (callback: () => void) => {
     dispatch(startLoading());
 
     const auth = getAuth();
 
-    return signOut(auth).catch((error) => {
-      dispatch(hasError(error));
-    });
+    return signOut(auth)
+      .then(() => {
+        callback();
+      })
+      .catch((error) => {
+        dispatch(hasError(error));
+      });
+  };
+
+  const resetPassword = async (email: string, callback: () => void) => {
+    dispatch(startLoading());
+
+    const auth = getAuth();
+
+    await sendPasswordResetEmail(auth, email)
+      .then(() => {
+        callback();
+      })
+      .catch((error) => {
+        dispatch(hasError(error));
+      });
   };
 
   return (
@@ -105,7 +124,8 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       value={{
         register,
         login,
-        logout
+        logout,
+        resetPassword
       }}
     >
       {children}
