@@ -20,7 +20,7 @@ type InitialValues = {
 };
 
 export function RegisterForm() {
-  const { register } = useAuth();
+  const { register, loginWithGoogle } = useAuth();
   const { isError, errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -32,6 +32,18 @@ export function RegisterForm() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError]);
+
+  const googleRegisterHandler = () =>
+    loginWithGoogle(() =>
+      enqueueSnackbar('Register success', {
+        variant: 'success',
+        action: (key) => (
+          <IconButton size="small" onClick={() => closeSnackbar(key)}>
+            <Close />
+          </IconButton>
+        )
+      })
+    );
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -72,7 +84,7 @@ export function RegisterForm() {
 
   return (
     <FormikProvider value={formik}>
-      <SocialForm />
+      <SocialForm onGoogleClick={googleRegisterHandler} />
 
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>

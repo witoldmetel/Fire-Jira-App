@@ -5,10 +5,9 @@ import { Theme } from '@mui/material';
 
 type SocialFormProps = {
   onGoogleClick: VoidFunction;
-  onFacebookClick: VoidFunction;
 };
 
-export function SocialForm({ onGoogleClick, onFacebookClick }: SocialFormProps) {
+export function SocialForm({ onGoogleClick }: SocialFormProps) {
   const classes = useStyles();
 
   return (
@@ -20,16 +19,14 @@ export function SocialForm({ onGoogleClick, onFacebookClick }: SocialFormProps) 
           </Button>
         </Grid>
         <Grid item xs>
-          <Button className={classes.button} fullWidth size="large" variant="outlined" onClick={onFacebookClick}>
+          <Button className={classes.button} fullWidth size="large" variant="contained" disabled>
             <Facebook className={classes.facebookIcon} height={24} />
           </Button>
         </Grid>
       </Grid>
 
-      <Divider sx={{ my: 3 }}>
-        <Typography className={classes.button} variant="body2">
-          OR
-        </Typography>
+      <Divider className={classes.divider}>
+        <Typography variant="body2">OR</Typography>
       </Divider>
     </>
   );
@@ -43,6 +40,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: '#DF3E30'
   },
   facebookIcon: {
-    color: '#1877F2'
+    color: theme.palette.text.secondary
+  },
+  divider: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3)
   }
 }));
