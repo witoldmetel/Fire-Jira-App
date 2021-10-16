@@ -10,6 +10,7 @@ import { useAuth } from 'src/hooks/useAuth';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { RegisterSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
+import { SocialForm } from './SocialForm';
 
 type InitialValues = {
   email: string;
@@ -71,6 +72,8 @@ export function RegisterForm() {
 
   return (
     <FormikProvider value={formik}>
+      <SocialForm />
+
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           {errors.afterSubmit && <Alert severity="error">{errors.afterSubmit}</Alert>}
