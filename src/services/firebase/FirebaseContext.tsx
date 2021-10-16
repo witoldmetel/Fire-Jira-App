@@ -12,7 +12,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  sendEmailVerification
 } from 'firebase/auth';
 
 import { FirebaseContextType } from './types';
@@ -64,11 +65,18 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           await setDoc(doc(db, 'users', userCredential.user.uid), {
             id: userCredential.user.uid,
             email: userCredential.user.email
-          }).then(() => callback());
+          }).then(async () => {
+            sendEmailVerification(userCredential.user, {
+              url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''
+            });
+
+            callback();
+          });
         } catch (error) {
           dispatch(hasError(error));
         }
       })
+
       .catch((error) => {
         dispatch(hasError(error));
         dispatch(resetState());
