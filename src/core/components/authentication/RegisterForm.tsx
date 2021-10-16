@@ -40,11 +40,7 @@ export function RegisterForm() {
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
-        await register(values.email, values.password);
-
-        if (isMountedRef.current) {
-          setSubmitting(false);
-        } else {
+        await register(values.email, values.password, () =>
           enqueueSnackbar('Register success', {
             variant: 'success',
             action: (key) => (
@@ -52,7 +48,11 @@ export function RegisterForm() {
                 <Close />
               </IconButton>
             )
-          });
+          })
+        );
+
+        if (isMountedRef.current) {
+          setSubmitting(false);
         }
       } catch (error) {
         enqueueSnackbar(errorMessage?.code, { variant: 'error' });

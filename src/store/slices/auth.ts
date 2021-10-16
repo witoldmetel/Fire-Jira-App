@@ -15,10 +15,14 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    startLoading(state) {
-      state.isLoading = true;
+    setInitState(state) {
+      state.isLoading = false;
       state.isError = false;
       state.errorMessage = null;
+    },
+
+    startLoading(state) {
+      state.isLoading = true;
     },
 
     hasError(state, action) {
@@ -49,7 +53,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { startLoading, hasError, getUserSuccess, getUserReject } = slice.actions;
+export const { setInitState, startLoading, hasError, getUserSuccess, getUserReject } = slice.actions;
 
 // Selectors
 const getState = (state: RootState) => state;

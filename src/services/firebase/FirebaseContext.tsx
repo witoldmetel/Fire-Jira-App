@@ -16,7 +16,7 @@ import {
 import { FirebaseContextType } from './types';
 import { firebaseConfig } from './firebaseConfig';
 import { dispatch } from 'src/store/store';
-import { startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
+import { setInitState, startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
 
 // check if firebase app has been initialized previously
 // if not, initialize with the config we saved earlier
@@ -51,7 +51,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const register = (email: string, password: string) => {
+  const register = (email: string, password: string, callback: () => void) => {
     dispatch(startLoading());
 
     const auth = getAuth();
@@ -62,17 +62,18 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           await setDoc(doc(db, 'users', userCredential.user.uid), {
             id: userCredential.user.uid,
             email: userCredential.user.email
-          });
+          }).then(() => callback());
         } catch (error) {
           dispatch(hasError(error));
         }
       })
       .catch((error) => {
         dispatch(hasError(error));
+        dispatch(setInitState());
       });
   };
 
-  const login = (email: string, password: string, remember: boolean) => {
+  const login = (email: string, password: string, remember: boolean, callback: () => void) => {
     dispatch(startLoading());
 
     const auth = getAuth();
@@ -84,25 +85,28 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         // if a user forgets to sign out.
         // ...
         // New sign-in will be persisted with session persistence.
-        return signInWithEmailAndPassword(auth, email, password);
+        return signInWithEmailAndPassword(auth, email, password).then(() => callback());
       })
       .catch((error) => {
         dispatch(hasError(error));
+        dispatch(setInitState());
       });
   };
 
-  const logout = (callback: () => void) => {
+  const logout = async (callback: () => void) => {
     dispatch(startLoading());
 
     const auth = getAuth();
 
-    return signOut(auth)
+    await signOut(auth)
       .then(() => {
         callback();
       })
       .catch((error) => {
         dispatch(hasError(error));
       });
+
+    dispatch(setInitState());
   };
 
   const resetPassword = async (email: string, callback: () => void) => {
@@ -117,6 +121,8 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       .catch((error) => {
         dispatch(hasError(error));
       });
+
+    dispatch(setInitState());
   };
 
   return (
