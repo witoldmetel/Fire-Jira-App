@@ -23,6 +23,7 @@ const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (p
 // Authentication
 const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
 const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
+const ResetPasswordPage = Loadable(lazy(() => import('../pages/ResetPasswordPage')));
 
 // Main
 const UnknownPage = Loadable(lazy(() => import('../pages/UnknownPage')));
@@ -55,7 +56,8 @@ export function Router() {
               <RegisterPage />
             </GuestGuard>
           )
-        }
+        },
+        { path: 'reset-password', element: <ResetPasswordPage /> }
       ]
     },
 
