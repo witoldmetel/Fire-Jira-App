@@ -10,6 +10,7 @@ import { useAuth } from 'src/hooks/useAuth';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { RegisterSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
+import { SocialForm } from './SocialForm';
 
 type InitialValues = {
   email: string;
@@ -19,7 +20,7 @@ type InitialValues = {
 };
 
 export function RegisterForm() {
-  const { register } = useAuth();
+  const { register, loginWithGoogle } = useAuth();
   const { isError, errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -31,6 +32,18 @@ export function RegisterForm() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError]);
+
+  const googleRegisterHandler = () =>
+    loginWithGoogle(() =>
+      enqueueSnackbar('Register success', {
+        variant: 'success',
+        action: (key) => (
+          <IconButton size="small" onClick={() => closeSnackbar(key)}>
+            <Close />
+          </IconButton>
+        )
+      })
+    );
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -71,6 +84,8 @@ export function RegisterForm() {
 
   return (
     <FormikProvider value={formik}>
+      <SocialForm onGoogleClick={googleRegisterHandler} />
+
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           {errors.afterSubmit && <Alert severity="error">{errors.afterSubmit}</Alert>}

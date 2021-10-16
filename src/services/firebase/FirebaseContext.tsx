@@ -10,7 +10,9 @@ import {
   browserSessionPersistence,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup
 } from 'firebase/auth';
 
 import { FirebaseContextType } from './types';
@@ -93,6 +95,30 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       });
   };
 
+  const loginWithGoogle = (callback: () => void) => {
+    const provider = new GoogleAuthProvider().setCustomParameters({
+      display: 'popup'
+    });
+
+    const auth = getAuth();
+
+    return signInWithPopup(auth, provider)
+      .then(async (result) => {
+        try {
+          await setDoc(doc(db, 'users', result.user.uid), {
+            id: result.user.uid,
+            email: result.user.email
+          }).then(() => callback());
+        } catch (error) {
+          dispatch(hasError(error));
+        }
+      })
+      .catch((error) => {
+        dispatch(hasError(error));
+        dispatch(resetState());
+      });
+  };
+
   const logout = async (callback: () => void) => {
     dispatch(startLoading());
 
@@ -130,6 +156,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       value={{
         register,
         login,
+        loginWithGoogle,
         logout,
         resetPassword
       }}
