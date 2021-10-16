@@ -54,9 +54,7 @@ export function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
-        const result = await login(values.email, values.password, values.remember);
-
-        if (result) {
+        await login(values.email, values.password, values.remember, () =>
           enqueueSnackbar('Login success', {
             variant: 'success',
             action: (key) => (
@@ -64,8 +62,8 @@ export function LoginForm() {
                 <Close />
               </IconButton>
             )
-          });
-        }
+          })
+        );
 
         if (isMountedRef.current) {
           setSubmitting(false);
