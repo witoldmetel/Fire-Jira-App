@@ -43,6 +43,14 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
+          // Update verification status
+          if (!userSnap.data().isVerified) {
+            await setDoc(doc(db, 'users', user.uid), {
+              ...userSnap.data(),
+              isVerified: user.emailVerified
+            });
+          }
+
           dispatch(getUserSuccess(userSnap.data()));
         } else {
           dispatch(hasError('User not found!'));
@@ -79,7 +87,8 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         try {
           await setDoc(doc(db, 'users', userCredential.user.uid), {
             id: userCredential.user.uid,
-            email: userCredential.user.email
+            email: userCredential.user.email,
+            isVerified: userCredential.user.emailVerified
           }).then(async () => {
             sendEmailVerification(userCredential.user, {
               url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''

@@ -12,7 +12,7 @@ type AuthGuardProps = {
 };
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated, isVerified } = useSelector(getAuthState);
+  const { isAuthenticated, user } = useSelector(getAuthState);
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
@@ -21,10 +21,14 @@ export function AuthGuard({ children }: AuthGuardProps) {
       setRequestedLocation(pathname);
     }
 
-    return <LoginPage />;
+    return (
+      <AuthLayout>
+        <LoginPage />
+      </AuthLayout>
+    );
   }
 
-  if (isAuthenticated && !isVerified) {
+  if (isAuthenticated && !user?.isVerified) {
     return (
       <AuthLayout>
         <VerifyPage />

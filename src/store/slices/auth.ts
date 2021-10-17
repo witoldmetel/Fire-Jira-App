@@ -5,7 +5,6 @@ import { RootState, AuthState } from '../types';
 const initialState: AuthState = {
   isAuthenticated: false,
   isInitialized: false,
-  isVerified: false,
   isLoading: false,
   isError: false,
   errorMessage: null,
