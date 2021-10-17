@@ -1,10 +1,19 @@
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import { makeStyles } from '@mui/styles';
 import { Box, Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
+import { getAuthState } from '../store/slices/auth';
 
 export default function LandingPage() {
   const classes = useStyles();
+  const { isAuthenticated } = useSelector(getAuthState);
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <Page className={classes.root} title="Fire Jira">
