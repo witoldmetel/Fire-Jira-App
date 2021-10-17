@@ -2,16 +2,16 @@ import { useState, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { CircularProgress } from '@mui/material';
-
 import { getAuthState } from '../store/slices/auth';
+import LoginPage from 'src/pages/LoginPage';
+import VerifyPage from 'src/pages/VerifyPage';
 
 type AuthGuardProps = {
   children: ReactNode;
 };
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated } = useSelector(getAuthState);
+  const { isAuthenticated, isVerified } = useSelector(getAuthState);
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
@@ -20,7 +20,11 @@ export function AuthGuard({ children }: AuthGuardProps) {
       setRequestedLocation(pathname);
     }
 
-    return <CircularProgress />;
+    return <LoginPage />;
+  }
+
+  if (isAuthenticated && !isVerified) {
+    return <VerifyPage />;
   }
 
   if (requestedLocation && pathname !== requestedLocation) {

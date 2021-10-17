@@ -10,6 +10,7 @@ type AuthUser = null | Record<string, any>;
 export type AuthState = {
   isAuthenticated: boolean;
   isInitialized: boolean;
+  isVerified: boolean;
   isLoading: boolean;
   isError: boolean;
   errorMessage: FirebaseError | null;
