@@ -12,7 +12,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  sendEmailVerification
 } from 'firebase/auth';
 
 import { FirebaseContextType } from './types';
@@ -42,9 +43,17 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
+          // Update verification status
+          if (!userSnap.data().isVerified) {
+            await setDoc(doc(db, 'users', user.uid), {
+              ...userSnap.data(),
+              isVerified: user.emailVerified
+            });
+          }
+
           dispatch(getUserSuccess(userSnap.data()));
         } else {
-          dispatch(hasError('No such document!'));
+          dispatch(hasError('User not found!'));
         }
       } else {
         dispatch(getUserReject());
@@ -52,6 +61,21 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  const sendConfirmationEmail = async () => {
+    dispatch(startLoading());
+
+    const auth = getAuth();
+
+    if (auth?.currentUser) {
+      return sendEmailVerification(auth.currentUser, {
+        url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''
+      });
+    } else {
+      dispatch(hasError('User not found!'));
+      dispatch(resetState());
+    }
+  };
 
   const register = (email: string, password: string, callback: () => void) => {
     dispatch(startLoading());
@@ -63,12 +87,20 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         try {
           await setDoc(doc(db, 'users', userCredential.user.uid), {
             id: userCredential.user.uid,
-            email: userCredential.user.email
-          }).then(() => callback());
+            email: userCredential.user.email,
+            isVerified: userCredential.user.emailVerified
+          }).then(async () => {
+            sendEmailVerification(userCredential.user, {
+              url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''
+            });
+
+            callback();
+          });
         } catch (error) {
           dispatch(hasError(error));
         }
       })
+
       .catch((error) => {
         dispatch(hasError(error));
         dispatch(resetState());
@@ -154,6 +186,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
   return (
     <FirebaseContext.Provider
       value={{
+        sendConfirmationEmail,
         register,
         login,
         loginWithGoogle,
