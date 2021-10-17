@@ -2,6 +2,7 @@ import { useState, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
+import { AuthLayout } from 'src/core/layouts/auth-layout';
 import { getAuthState } from '../store/slices/auth';
 import LoginPage from 'src/pages/LoginPage';
 import VerifyPage from 'src/pages/VerifyPage';
@@ -24,7 +25,11 @@ export function AuthGuard({ children }: AuthGuardProps) {
   }
 
   if (isAuthenticated && !isVerified) {
-    return <VerifyPage />;
+    return (
+      <AuthLayout>
+        <VerifyPage />
+      </AuthLayout>
+    );
   }
 
   if (requestedLocation && pathname !== requestedLocation) {

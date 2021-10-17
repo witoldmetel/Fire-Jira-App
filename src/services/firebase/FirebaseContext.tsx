@@ -45,7 +45,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         if (userSnap.exists()) {
           dispatch(getUserSuccess(userSnap.data()));
         } else {
-          dispatch(hasError('No such document!'));
+          dispatch(hasError('User not found!'));
         }
       } else {
         dispatch(getUserReject());
@@ -53,6 +53,21 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  const sendConfirmationEmail = async () => {
+    dispatch(startLoading());
+
+    const auth = getAuth();
+
+    if (auth?.currentUser) {
+      return sendEmailVerification(auth.currentUser, {
+        url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''
+      });
+    } else {
+      dispatch(hasError('User not found!'));
+      dispatch(resetState());
+    }
+  };
 
   const register = (email: string, password: string, callback: () => void) => {
     dispatch(startLoading());
@@ -162,6 +177,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
   return (
     <FirebaseContext.Provider
       value={{
+        sendConfirmationEmail,
         register,
         login,
         loginWithGoogle,

@@ -1,37 +1,26 @@
-import { Link as RouterLink } from 'react-router-dom';
-
-import { Box, Button, Container, Typography, Stack } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
-import { PATH_AUTH } from '../routes/paths';
+import { useAuth } from 'src/hooks/useAuth';
 import { Page } from '../core/components';
 
 export default function VerifyPage() {
   const classes = useStyles();
+  const { sendConfirmationEmail } = useAuth();
 
   return (
-    <Page className={classes.root} title="Reset Password | Fire Jira">
+    <Page className={classes.root} title="Verify Email | Fire Jira">
       <Container>
         <div className={classes.content}>
           <Box className={classes.box}>
             <Typography variant="h3" gutterBottom>
-              Please confirm your email
+              Go to your email inbox and please verify your email
             </Typography>
 
-            <Stack
-              className={classes.stack}
-              direction={{ xs: 'column', sm: 'row' }}
-              justifyContent="space-between"
-              spacing={2}
-            >
-              <Button size="large" variant="outlined" onClick={() => console.log('send again')}>
-                Send again
-              </Button>
-              <Button size="large" variant="outlined" component={RouterLink} to={PATH_AUTH.login}>
-                Back
-              </Button>
-            </Stack>
+            <Button fullWidth size="large" variant="contained" onClick={sendConfirmationEmail}>
+              Send again
+            </Button>
           </Box>
         </div>
       </Container>
@@ -54,8 +43,5 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center'
   },
-  box: { textAlign: 'center' },
-  stack: {
-    marginTop: theme.spacing(5)
-  }
+  box: { textAlign: 'center' }
 }));
