@@ -9,7 +9,8 @@
     "serve": "vite preview",
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest --verbose"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,9 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.4",
+    "@babel/preset-typescript": "^7.15.0",
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.2",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.9",
@@ -72,9 +76,11 @@
     "eslint-plugin-react": "^7.25.2",
     "eslint-plugin-react-hooks": "4.2.0",
     "husky": "^7.0.0",
+    "jest": "^27.3.0",
     "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1",
+    "ts-jest": "^27.0.7",
     "typescript": "^4.3.2",
     "vite": "^2.6.0",
     "vite-tsconfig-paths": "^3.3.14"
@@ -82,7 +88,8 @@
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "yarn lint",
-      "yarn prettier --write"
+      "yarn prettier --write",
+      "yarn test --watchAll=false --findRelatedTests --bail"
     ]
   }
 }
