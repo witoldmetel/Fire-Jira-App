@@ -6,6 +6,9 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { rootReducer as reducer } from '../store/rootReducer';
 import { RootState } from '../store/types';
+import { FirebaseProvider } from '../services/firebase/FirebaseContext';
+import { ThemeConfig } from '../core/theme';
+import { NotistackProvider } from '../core/components';
 
 type WrapperProps = {
   preloadedState?: DeepPartial<RootState>;
@@ -19,7 +22,13 @@ const Wrapper: FC<WrapperProps> = ({ preloadedState = {}, children } = {}) => {
 
   return (
     <Provider store={store}>
-      <MemoryRouter>{children}</MemoryRouter>
+      <FirebaseProvider>
+        <ThemeConfig>
+          <NotistackProvider>
+            <MemoryRouter>{children}</MemoryRouter>
+          </NotistackProvider>
+        </ThemeConfig>
+      </FirebaseProvider>
     </Provider>
   );
 };
