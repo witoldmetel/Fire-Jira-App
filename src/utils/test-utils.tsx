@@ -1,12 +1,22 @@
-import React, { FC, ReactElement } from 'react';
-import { configureStore } from '@reduxjs/toolkit';
+import { FC, ReactElement } from 'react';
+import { configureStore, DeepPartial, Reducer } from '@reduxjs/toolkit';
 import { render, RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import { rootReducer as reducer } from '../store/rootReducer';
+import { RootState } from '../store/types';
 
-const Wrapper: FC = ({ preloadedState = {}, store = configureStore({ reducer, preloadedState }), children } = {}) => {
+type WrapperProps = {
+  preloadedState?: DeepPartial<RootState>;
+};
+
+const Wrapper: FC<WrapperProps> = ({ preloadedState = {}, children } = {}) => {
+  const store = configureStore({ reducer, preloadedState } as {
+    reducer: Reducer;
+    preloadedState: DeepPartial<RootState>;
+  });
+
   return (
     <Provider store={store}>
       <MemoryRouter>{children}</MemoryRouter>
