@@ -18,7 +18,7 @@ import {
 
 import { FirebaseContextType } from './types';
 import { firebaseConfig } from './firebaseConfig';
-import { dispatch } from 'src/store/store';
+import { useDispatch } from 'src/store/store';
 import { resetState, startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
 
 // check if firebase app has been initialized previously
@@ -32,6 +32,7 @@ if (getApps().length === 0) {
 const FirebaseContext = createContext<FirebaseContextType | null>(null);
 
 function FirebaseProvider({ children }: { children: ReactNode }) {
+  const dispatch = useDispatch();
   const db = getFirestore();
 
   useEffect(() => {
