@@ -1,11 +1,11 @@
 import { useState, ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { AuthLayout } from 'src/core/layouts/auth-layout';
 import { getAuthState } from '../store/slices/auth';
 import LoginPage from 'src/pages/LoginPage';
 import VerifyPage from 'src/pages/VerifyPage';
+import { useSelector } from 'src/store/store';
 
 type AuthGuardProps = {
   children: ReactNode;

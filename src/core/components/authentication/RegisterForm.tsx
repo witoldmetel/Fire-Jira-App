@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { useSelector } from 'react-redux';
 
 import { Stack, TextField, IconButton, InputAdornment, Alert, Button } from '@mui/material';
 import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
@@ -11,6 +10,7 @@ import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { RegisterSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
 import { SocialForm } from './SocialForm';
+import { useSelector } from 'src/store/store';
 
 type InitialValues = {
   email: string;

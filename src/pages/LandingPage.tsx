@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@mui/styles';
 import { Box, Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
 import { getAuthState } from '../store/slices/auth';
+import { useSelector } from 'src/store/store';
 
 export default function LandingPage() {
   const classes = useStyles();

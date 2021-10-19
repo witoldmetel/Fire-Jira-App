@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useFormik, Form, FormikProvider } from 'formik';
 
 import {
@@ -23,6 +22,7 @@ import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { LoginSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
 import { SocialForm } from './SocialForm';
+import { useSelector } from 'src/store/store';
 
 type InitialValues = {
   email: string;

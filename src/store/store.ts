@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch as useReduxDispatch } from 'react-redux';
+import { useDispatch as useReduxDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 
 import { rootReducer } from './rootReducer';
-import { AppDispatch } from './types';
+import { RootState, AppDispatch } from './types';
 
 const store = configureStore({
   reducer: rootReducer,
@@ -16,5 +16,6 @@ const store = configureStore({
 const { dispatch } = store;
 
 const useDispatch = () => useReduxDispatch<AppDispatch>();
+const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
-export { store, dispatch, useDispatch };
+export { store, dispatch, useDispatch, useSelector };

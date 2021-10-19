@@ -1,5 +1,4 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 
 import { makeStyles } from '@mui/styles';
@@ -10,6 +9,7 @@ import { Logo } from 'src/core/components';
 import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
 import { getAuthState } from 'src/store/slices/auth';
+import { useSelector } from 'src/store/store';
 
 export function MainNavbar() {
   const classes = useStyles();
