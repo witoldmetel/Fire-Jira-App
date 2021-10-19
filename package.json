@@ -10,7 +10,9 @@
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
     "prepare": "husky install",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:watch": "jest --watchAll --verbose",
+    "test:coverage": "jest --verbose --coverage"
   },
   "eslintConfig": {
     "extends": [
