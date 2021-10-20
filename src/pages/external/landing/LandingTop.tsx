@@ -25,17 +25,17 @@ export function LandingTop() {
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={5}>
             <motion.div variants={fadeInRight}>
-              <Typography variant="h1" sx={{ color: 'common.white' }}>
+              <Typography variant="h1" className={classes.textSecondary}>
                 Manage your <br />
                 new project <br /> with
-                <Typography component="span" variant="h1" sx={{ color: 'primary.main' }}>
+                <Typography component="span" variant="h1" className={classes.textPrimary}>
                   &nbsp;Fire Jira
                 </Typography>
               </Typography>
             </motion.div>
 
             <motion.div variants={fadeInRight}>
-              <Typography sx={{ color: 'common.white' }}>
+              <Typography className={classes.textSecondary}>
                 Make Your Own Workflow! Track and manage projects in real time. Register and check it now!
               </Typography>
             </motion.div>
@@ -125,5 +125,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     width: 32,
     height: 32
+  },
+  textPrimary: {
+    color: theme.palette.primary.main
+  },
+  textSecondary: {
+    color: theme.palette.common.white
   }
 }));
