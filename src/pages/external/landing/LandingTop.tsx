@@ -1,21 +1,26 @@
 import { motion } from 'framer-motion';
-import { Link as RouterLink } from 'react-router-dom';
 
 import { Button, Box, Tooltip, Container, Typography, Stack, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { PATH_DASHBOARD } from 'src/routes/paths';
+import { useAuth } from 'src/hooks/useAuth';
 import { fadeIn, fadeInUp, fadeInRight, wrapEnter } from 'src/core/components';
 
 export function LandingTop() {
   const classes = useStyles();
+  const { login } = useAuth();
 
   return (
     <>
       <motion.div className={classes.root} initial="initial" animate="animate" variants={wrapEnter}>
         <motion.img className={classes.overlay} alt="overlay" src="/static/overlay.svg" variants={fadeIn} />
 
-        <motion.img className={classes.backgroundImage} alt="hero" src="/static/home/hero.png" variants={fadeInUp} />
+        <motion.img
+          className={classes.backgroundImage}
+          alt="hero"
+          src="/static/thought_process.svg"
+          variants={fadeInUp}
+        />
 
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={5}>
@@ -36,8 +41,8 @@ export function LandingTop() {
             </motion.div>
 
             <motion.div variants={fadeInRight}>
-              <Button size="large" variant="contained" component={RouterLink} to={PATH_DASHBOARD.root}>
-                Live Preview
+              <Button size="large" variant="contained" onClick={() => login('joedoe@firejira.com', 'firejira', false)}>
+                Live Demo
               </Button>
             </motion.div>
 

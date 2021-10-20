@@ -108,7 +108,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
       });
   };
 
-  const login = (email: string, password: string, remember: boolean, callback: () => void) => {
+  const login = (email: string, password: string, remember: boolean, callback?: () => void) => {
     dispatch(startLoading());
 
     const auth = getAuth();
@@ -120,7 +120,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         // if a user forgets to sign out.
         // ...
         // New sign-in will be persisted with session persistence.
-        return signInWithEmailAndPassword(auth, email, password).then(() => callback());
+        return signInWithEmailAndPassword(auth, email, password).then(() => callback && callback());
       })
       .catch((error) => {
         dispatch(hasError(error));
