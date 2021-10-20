@@ -25,3 +25,7 @@ FIREBASE_MEASUREMENT_ID = '<YOUR_MEASUREMENT_ID>'
 Where values in the brackets should be replaced by described data.
 
 You can take this configuration from `https://firebase.google.com/`
+
+## Assets source
+
+All graphics taken from: [undraw.co](https://undraw.co/illustrations)
