@@ -1,18 +1,21 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import classnames from 'classnames';
 
 import { makeStyles } from '@mui/styles';
-import { AppBar, Toolbar, Container, Theme, Button, Link, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
 import { Logo } from 'src/core/components';
 import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
+import { useOffSetTop } from 'src/hooks/useOffSetTop';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
 
 export function MainNavbar() {
   const classes = useStyles();
+  const isOffset = useOffSetTop(250);
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { isAuthenticated } = useSelector(getAuthState);
@@ -39,11 +42,14 @@ export function MainNavbar() {
 
   return (
     <AppBar className={classes.appBar}>
-      <Toolbar className={classes.toolbar} disableGutters>
+      <Toolbar className={classnames(classes.toolbar, { [classes.toolbarOffset]: isOffset })} disableGutters>
         <Container className={classes.container} maxWidth="lg">
           <RouterLink to={isAuthenticated ? PATH_DASHBOARD.root : '/'}>
             <Logo />
           </RouterLink>
+
+          {/* Section divider */}
+          <Box sx={{ flexGrow: 1 }} />
 
           {isAuthenticated ? (
             <Button variant="outlined" onClick={handleLogout}>
@@ -51,20 +57,18 @@ export function MainNavbar() {
             </Button>
           ) : (
             <>
-              <Button variant="outlined">
-                <Link to={PATH_AUTH.register} component={RouterLink}>
-                  Register
-                </Link>
+              <Button component={RouterLink} to={PATH_AUTH.register} variant="outlined">
+                Register
               </Button>
-              <Button variant="outlined">
-                <Link to={PATH_AUTH.login} component={RouterLink}>
-                  Login
-                </Link>
+              <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
+                Login
               </Button>
             </>
           )}
         </Container>
       </Toolbar>
+
+      {isOffset && <div className={classes.shadowToolbar} />}
     </AppBar>
   );
 }
@@ -75,18 +79,36 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'transparent'
   },
   toolbar: {
-    height: 64,
+    height: 65,
     transition: theme.transitions.create(['height', 'background-color'], {
       easing: theme.transitions.easing.easeInOut,
       duration: theme.transitions.duration.shorter
     }),
     [theme.breakpoints.up('md')]: {
-      height: 88
+      height: 90
+    }
+  },
+  toolbarOffset: {
+    backgroundColor: theme.palette.background.default,
+    [theme.breakpoints.up('md')]: {
+      height: 70
     }
   },
   container: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  shadowToolbar: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 25,
+    zIndex: -1,
+    margin: 'auto',
+    borderRadius: '50%',
+    position: 'absolute',
+    width: `calc(100% - 48px)`,
+    boxShadow: theme.customShadows.z8
   }
 }));

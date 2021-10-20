@@ -1,8 +1,25 @@
-import { Box, Grid, Container, Typography, Theme } from '@mui/material';
+import classnames from 'classnames';
+
+import { Box, Grid, Container, Typography, Theme, Card } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 
 import { MotionInView, fadeInUp, fadeInRight } from 'src/core/components';
+
+const CARDS = [
+  {
+    icon: '/static/spreadsheets.svg',
+    description: 'It helps visualize the actual workflow'
+  },
+  {
+    icon: '/static/work_together.svg',
+    description: 'It balances the work and workflow'
+  },
+  {
+    icon: '/static/grades.svg',
+    description: 'It encourages leadership roles at all levels'
+  }
+];
 
 export function LandingAbout() {
   const classes = useStyles();
@@ -44,6 +61,23 @@ export function LandingAbout() {
               <Box component="img" src="/static/shared_goals.svg" />
             </MotionInView>
           </Grid>
+        </Grid>
+
+        <Grid className={classes.cards} container>
+          {CARDS.map((card, index) => (
+            <Grid key={card.icon} item xs={12} md={4}>
+              <MotionInView variants={fadeInUp}>
+                <Card
+                  className={classnames(classes.card, {
+                    [classes.cardCenter]: index === 1
+                  })}
+                >
+                  <Box className={classes.cardIcon} component="img" src={card.icon} />
+                  <Typography>{card.description}</Typography>
+                </Card>
+              </MotionInView>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </div>
@@ -93,5 +127,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   textPrimary: {
     color: theme.palette.primary.main
+  },
+  cards: {
+    marginTop: theme.spacing(25)
+  },
+  card: {
+    maxWidth: 270,
+    minHeight: 100,
+    margin: 'auto',
+    textAlign: 'center',
+    padding: theme.spacing(5),
+    boxShadow: `-40px 40px 80px 0 ${alpha(theme.palette.grey[500], 0.48)}`,
+    [theme.breakpoints.up('md')]: {
+      boxShadow: 'none',
+      backgroundColor: theme.palette.grey[200]
+    }
+  },
+  cardCenter: {
+    [theme.breakpoints.up('md')]: {
+      marginTop: -80,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: `-40px 40px 80px 0 ${alpha(theme.palette.grey[500], 0.4)}`
+    }
+  },
+  cardIcon: {
+    width: 200,
+    height: 200
   }
 }));
