@@ -47,28 +47,29 @@ export function LandingTop() {
             </motion.div>
 
             <Stack direction="row" spacing={1.5} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-              <Tooltip title={'React'}>
+              <Tooltip title="React">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/reactjs.svg" />
               </Tooltip>
-              <Tooltip title={'Typescript'}>
+              <Tooltip title="Typescript">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/typescript.svg" />
               </Tooltip>
-              <Tooltip title={'Redux Toolkit'}>
+              <Tooltip title="Redux Toolkit">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/redux.svg" />
               </Tooltip>
-              <Tooltip title={'Firebase'}>
+              <Tooltip title="Firebase">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/firebase.png" />
               </Tooltip>
-              <Tooltip title={'Material UI'}>
+              <Tooltip title="Material UI">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/material-ui.svg" />
               </Tooltip>
-              <Tooltip title={'Vite'}>
+              <Tooltip title="Vite">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/vite.svg" />
               </Tooltip>
             </Stack>
           </Stack>
         </Container>
       </motion.div>
+
       <Box sx={{ height: { md: '100vh' } }} />
     </>
   );

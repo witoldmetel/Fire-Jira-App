@@ -6,7 +6,7 @@ import { Theme } from '@mui/material';
 import { Page } from 'src/core/components';
 import { getAuthState } from '../store/slices/auth';
 import { useSelector } from 'src/store/store';
-import { LandingTop, LandingAbout } from './external';
+import { LandingTop, LandingAbout, LandingFeatures } from './external';
 
 export default function LandingPage() {
   const classes = useStyles();
@@ -17,10 +17,11 @@ export default function LandingPage() {
   }
 
   return (
-    <Page className={classes.root} title="Fire Jira">
+    <Page className={classes.root} title="Fire Jira" id="move_top">
       <LandingTop />
       <div className={classes.content}>
         <LandingAbout />
+        <LandingFeatures />
       </div>
     </Page>
   );
