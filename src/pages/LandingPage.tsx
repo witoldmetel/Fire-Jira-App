@@ -6,7 +6,7 @@ import { Theme } from '@mui/material';
 import { Page } from 'src/core/components';
 import { getAuthState } from '../store/slices/auth';
 import { useSelector } from 'src/store/store';
-import { LandingTop } from './external';
+import { LandingTop, LandingAbout } from './external';
 
 export default function LandingPage() {
   const classes = useStyles();
@@ -19,6 +19,9 @@ export default function LandingPage() {
   return (
     <Page className={classes.root} title="Fire Jira">
       <LandingTop />
+      <div className={classes.content}>
+        <LandingAbout />
+      </div>
     </Page>
   );
 }
@@ -26,5 +29,10 @@ export default function LandingPage() {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: '100%'
+  },
+  content: {
+    overflow: 'hidden',
+    position: 'relative',
+    backgroundColor: theme.palette.background.default
   }
 }));
