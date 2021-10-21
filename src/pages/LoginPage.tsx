@@ -24,7 +24,7 @@ export default function LoginPage() {
             </Box>
 
             <Tooltip title={'Firebase'}>
-              <Box className={classes.authLogo} component="img" src="/static/firebase.png" />
+              <Box className={classes.authLogo} component="img" src="/static/firebase.svg" />
             </Tooltip>
           </Stack>
 
