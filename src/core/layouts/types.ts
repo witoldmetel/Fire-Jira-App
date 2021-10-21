@@ -11,9 +11,3 @@ export type MenuItemProps = {
     }[];
   }[];
 };
-
-export type MenuProps = {
-  isOffset: boolean;
-  isHome: boolean;
-  navConfig: MenuItemProps[];
-};

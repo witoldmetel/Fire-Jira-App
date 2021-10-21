@@ -15,12 +15,7 @@ export function LandingTop() {
       <motion.div className={classes.root} initial="initial" animate="animate" variants={wrapEnter}>
         <motion.img className={classes.overlay} alt="overlay" src="/static/overlay.svg" variants={fadeIn} />
 
-        <motion.img
-          className={classes.backgroundImage}
-          alt="hero"
-          src="/static/thought_process.svg"
-          variants={fadeInUp}
-        />
+        <motion.img className={classes.backgroundImage} src="/static/thought_process.svg" variants={fadeInUp} />
 
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={5}>
@@ -57,7 +52,7 @@ export function LandingTop() {
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/redux.svg" />
               </Tooltip>
               <Tooltip title="Firebase">
-                <motion.img className={classes.logo} variants={fadeInRight} src="/static/firebase.png" />
+                <motion.img className={classes.logo} variants={fadeInRight} src="/static/firebase.svg" />
               </Tooltip>
               <Tooltip title="Material UI">
                 <motion.img className={classes.logo} variants={fadeInRight} src="/static/material-ui.svg" />

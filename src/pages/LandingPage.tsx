@@ -7,13 +7,14 @@ import { Page } from 'src/core/components';
 import { getAuthState } from '../store/slices/auth';
 import { useSelector } from 'src/store/store';
 import { LandingTop, LandingAbout, LandingFeatures } from './external';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 export default function LandingPage() {
   const classes = useStyles();
   const { isAuthenticated } = useSelector(getAuthState);
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to={PATH_DASHBOARD.root} />;
   }
 
   return (

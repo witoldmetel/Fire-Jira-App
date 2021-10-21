@@ -1,6 +1,5 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
 
 import { useAuth } from 'src/hooks/useAuth';
 import { Page } from '../core/components';
@@ -28,7 +27,7 @@ export default function VerifyPage() {
   );
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     minHeight: '100%',

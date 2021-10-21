@@ -58,7 +58,7 @@ export function LandingAbout() {
 
           <Grid item xs={12} md={8}>
             <MotionInView variants={fadeInRight}>
-              <Box component="img" src="/static/shared_goals.svg" />
+              <Box className={classes.backgroundImage} component="img" src="/static/shared_goals.svg" />
             </MotionInView>
           </Grid>
         </Grid>
@@ -125,6 +125,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       borderRadius: 12
     }
   },
+  backgroundImage: {
+    width: '100%',
+    margin: 'auto',
+    [theme.breakpoints.up('lg')]: {
+      width: 'auto',
+      height: '45vh'
+    }
+  },
   textPrimary: {
     color: theme.palette.primary.main
   },
@@ -148,6 +156,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: -80,
       backgroundColor: theme.palette.background.paper,
       boxShadow: `-40px 40px 80px 0 ${alpha(theme.palette.grey[500], 0.4)}`
+    },
+    [theme.breakpoints.down('md')]: {
+      margin: `${theme.spacing(5)} auto`
     }
   },
   cardIcon: {

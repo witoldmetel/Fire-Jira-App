@@ -6,12 +6,14 @@ import { makeStyles } from '@mui/styles';
 import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-import { Logo } from 'src/core/components';
+import { Logo, HiddenComponent } from 'src/core/components';
 import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
 import { useOffSetTop } from 'src/hooks/useOffSetTop';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
+import { MainMenu } from './MainMenu';
+import { mainMenuConfig } from '../constants';
 
 export function MainNavbar() {
   const classes = useStyles();
@@ -51,20 +53,23 @@ export function MainNavbar() {
           {/* Section divider */}
           <Box sx={{ flexGrow: 1 }} />
 
+          <HiddenComponent width="mdDown">
+            <MainMenu navConfig={mainMenuConfig} />
+          </HiddenComponent>
+
           {isAuthenticated ? (
             <Button variant="outlined" onClick={handleLogout}>
               Logout
             </Button>
           ) : (
-            <>
-              <Button component={RouterLink} to={PATH_AUTH.register} variant="outlined">
-                Register
-              </Button>
-              <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
-                Login
-              </Button>
-            </>
+            <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
+              Login
+            </Button>
           )}
+
+          <HiddenComponent width="mdUp">
+            <MainMenu navConfig={mainMenuConfig} isMobile />
+          </HiddenComponent>
         </Container>
       </Toolbar>
 
