@@ -23,13 +23,14 @@ export default function LoginPage() {
               <Typography className={classes.contentStackBoxTypography}>Enter your details below.</Typography>
             </Box>
 
-            <Tooltip title={'Firebase'}>
+            <Tooltip title="Firebase">
               <Box className={classes.authLogo} component="img" src="/static/firebase.svg" />
             </Tooltip>
           </Stack>
 
           <Alert className={classes.infoBar} severity="info">
-            Use email : <strong>joedoe@firejira.com</strong> / password :<strong>&nbsp;firejira</strong>
+            <strong>Demo</strong> email : <strong>joedoe@firejira.com</strong> / password :
+            <strong>&nbsp;firejira</strong>
           </Alert>
 
           <LoginForm />
