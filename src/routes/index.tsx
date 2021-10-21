@@ -1,17 +1,16 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import { CircularProgress } from '@mui/material';
-
 import { MainLayout } from '../core/layouts/main-layout';
 import { LogoLayout } from '../core/layouts/logo-layout';
 import { PATH_PAGE, PATH_DASHBOARD } from './paths';
 import { GuestGuard } from '../guards/GuestGuard';
 import { AuthGuard } from '../guards/AuthGuard';
+import { LoadingPage } from '../core/components';
 
 const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: JSX.IntrinsicAttributes) => {
   return (
-    <Suspense fallback={<CircularProgress />}>
+    <Suspense fallback={<LoadingPage />}>
       <Component {...props} />
     </Suspense>
   );
