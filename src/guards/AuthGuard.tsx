@@ -1,11 +1,9 @@
 import { useState, ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { AuthLayout } from 'src/core/layouts/auth-layout';
 import { getAuthState } from '../store/slices/auth';
-import LoginPage from 'src/pages/LoginPage';
-import VerifyPage from 'src/pages/VerifyPage';
 import { useSelector } from 'src/store/store';
+import { PATH_AUTH } from 'src/routes/paths';
 
 type AuthGuardProps = {
   children: ReactNode;
@@ -21,19 +19,11 @@ export function AuthGuard({ children }: AuthGuardProps) {
       setRequestedLocation(pathname);
     }
 
-    return (
-      <AuthLayout>
-        <LoginPage />
-      </AuthLayout>
-    );
+    return <Navigate to={PATH_AUTH.login} />;
   }
 
   if (isAuthenticated && !user?.isVerified) {
-    return (
-      <AuthLayout>
-        <VerifyPage />
-      </AuthLayout>
-    );
+    return <Navigate to={PATH_AUTH.verify} />;
   }
 
   if (requestedLocation && pathname !== requestedLocation) {
