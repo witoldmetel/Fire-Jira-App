@@ -54,7 +54,7 @@ export function MainNavbar() {
           <Box sx={{ flexGrow: 1 }} />
 
           <HiddenComponent width="mdDown">
-            <MainMenu isOffset={isOffset} navConfig={mainMenuConfig} />
+            <MainMenu navConfig={mainMenuConfig} />
           </HiddenComponent>
 
           {isAuthenticated ? (
@@ -62,18 +62,13 @@ export function MainNavbar() {
               Logout
             </Button>
           ) : (
-            <>
-              <Button component={RouterLink} to={PATH_AUTH.register} variant="outlined">
-                Register
-              </Button>
-              <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
-                Login
-              </Button>
-            </>
+            <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
+              Login
+            </Button>
           )}
 
           <HiddenComponent width="mdUp">
-            <MainMenu isOffset={isOffset} navConfig={mainMenuConfig} isMobile />
+            <MainMenu navConfig={mainMenuConfig} isMobile />
           </HiddenComponent>
         </Container>
       </Toolbar>

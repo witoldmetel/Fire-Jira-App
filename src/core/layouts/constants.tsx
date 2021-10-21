@@ -1,22 +1,32 @@
-import AcUnitIcon from '@mui/icons-material/AcUnit';
+import { Box } from '@mui/material';
+import { Help, VpnKey, ContactPage, EmojiPeople } from '@mui/icons-material';
 
-import { PATH_PAGE } from '../../routes/paths';
+import { PATH_AUTH } from '../../routes/paths';
 
 export const mainMenuConfig = [
   {
-    title: 'Home',
-    icon: <AcUnitIcon sx={{ width: 22, height: 22 }} />,
-    path: '/'
+    title: 'About Me',
+    icon: <EmojiPeople sx={{ width: 22, height: 22 }} />,
+    path: ''
   },
   {
-    title: 'Components',
-    icon: <AcUnitIcon sx={{ width: 22, height: 22 }} />,
-    path: PATH_PAGE.about
+    title: 'Contact Me',
+    icon: <ContactPage sx={{ width: 22, height: 22 }} />,
+    path: ''
   },
-
   {
-    title: 'Documentation',
-    icon: <AcUnitIcon sx={{ width: 22, height: 22 }} />,
-    path: PATH_PAGE.about
+    title: 'FAQs',
+    icon: <Help />,
+    path: ''
+  },
+  {
+    title: 'Storybook',
+    icon: <Box component="img" src="/static/storybook.svg" sx={{ width: 22, height: 22 }} />,
+    path: ''
+  },
+  {
+    title: 'Register',
+    icon: <VpnKey sx={{ width: 22, height: 22 }} />,
+    path: PATH_AUTH.register
   }
 ];
