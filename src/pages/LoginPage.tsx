@@ -5,7 +5,7 @@ import { Theme } from '@mui/material';
 
 import { Box, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
 
-import { Page, HiddenComponent, LoginForm } from '../core/components';
+import { Page, LoginForm } from '../core/components';
 import { PATH_AUTH } from '../routes/paths';
 
 export default function LoginPage() {
@@ -34,14 +34,12 @@ export default function LoginPage() {
 
           <LoginForm />
 
-          <HiddenComponent width="smUp">
-            <Typography className={classes.registerBar} variant="body2" align="center">
-              Don’t have an account?&nbsp;
-              <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-                Get started
-              </Link>
-            </Typography>
-          </HiddenComponent>
+          <Typography className={classes.registerBar} variant="body2" align="center">
+            Don’t have an account?&nbsp;
+            <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
+              Get started
+            </Link>
+          </Typography>
         </div>
       </Container>
     </Page>

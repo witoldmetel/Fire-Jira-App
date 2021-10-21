@@ -41,7 +41,7 @@ export function Router() {
      */
     {
       path: 'auth',
-      element: <MainLayout />,
+      element: <LogoLayout />,
       children: [
         {
           path: 'login',

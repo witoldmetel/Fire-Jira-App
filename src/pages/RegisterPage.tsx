@@ -4,7 +4,7 @@ import { Box, Link, Container, Typography, Tooltip, Stack } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
-import { Page, HiddenComponent, RegisterForm } from '../core/components';
+import { Page, RegisterForm } from '../core/components';
 import { PATH_AUTH } from '../routes/paths';
 
 export default function RegisterPage() {
@@ -30,14 +30,12 @@ export default function RegisterPage() {
 
           <RegisterForm />
 
-          <HiddenComponent width="smUp">
-            <Typography className={classes.loginBar} variant="body2" align="center">
-              Already have an account?&nbsp;
-              <Link to={PATH_AUTH.login} component={RouterLink}>
-                Login
-              </Link>
-            </Typography>
-          </HiddenComponent>
+          <Typography className={classes.loginBar} variant="body2" align="center">
+            Already have an account?&nbsp;
+            <Link to={PATH_AUTH.login} component={RouterLink}>
+              Login
+            </Link>
+          </Typography>
         </div>
       </Container>
     </Page>
