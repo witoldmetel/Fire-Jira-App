@@ -1,13 +1,13 @@
 import { Box } from '@mui/material';
 import { Help, VpnKey, ContactPage, EmojiPeople } from '@mui/icons-material';
 
-import { PATH_AUTH } from '../../routes/paths';
+import { PATH_AUTH, PATH_PAGE } from '../../routes/paths';
 
 export const mainMenuConfig = [
   {
     title: 'About Me',
     icon: <EmojiPeople sx={{ width: 22, height: 22 }} />,
-    path: ''
+    path: PATH_PAGE.about
   },
   {
     title: 'Contact Me',
