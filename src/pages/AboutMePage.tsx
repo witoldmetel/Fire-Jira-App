@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
-import { AboutMeTop } from './external';
+import { AboutMeTop, AboutMeGeneral } from './external';
 
 export default function AboutMePage() {
   const classes = useStyles();
@@ -10,15 +10,20 @@ export default function AboutMePage() {
   return (
     <Page className={classes.root} title="About Me | Fire Jira">
       <AboutMeTop />
+      <div className={classes.content}>
+        <AboutMeGeneral />
+      </div>
     </Page>
   );
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    paddingTop: theme.spacing(8),
-    [theme.breakpoints.up('md')]: {
-      paddingTop: theme.spacing(11)
-    }
+    height: '100%'
+  },
+  content: {
+    overflow: 'hidden',
+    position: 'relative',
+    backgroundColor: theme.palette.background.default
   }
 }));

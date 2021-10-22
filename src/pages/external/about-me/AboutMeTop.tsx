@@ -17,10 +17,10 @@ export function AboutMeTop() {
 
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={1}>
-            <Box sx={{ display: 'inline-flex', color: 'common.white' }}>
-              <MotionText text="Who" sx={{ color: 'primary.main' }} variants={fadeInRight} />
+            <Box className={classes.info}>
+              <MotionText className={classes.textPrimary} text="Who" variants={fadeInRight} />
               &nbsp;
-              <MotionText text="am" />
+              <MotionText text={'am'} />
               &nbsp;
               <MotionText text="I?" />
             </Box>
@@ -64,6 +64,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       textAlign: 'left'
     }
   },
+  info: {
+    display: 'inline-flex',
+    color: theme.palette.common.white,
+    [theme.breakpoints.down('md')]: {
+      justifyContent: 'center'
+    }
+  },
   overlay: {
     zIndex: 9,
     width: '100%',
@@ -76,14 +83,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 0,
     bottom: 0,
     zIndex: 8,
+    height: '100%',
     width: '100%',
     margin: 'auto',
     position: 'absolute',
     [theme.breakpoints.up('lg')]: {
       right: '8%',
       width: 'auto',
-      height: '48vh'
+      height: '70vh'
     }
+  },
+  textPrimary: {
+    color: theme.palette.primary.main
   },
   textSecondary: {
     color: theme.palette.common.white
