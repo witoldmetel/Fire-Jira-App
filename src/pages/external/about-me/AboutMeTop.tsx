@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Box, Container, Typography, Stack, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { MotionText, fadeIn, fadeInUp, fadeInRight, wrapEnter } from 'src/core/components';
+import { MotionText, fadeIn, fadeInDown, fadeInRight, wrapEnter } from 'src/core/components';
 
 export function AboutMeTop() {
   const classes = useStyles();
@@ -13,7 +13,7 @@ export function AboutMeTop() {
       <motion.div className={classes.root} initial="initial" animate="animate" variants={wrapEnter}>
         <motion.img className={classes.overlay} alt="overlay" src="/static/overlay.svg" variants={fadeIn} />
 
-        <motion.img className={classes.backgroundImage} src="/static/designer.svg" variants={fadeInUp} />
+        <motion.img className={classes.backgroundImage} src="/static/designer.svg" variants={fadeInDown} />
 
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={1}>

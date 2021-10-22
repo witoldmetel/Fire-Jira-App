@@ -1,8 +1,10 @@
-import { Box, Grid, Button, Container, Typography, Theme, IconButton, Card, Link } from '@mui/material';
+import { motion } from 'framer-motion';
+
+import { Box, Grid, Button, Container, Typography, Theme, IconButton, Card, Link, Tooltip, Stack } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Facebook, GitHub, LinkedIn } from '@mui/icons-material';
 
-import { fadeIn, fadeInRight, MotionInView } from 'src/core/components';
+import { fadeIn, fadeInRight, MotionInView, wrapEnter } from 'src/core/components';
 
 export function AboutMeGeneral() {
   const classes = useStyles();
@@ -53,7 +55,93 @@ export function AboutMeGeneral() {
               </Typography>
             </MotionInView>
 
-            <MotionInView variants={fadeInRight}>
+            <MotionInView initial="initial" animate="animate" variants={wrapEnter}>
+              <Typography className={classes.stackTitle} variant="subtitle2">
+                The most used:
+              </Typography>
+              <Stack
+                className={classes.stack}
+                direction="row"
+                spacing={2}
+                justifyContent={{ xs: 'center', md: 'flex-start' }}
+              >
+                <Tooltip title="React">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/reactjs.svg" />
+                </Tooltip>
+                <Tooltip title="Typescript">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/typescript.svg" />
+                </Tooltip>
+                <Tooltip title="Javascript">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/javascript.svg" />
+                </Tooltip>
+                <Tooltip title="Material UI">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/material-ui.svg" />
+                </Tooltip>
+              </Stack>
+
+              <Typography className={classes.stackTitle} variant="subtitle2">
+                Experienced:
+              </Typography>
+              <Stack
+                className={classes.stack}
+                direction="row"
+                spacing={2}
+                justifyContent={{ xs: 'center', md: 'flex-start' }}
+              >
+                <Tooltip title="CSS">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/css.svg" />
+                </Tooltip>
+                <Tooltip title="Redux / Redux Toolkit">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/redux.svg" />
+                </Tooltip>
+                <Tooltip title="MobX">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/mobx.svg" />
+                </Tooltip>
+                <Tooltip title="Webpack">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/webpack.svg" />
+                </Tooltip>
+                <Tooltip title="Parcel">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/parceljs.svg" />
+                </Tooltip>
+                <Tooltip title="Storybook">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/storybook.svg" />
+                </Tooltip>
+              </Stack>
+
+              <Typography className={classes.stackTitle} variant="subtitle2">
+                Currently learning:
+              </Typography>
+              <Stack
+                className={classes.stack}
+                direction="row"
+                spacing={2}
+                justifyContent={{ xs: 'center', md: 'flex-start' }}
+              >
+                <Tooltip title="Blitz">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/blitzjs.ico" />
+                </Tooltip>
+                <Tooltip title="Prisma">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/prisma.svg" />
+                </Tooltip>
+                <Tooltip title="PostgreSQL">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/postgresql.svg" />
+                </Tooltip>
+                <Tooltip title="React Native">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/reactjs.svg" />
+                </Tooltip>
+                <Tooltip title="Firebase">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/firebase.svg" />
+                </Tooltip>
+                <Tooltip title="Vite">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/vite.svg" />
+                </Tooltip>
+                <Tooltip title="Docker">
+                  <motion.img className={classes.logo} variants={fadeInRight} src="/static/docker.svg" />
+                </Tooltip>
+              </Stack>
+            </MotionInView>
+
+            <MotionInView className={classes.projectLink} variants={fadeInRight}>
               <Link
                 href="https://github.com/witoldmetel?tab=repositories"
                 target="_blank"
@@ -137,5 +225,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   textSecondary: {
     color: theme.palette.text.secondary
+  },
+  logo: {
+    width: 32,
+    height: 32
+  },
+  stackTitle: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  },
+  stack: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  },
+  projectLink: {
+    marginTop: theme.spacing(5)
   }
 }));
