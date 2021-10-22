@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Container, Typography, Theme, IconButton, Card } from '@mui/material';
+import { Box, Grid, Button, Container, Typography, Theme, IconButton, Card, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Facebook, GitHub, LinkedIn } from '@mui/icons-material';
 
@@ -13,18 +13,28 @@ export function AboutMeGeneral() {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} lg={5}>
             <MotionInView variants={fadeIn}>
-              <Card sx={{ p: 1, mx: 1.5 }}>
-                <Box component="img" src="/static/me.jfif" sx={{ width: '100%', borderRadius: 1.5 }} />
-                <Box sx={{ mt: 2, mb: 1 }}>
-                  <IconButton>
-                    <Facebook width={20} height={20} />
-                  </IconButton>
-                  <IconButton>
-                    <LinkedIn width={20} height={20} />
-                  </IconButton>
-                  <IconButton>
-                    <GitHub width={20} height={20} />
-                  </IconButton>
+              <Card className={classes.card}>
+                <Box className={classes.avatar} component="img" src="/static/me.jfif" />
+                <Box className={classes.socials}>
+                  <Link
+                    component={IconButton}
+                    href="https://www.facebook.com/Managersky/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <Facebook className={classes.logoIcon} />
+                  </Link>
+                  <Link
+                    component={IconButton}
+                    href="https://www.linkedin.com/in/witoldmetel"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <LinkedIn className={classes.logoIcon} />
+                  </Link>
+                  <Link component={IconButton} href="https://github.com/witoldmetel" target="_blank" rel="noopener">
+                    <GitHub className={classes.logoIcon} />
+                  </Link>
                 </Box>
               </Card>
             </MotionInView>
@@ -32,25 +42,28 @@ export function AboutMeGeneral() {
 
           <Grid item xs={12} md={6} lg={5}>
             <MotionInView variants={fadeInRight}>
-              <Typography variant="h2" sx={{ mb: 3 }}>
-                Witold Metel
+              <Typography variant="h2" className={classes.title}>
+                Witold Mętel
               </Typography>
             </MotionInView>
 
             <MotionInView variants={fadeInRight}>
-              <Typography
-                sx={{
-                  color: 'text.secondary'
-                }}
-              >
+              <Typography className={classes.textSecondary}>
                 Front-End Developer mostly working in React and Typescript.
               </Typography>
             </MotionInView>
 
             <MotionInView variants={fadeInRight}>
-              <Button variant="outlined" color="inherit" size="large" endIcon={<GitHub width={24} height={24} />}>
-                Check out my projects
-              </Button>
+              <Link
+                href="https://github.com/witoldmetel?tab=repositories"
+                target="_blank"
+                rel="noopener"
+                underline="none"
+              >
+                <Button variant="outlined" color="inherit" size="large" endIcon={<GitHub width={24} height={24} />}>
+                  Check out my projects
+                </Button>
+              </Link>
             </MotionInView>
           </Grid>
         </Grid>
@@ -102,14 +115,27 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: '48vh'
     }
   },
-  logo: {
-    width: 32,
-    height: 32
+  card: {
+    padding: theme.spacing(2)
   },
-  textPrimary: {
-    color: theme.palette.primary.main
+  avatar: {
+    width: '100%',
+    borderRadius: theme.shape.borderRadiusMd
+  },
+  title: {
+    marginBottom: theme.spacing(3)
+  },
+  socials: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1)
+  },
+  logoIcon: {
+    width: 20,
+    height: 20
   },
   textSecondary: {
-    color: theme.palette.common.white
+    color: theme.palette.text.secondary
   }
 }));

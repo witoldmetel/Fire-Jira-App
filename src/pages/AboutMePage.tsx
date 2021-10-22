@@ -8,7 +8,7 @@ export default function AboutMePage() {
   const classes = useStyles();
 
   return (
-    <Page className={classes.root} title="About Me | Fire Jira">
+    <Page className={classes.root} title="About Me | Fire Jira" id="move_top">
       <AboutMeTop />
       <div className={classes.content}>
         <AboutMeGeneral />
