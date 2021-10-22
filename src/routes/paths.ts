@@ -16,7 +16,6 @@ export const PATH_AUTH = {
 export const PATH_PAGE = {
   about: '/about-me',
   contact: '/contact-me',
-  faqs: '/faqs',
   storybook: '/storybook',
   page404: '/404',
   page500: '/500'
