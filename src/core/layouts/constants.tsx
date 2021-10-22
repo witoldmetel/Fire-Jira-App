@@ -12,7 +12,7 @@ export const mainMenuConfig = [
   {
     title: 'Contact Me',
     icon: <ContactPage sx={{ width: 22, height: 22 }} />,
-    path: ''
+    path: PATH_PAGE.contact
   },
   {
     title: 'Storybook',
