@@ -18,13 +18,9 @@ export function ContactMeTop() {
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={1}>
             <Box className={classes.info}>
-              <MotionText className={classes.textPrimary} text="Where" variants={fadeInRight} />
+              <MotionText className={classes.textPrimary} text="Contact" variants={fadeInRight} />
               &nbsp;
-              <MotionText text="to" />
-              &nbsp;
-              <MotionText text="find" />
-              &nbsp;
-              <MotionText text="me?" />
+              <MotionText text="me" />
             </Box>
 
             <motion.div variants={fadeInRight}>
