@@ -4,3 +4,4 @@ export { LandingFeatures } from './landing/LandingFeatures';
 export { AboutMeTop } from './about-me/AboutMeTop';
 export { AboutMeGeneral } from './about-me/AboutMeGeneral';
 export { ContactMeTop } from './contact-me/ContactMeTop';
+export { ContactMeForm } from './contact-me/ContactMeForm';
