@@ -8,6 +8,7 @@ import { palette } from './palette';
 import { typography } from './typography';
 import { breakpoints } from './breakpoints';
 import { shadows, customShadows } from './shadows';
+import { ComponentsOverrides } from './overrides';
 
 type ThemeConfigProps = {
   children: ReactNode;
@@ -22,6 +23,8 @@ export function ThemeConfig({ children }: ThemeConfigProps) {
     shadows,
     customShadows
   });
+
+  theme.components = ComponentsOverrides(theme);
 
   return (
     <StyledEngineProvider injectFirst>
