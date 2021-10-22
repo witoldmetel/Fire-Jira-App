@@ -2,13 +2,14 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
+import { ContactMeTop } from './external';
 
 export default function ContactMePage() {
   const classes = useStyles();
 
   return (
     <Page className={classes.root} title="Contact Me | Fire Jira" id="move_top">
-      xd
+      <ContactMeTop />
       <div className={classes.content}>xd</div>
     </Page>
   );
