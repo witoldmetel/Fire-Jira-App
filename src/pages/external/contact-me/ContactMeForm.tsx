@@ -1,7 +1,9 @@
 import { useFormik, Form, FormikProvider } from 'formik';
+import { useSnackbar } from 'notistack';
 
-import { Button, Container, Typography, Theme, TextField, Stack, Alert } from '@mui/material';
+import { Button, Container, Typography, Theme, TextField, Stack, Alert, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Close } from '@mui/icons-material';
 
 import { MotionInView, fadeInUp } from 'src/core/components';
 import { ContactSchema } from './validations';
@@ -17,6 +19,7 @@ type InitialValues = {
 
 export function ContactMeForm() {
   const classes = useStyles();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -28,7 +31,19 @@ export function ContactMeForm() {
     validationSchema: ContactSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
-        console.log('send', values);
+        // SIMULATE SENDING MESSAGE BECAUSE FIREBASE CLOUD FUNCTIONS ARE NOT FREE ANYMORE :(
+        await new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+          enqueueSnackbar('Message sent successfully!', {
+            variant: 'success',
+            action: (key) => (
+              <IconButton size="small" onClick={() => closeSnackbar(key)}>
+                <Close />
+              </IconButton>
+            )
+          });
+          resetForm();
+          setSubmitting(false);
+        });
       } catch (error) {
         resetForm();
         setSubmitting(false);
