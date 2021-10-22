@@ -7,4 +7,5 @@ export type FirebaseContextType = {
   register: (email: string, password: string, callback: () => void) => Promise<void>;
   logout: (callback: () => void) => Promise<void>;
   resetPassword: (email: string, callback: () => void) => Promise<void>;
+  sendMessage: (name: string, email: string, subject: string, message: string, callback: () => void) => Promise<void>;
 };

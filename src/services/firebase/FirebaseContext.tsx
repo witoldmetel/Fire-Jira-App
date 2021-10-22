@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import {
@@ -184,6 +185,24 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     dispatch(resetState());
   };
 
+  const sendMessage = async (name: string, email: string, subject: string, message: string, callback: () => void) => {
+    dispatch(startLoading());
+
+    const id = uuidv4();
+
+    await setDoc(doc(db, 'contacts', id), {
+      id,
+      name,
+      email,
+      subject,
+      message
+    })
+      .then(() => {
+        callback();
+      })
+      .catch((error) => dispatch(hasError(error)));
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -192,7 +211,8 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         login,
         loginWithGoogle,
         logout,
-        resetPassword
+        resetPassword,
+        sendMessage
       }}
     >
       {children}
