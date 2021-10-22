@@ -29,6 +29,7 @@ const VerifyPage = Loadable(lazy(() => import('../pages/VerifyPage')));
 // Main
 const UnknownPage = Loadable(lazy(() => import('../pages/UnknownPage')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
+const AboutMePage = Loadable(lazy(() => import('../pages/AboutMePage')));
 
 // Dashboard
 const DashboardPage = Loadable(lazy(() => import('../pages/DashboardPage')));
@@ -77,7 +78,10 @@ export function Router() {
     {
       path: '/',
       element: <MainLayout />,
-      children: [{ path: '/', element: <LandingPage /> }]
+      children: [
+        { path: '/', element: <LandingPage /> },
+        { path: 'about-me', element: <AboutMePage /> }
+      ]
     },
     { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
 
