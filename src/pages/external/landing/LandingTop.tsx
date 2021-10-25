@@ -20,6 +20,7 @@ export function LandingTop() {
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={5}>
             <motion.div variants={fadeInRight}>
+              <button onClick={methodDoesNotExist}>Break the world</button>
               <Typography variant="h1" className={classes.textSecondary}>
                 Manage your <br />
                 new project <br /> with
