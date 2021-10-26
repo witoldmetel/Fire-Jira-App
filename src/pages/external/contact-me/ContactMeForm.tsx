@@ -32,6 +32,7 @@ export function ContactMeForm() {
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
         // SIMULATE SENDING MESSAGE BECAUSE FIREBASE CLOUD FUNCTIONS ARE NOT FREE ANYMORE :(
+        // @todo: Try Lambda AWS
         await new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
           enqueueSnackbar('Message sent successfully!', {
             variant: 'success',
@@ -55,84 +56,93 @@ export function ContactMeForm() {
   const { errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
 
   return (
-    <Container maxWidth="lg">
-      <div className={classes.content}>
-        <FormikProvider value={formik}>
-          <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-            {errors.afterSubmit && <Alert severity="error">{errors.afterSubmit}</Alert>}
+    <div className={classes.root}>
+      <Container maxWidth="lg">
+        <div className={classes.content}>
+          <FormikProvider value={formik}>
+            <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+              {errors.afterSubmit && <Alert severity="error">{errors.afterSubmit}</Alert>}
 
-            <Stack spacing={5}>
-              <MotionInView variants={fadeInUp}>
-                <Typography variant="h3">Any questions?</Typography>
-              </MotionInView>
-
-              <Stack spacing={3}>
+              <Stack spacing={5}>
                 <MotionInView variants={fadeInUp}>
-                  <TextField
-                    fullWidth
-                    type="text"
-                    label="Name"
-                    {...getFieldProps('name')}
-                    error={Boolean(touched.name && errors.name)}
-                    helperText={touched.name && errors.name}
-                  />
+                  <Typography variant="h3">Any questions?</Typography>
                 </MotionInView>
 
-                <MotionInView variants={fadeInUp}>
-                  <TextField
-                    fullWidth
-                    type="text"
-                    label="Email"
-                    {...getFieldProps('email')}
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
-                  />
-                </MotionInView>
+                <Stack spacing={3}>
+                  <MotionInView variants={fadeInUp}>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      label="Name"
+                      {...getFieldProps('name')}
+                      error={Boolean(touched.name && errors.name)}
+                      helperText={touched.name && errors.name}
+                    />
+                  </MotionInView>
+
+                  <MotionInView variants={fadeInUp}>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      label="Email"
+                      {...getFieldProps('email')}
+                      error={Boolean(touched.email && errors.email)}
+                      helperText={touched.email && errors.email}
+                    />
+                  </MotionInView>
+
+                  <MotionInView variants={fadeInUp}>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      label="Subject"
+                      {...getFieldProps('subject')}
+                      error={Boolean(touched.subject && errors.subject)}
+                      helperText={touched.subject && errors.subject}
+                    />
+                  </MotionInView>
+
+                  <MotionInView variants={fadeInUp}>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      label="Enter your message here."
+                      {...getFieldProps('message')}
+                      error={Boolean(touched.message && errors.message)}
+                      helperText={touched.message && errors.message}
+                      multiline
+                      rows={5}
+                    />
+                  </MotionInView>
+                </Stack>
 
                 <MotionInView variants={fadeInUp}>
-                  <TextField
-                    fullWidth
-                    type="text"
-                    label="Subject"
-                    {...getFieldProps('subject')}
-                    error={Boolean(touched.subject && errors.subject)}
-                    helperText={touched.subject && errors.subject}
-                  />
-                </MotionInView>
-
-                <MotionInView variants={fadeInUp}>
-                  <TextField
-                    fullWidth
-                    type="text"
-                    label="Enter your message here."
-                    {...getFieldProps('message')}
-                    error={Boolean(touched.message && errors.message)}
-                    helperText={touched.message && errors.message}
-                    multiline
-                    rows={5}
-                  />
+                  <Button size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
+                    Send Now
+                  </Button>
                 </MotionInView>
               </Stack>
-
-              <MotionInView variants={fadeInUp}>
-                <Button size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
-                  Send Now
-                </Button>
-              </MotionInView>
-            </Stack>
-          </Form>
-        </FormikProvider>
-      </div>
-    </Container>
+            </Form>
+          </FormikProvider>
+        </div>
+      </Container>
+    </div>
   );
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    textAlign: 'center',
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(5),
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'left'
+    }
+  },
   content: {
     maxWidth: 480,
     margin: 'auto',
     display: 'flex',
-    minHeight: '100vh',
     flexDirection: 'column',
     justifyContent: 'center',
     padding: theme.spacing(12, 0)

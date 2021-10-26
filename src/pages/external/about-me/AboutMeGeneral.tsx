@@ -163,7 +163,7 @@ export function AboutMeGeneral() {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     textAlign: 'center',
-    paddingTop: theme.spacing(20),
+    paddingTop: theme.spacing(30),
     paddingBottom: theme.spacing(10),
     [theme.breakpoints.up('md')]: {
       textAlign: 'left'
