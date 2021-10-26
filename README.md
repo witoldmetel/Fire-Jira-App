@@ -1,4 +1,4 @@
-# Fire-Jira-App
+# Fire Jira App
 
 ## Legacy
 
