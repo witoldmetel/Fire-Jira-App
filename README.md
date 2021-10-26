@@ -26,6 +26,12 @@ Where values in the brackets should be replaced by described data.
 
 You can take this configuration from `https://firebase.google.com/`
 
+## Storybook
+
+I've started to write interactive documentation in `Storybook`.
+
+You can check it here: [Storybook](https://firejira-storybook.netlify.app/)
+
 ## Assets source
 
 All graphics taken from: [undraw.co](https://undraw.co/illustrations)
