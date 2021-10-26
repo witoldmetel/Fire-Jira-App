@@ -43,7 +43,12 @@ export function MainMenu({ navConfig, isMobile }: MainMenuProps) {
                 underline="none"
               >
                 {link.icon}
-                <Typography className={classes.openedMenu} variant="subtitle1">
+                <Typography
+                  className={classes.openedMenu}
+                  variant="subtitle1"
+                  // color for storybook link
+                  style={{ color: link.isExternal ? '#FF4785' : '#212B36' }}
+                >
                   {link.title}
                 </Typography>
               </Link>
@@ -68,6 +73,7 @@ export function MainMenu({ navConfig, isMobile }: MainMenuProps) {
               rel="noopener"
               underline="none"
             >
+              {/* color for storybook link */}
               <span style={{ color: '#FF4785' }}>{link.title}</span>
             </Link>
           );
