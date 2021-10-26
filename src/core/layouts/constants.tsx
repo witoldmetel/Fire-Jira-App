@@ -17,7 +17,8 @@ export const mainMenuConfig = [
   {
     title: 'Storybook',
     icon: <Box component="img" src="/static/storybook.svg" sx={{ width: 22, height: 22 }} />,
-    path: ''
+    path: 'https://firejira-storybook.netlify.app/',
+    isExternal: true
   },
   {
     title: 'Register',

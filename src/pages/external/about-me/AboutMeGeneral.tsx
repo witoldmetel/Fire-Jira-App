@@ -204,7 +204,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   card: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      width: '75%',
+      margin: '0 auto'
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      margin: '0 auto'
+    }
   },
   avatar: {
     width: '100%',
