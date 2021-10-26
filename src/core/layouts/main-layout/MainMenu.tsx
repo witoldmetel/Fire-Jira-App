@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { Link, Stack, Theme, IconButton, MenuItem } from '@mui/material';
+import { Link, Stack, Theme, IconButton, MenuItem, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -36,9 +36,16 @@ export function MainMenu({ navConfig, isMobile }: MainMenuProps) {
         <MenuPopover className={classes.menu} open={open} onClose={handleOpen(false)} anchorEl={anchorRef.current}>
           {navConfig.map((link) => (
             <MenuItem key={`${link.title}-${link.path}`} onClick={handleOpen(false)} disabled={!link.path}>
-              <Link className={classes.menuItem} href={link.path} underline="none">
+              <Link
+                className={classes.menuItem}
+                href={link.path}
+                target={link.isExternal ? '_blank' : '_self'}
+                underline="none"
+              >
                 {link.icon}
-                {link.title}
+                <Typography className={classes.openedMenu} variant="subtitle1">
+                  {link.title}
+                </Typography>
               </Link>
             </MenuItem>
           ))}
@@ -50,6 +57,22 @@ export function MainMenu({ navConfig, isMobile }: MainMenuProps) {
   return (
     <Stack direction="row">
       {navConfig.map((link) => {
+        if (link.isExternal) {
+          return (
+            <Link
+              key={link.title}
+              className={classes.link}
+              component={Link}
+              href={link.path}
+              target="_blank"
+              rel="noopener"
+              underline="none"
+            >
+              <span style={{ color: '#FF4785' }}>{link.title}</span>
+            </Link>
+          );
+        }
+
         return (
           <Link
             key={link.title}
