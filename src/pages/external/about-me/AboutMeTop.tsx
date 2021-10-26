@@ -18,11 +18,11 @@ export function AboutMeTop() {
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={1}>
             <Box className={classes.info}>
-              <MotionText className={classes.textPrimary} text="Who" variants={fadeInRight} />
-              &nbsp;
-              <MotionText text={'am'} />
-              &nbsp;
-              <MotionText text="I?" />
+              <MotionText className={classes.textPrimary} text="Who" variants={fadeInRight} sx={{ fontSize: '4rem' }} />
+              &nbsp;&nbsp;&nbsp;
+              <MotionText text="am" sx={{ fontSize: '4rem' }} />
+              &nbsp;&nbsp;&nbsp;
+              <MotionText text="I?" sx={{ fontSize: '4rem' }} />
             </Box>
 
             <motion.div variants={fadeInRight}>

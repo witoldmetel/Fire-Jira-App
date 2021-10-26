@@ -18,9 +18,14 @@ export function ContactMeTop() {
         <Container maxWidth="lg">
           <Stack className={classes.content} spacing={1}>
             <Box className={classes.info}>
-              <MotionText className={classes.textPrimary} text="Contact" variants={fadeInRight} />
-              &nbsp;
-              <MotionText text="me" />
+              <MotionText
+                className={classes.textPrimary}
+                text="Contact"
+                variants={fadeInRight}
+                sx={{ fontSize: '4rem' }}
+              />
+              &nbsp;&nbsp;&nbsp;
+              <MotionText text="me" sx={{ fontSize: '4rem' }} />
             </Box>
 
             <motion.div variants={fadeInRight}>
