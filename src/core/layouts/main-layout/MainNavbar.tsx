@@ -32,9 +32,11 @@ export function MainNavbar() {
             <MainMenu navConfig={mainMenuConfig} />
           </HiddenComponent>
 
-          <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
-            Login
-          </Button>
+          {!isAuthenticated && (
+            <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
+              Login
+            </Button>
+          )}
 
           <HiddenComponent width="mdUp">
             <MainMenu navConfig={mainMenuConfig} isMobile />

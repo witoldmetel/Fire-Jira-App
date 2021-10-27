@@ -58,7 +58,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(8),
     color: theme.palette.common.white,
-    background: theme.palette.common.black
+    background: '#0a0b0c no-repeat center center',
+    backgroundSize: 'cover',
+    backgroundImage: 'url(/static/overlay.svg)'
   },
   link: {
     ...theme.typography.subtitle2,
