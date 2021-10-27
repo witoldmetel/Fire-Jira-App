@@ -6,6 +6,7 @@ import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 
 import { Page, MotionContainer, bounceIn } from 'src/core/components';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 export default function DashboardPage() {
   const classes = useStyles();
@@ -26,10 +27,10 @@ export default function DashboardPage() {
               </Typography>
 
               <motion.div variants={bounceIn}>
-                <Box className={classes.image} component="img" src={'/static/alert.svg'} />
+                <Box className={classes.image} component="img" src="/static/alert.svg" />
               </motion.div>
 
-              <Button component={Link} to="/" size="large" variant="contained">
+              <Button component={Link} to={PATH_DASHBOARD.newProject} size="large" variant="contained">
                 Create new project
               </Button>
             </Box>

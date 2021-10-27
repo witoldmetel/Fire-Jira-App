@@ -22,5 +22,6 @@ export const PATH_PAGE = {
 };
 
 export const PATH_DASHBOARD = {
-  root: ROOTS_DASHBOARD
+  root: ROOTS_DASHBOARD,
+  newProject: path(ROOTS_DASHBOARD, '/new-project')
 };

@@ -49,7 +49,7 @@ export function DashboardNavbar() {
           <Button className={classes.link} component={RouterLink} to={PATH_DASHBOARD.root} variant="text">
             Home
           </Button>
-          <Button className={classes.link} variant="text">
+          <Button className={classes.link} component={RouterLink} to={PATH_DASHBOARD.newProject} variant="text">
             New Project
           </Button>
           {/* Section divider */}
