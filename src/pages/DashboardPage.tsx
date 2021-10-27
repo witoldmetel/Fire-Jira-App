@@ -47,7 +47,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   content: {
     padding: theme.spacing(14, 0),
-    backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 0%, ${theme.palette.grey[300]} 100%)`
+    backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 40%, ${
+      theme.palette.grey[300]
+    } 100%)`
   },
   emptyState: {
     maxWidth: 850,

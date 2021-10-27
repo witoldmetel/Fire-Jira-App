@@ -53,7 +53,16 @@ export function ContactMeForm() {
     }
   });
 
-  const { errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+  const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+
+  const isSubmitDisabled =
+    !values.name ||
+    !values.email ||
+    !values.subject ||
+    !values.message ||
+    !dirty ||
+    !!Object.keys(errors).length ||
+    isSubmitting;
 
   return (
     <div className={classes.root}>
@@ -117,7 +126,7 @@ export function ContactMeForm() {
                 </Stack>
 
                 <MotionInView variants={fadeInUp}>
-                  <Button size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
+                  <Button size="large" type="submit" variant="contained" disabled={isSubmitDisabled}>
                     Send Now
                   </Button>
                 </MotionInView>

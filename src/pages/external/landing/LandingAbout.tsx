@@ -1,7 +1,6 @@
 import classnames from 'classnames';
 
-import { Box, Grid, Container, Typography, Theme, Card } from '@mui/material';
-import { alpha } from '@mui/material/styles';
+import { Box, Grid, Container, Typography, Theme, Card, alpha } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { MotionInView, fadeInUp, fadeInRight } from 'src/core/components';

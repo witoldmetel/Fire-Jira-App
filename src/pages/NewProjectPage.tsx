@@ -11,17 +11,15 @@ import { alpha } from '@mui/material/styles';
 import { Page } from 'src/core/components';
 
 export const NewProjectSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-  subject: Yup.string().required('Subject is required'),
-  message: Yup.string().min(20).required('Message is required')
+  name: Yup.string().required('Project Name is required'),
+  key: Yup.string().min(3).max(5).required('Key should be between 3 to 5 chars'),
+  description: Yup.string()
 });
 
 type InitialValues = {
   name: string;
-  email: string;
-  subject: string;
-  message: string;
+  key: string;
+  description: string;
 
   afterSubmit?: string;
 };
@@ -33,9 +31,8 @@ export default function NewProjectPage() {
   const formik = useFormik<InitialValues>({
     initialValues: {
       name: '',
-      email: '',
-      subject: '',
-      message: ''
+      key: '',
+      description: ''
     },
     validationSchema: NewProjectSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
@@ -62,7 +59,9 @@ export default function NewProjectPage() {
     }
   });
 
-  const { errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+  const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+
+  const isSubmitDisabled = !values.name || !values.key || !dirty || !!Object.keys(errors).length || isSubmitting;
 
   return (
     <Page className={classes.root} title="New Project | Fire Jira">
@@ -79,44 +78,38 @@ export default function NewProjectPage() {
                   <TextField
                     fullWidth
                     type="text"
-                    label="Name"
+                    label="Project Name"
                     {...getFieldProps('name')}
                     error={Boolean(touched.name && errors.name)}
                     helperText={touched.name && errors.name}
                   />
 
+                  <Alert className={classes.infoBar} severity="info">
+                    <strong>The Project Key becomes the prefix for tasks created within that Project</strong>
+                  </Alert>
                   <TextField
                     fullWidth
                     type="text"
-                    label="Email"
-                    {...getFieldProps('email')}
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
+                    label="Project Key"
+                    {...getFieldProps('key')}
+                    error={Boolean(touched.key && errors.key)}
+                    helperText={touched.key && errors.key}
                   />
 
                   <TextField
                     fullWidth
                     type="text"
-                    label="Subject"
-                    {...getFieldProps('subject')}
-                    error={Boolean(touched.subject && errors.subject)}
-                    helperText={touched.subject && errors.subject}
-                  />
-
-                  <TextField
-                    fullWidth
-                    type="text"
-                    label="Enter your message here."
-                    {...getFieldProps('message')}
-                    error={Boolean(touched.message && errors.message)}
-                    helperText={touched.message && errors.message}
+                    label="Description"
+                    {...getFieldProps('description')}
+                    error={Boolean(touched.description && errors.description)}
+                    helperText={touched.description && errors.description}
                     multiline
                     rows={5}
                   />
                 </Stack>
 
-                <Button size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
-                  Send Now
+                <Button size="large" type="submit" variant="contained" disabled={isSubmitDisabled}>
+                  Create Project
                 </Button>
               </Stack>
             </Form>
@@ -130,8 +123,10 @@ export default function NewProjectPage() {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     textAlign: 'center',
-    paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(5),
+    backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 40%, ${
+      theme.palette.grey[300]
+    } 100%)`,
     [theme.breakpoints.up('md')]: {
       textAlign: 'left'
     }
@@ -143,5 +138,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     padding: theme.spacing(12, 0)
+  },
+  infoBar: {
+    marginBottom: theme.spacing(3)
   }
 }));
