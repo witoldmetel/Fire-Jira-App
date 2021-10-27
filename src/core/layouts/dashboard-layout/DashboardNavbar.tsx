@@ -1,4 +1,4 @@
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 import { makeStyles } from '@mui/styles';
@@ -6,16 +6,12 @@ import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box, Typography 
 import { Close } from '@mui/icons-material';
 
 import { Logo } from 'src/core/components';
-import { PATH_DASHBOARD } from 'src/routes/paths';
 import { useAuth } from 'src/hooks/useAuth';
-import { getAuthState } from 'src/store/slices/auth';
-import { useSelector } from 'src/store/store';
 
 export function DashboardNavbar() {
   const classes = useStyles();
   const navigate = useNavigate();
   const { logout } = useAuth();
-  const { isAuthenticated } = useSelector(getAuthState);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
@@ -44,7 +40,7 @@ export function DashboardNavbar() {
           <Logo />
           <Typography variant="h1">Fire Jira</Typography>
         </Box>
-        <Typography variant="h2">The professional publishing platform</Typography>
+        <Typography variant="h2">The professional progress tracking platform</Typography>
       </Box>
 
       <Toolbar className={classes.toolbar} disableGutters>
@@ -52,7 +48,7 @@ export function DashboardNavbar() {
           {/* Section divider */}
           <Box sx={{ flexGrow: 1 }} />
 
-          <Button variant="outlined" onClick={handleLogout}>
+          <Button className={classes.logoutButton} variant="outlined" onClick={handleLogout}>
             Logout
           </Button>
         </Container>
@@ -63,7 +59,7 @@ export function DashboardNavbar() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    height: '30vh',
+    height: '50%',
     padding: '0 5vw',
     position: 'relative',
     paddingTop: theme.spacing(2),
@@ -76,7 +72,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
     margin: '0 auto',
     maxWidth: 1040,
-    width: '100%'
+    width: '100%',
+    padding: '0 5vw'
   },
   container: {
     display: 'flex',
@@ -97,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(2),
       padding: '5px 0',
       fontSize: 22,
-      fontWeight: 700
+      fontWeight: 400
     }
   },
   logoWrapper: {
@@ -107,8 +104,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     '& > h1': {
       marginLeft: theme.spacing(2),
-      fontSize: 30,
+      fontSize: 35,
       fontWeight: 700
     }
+  },
+  logoutButton: {
+    fontSize: 10,
+    borderRadius: theme.shape.borderRadiusMd,
+    padding: theme.spacing(0.4)
   }
 }));
