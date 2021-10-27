@@ -1,14 +1,11 @@
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
+import { Link as RouterLink } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { makeStyles } from '@mui/styles';
-import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { AppBar, Toolbar, Container, Theme, Button, Box } from '@mui/material';
 
 import { Logo, HiddenComponent } from 'src/core/components';
 import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
-import { useAuth } from 'src/hooks/useAuth';
 import { useOffSetTop } from 'src/hooks/useOffSetTop';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
@@ -18,29 +15,7 @@ import { mainMenuConfig } from '../constants';
 export function MainNavbar() {
   const classes = useStyles();
   const isOffset = useOffSetTop(250);
-  const navigate = useNavigate();
-  const { logout } = useAuth();
   const { isAuthenticated } = useSelector(getAuthState);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
-  const handleLogout = async () => {
-    try {
-      await logout(() =>
-        enqueueSnackbar('Logout success', {
-          variant: 'success',
-          action: (key) => (
-            <IconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Close />
-            </IconButton>
-          )
-        })
-      ).then(() => {
-        navigate('/');
-      });
-    } catch (error) {
-      enqueueSnackbar('Unable to logout', { variant: 'error' });
-    }
-  };
 
   return (
     <AppBar className={classes.appBar}>
@@ -57,11 +32,7 @@ export function MainNavbar() {
             <MainMenu navConfig={mainMenuConfig} />
           </HiddenComponent>
 
-          {isAuthenticated ? (
-            <Button variant="outlined" onClick={handleLogout}>
-              Logout
-            </Button>
-          ) : (
+          {!isAuthenticated && (
             <Button component={RouterLink} to={PATH_AUTH.login} variant="contained">
               Login
             </Button>

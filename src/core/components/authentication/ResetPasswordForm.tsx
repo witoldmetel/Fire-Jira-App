@@ -65,7 +65,9 @@ export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps
     }
   });
 
-  const { errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+  const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+
+  const isSubmitDisabled = !values.email || !dirty || !!Object.keys(errors).length || isSubmitting;
 
   return (
     <FormikProvider value={formik}>
@@ -82,7 +84,7 @@ export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps
             helperText={touched.email && errors.email}
           />
 
-          <Button fullWidth size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
+          <Button fullWidth size="large" type="submit" variant="contained" disabled={isSubmitDisabled}>
             Reset Password
           </Button>
         </Stack>

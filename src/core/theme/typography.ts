@@ -16,7 +16,7 @@ function responsiveFontSizes({ sm, md, lg }: { sm: number; md: number; lg: numbe
   };
 }
 
-const FONT_PRIMARY = 'Public Sans, sans-serif'; // Google Font
+const FONT_PRIMARY = 'Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif';
 
 export const typography = {
   fontFamily: FONT_PRIMARY,

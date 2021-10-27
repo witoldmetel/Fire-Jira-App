@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 
 import { MainLayout } from '../core/layouts/main-layout';
 import { LogoLayout } from '../core/layouts/logo-layout';
+import { DashboardLayout } from '../core/layouts/dashboard-layout';
 import { PATH_PAGE, PATH_DASHBOARD } from './paths';
 import { GuestGuard } from '../guards/GuestGuard';
 import { AuthGuard } from '../guards/AuthGuard';
@@ -94,7 +95,7 @@ export function Router() {
       path: 'dashboard',
       element: (
         <AuthGuard>
-          <MainLayout />
+          <DashboardLayout />
         </AuthGuard>
       ),
       children: [{ path: PATH_DASHBOARD.root, element: <DashboardPage /> }]

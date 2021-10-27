@@ -97,6 +97,8 @@ export function LoginForm() {
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
+  const isSubmitDisabled = !values.email || !values.password || !dirty || !!Object.keys(errors).length || isSubmitting;
+
   return (
     <FormikProvider value={formik}>
       <SocialForm onGoogleClick={googleLoginHandler} />
@@ -146,7 +148,7 @@ export function LoginForm() {
           </Link>
         </Stack>
 
-        <Button fullWidth size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
+        <Button fullWidth size="large" type="submit" variant="contained" disabled={isSubmitDisabled}>
           Login
         </Button>
       </Form>
