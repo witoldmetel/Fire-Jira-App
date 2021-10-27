@@ -46,16 +46,16 @@ export function DashboardNavbar() {
 
       <Toolbar className={classes.toolbar} disableGutters>
         <Container className={classes.container} maxWidth="lg">
-          <Button className={classes.navButton} component={RouterLink} to={PATH_DASHBOARD.root} variant="text">
+          <Button className={classes.link} component={RouterLink} to={PATH_DASHBOARD.root} variant="text">
             Home
           </Button>
-          <Button className={classes.navButton} variant="text">
+          <Button className={classes.link} variant="text">
             New Project
           </Button>
           {/* Section divider */}
           <Box sx={{ flexGrow: 1 }} />
 
-          <Button className={classes.logoutButton} variant="outlined" onClick={handleLogout}>
+          <Button className={classes.link} variant="outlined" onClick={handleLogout}>
             Logout
           </Button>
         </Container>
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '10vw 4vw',
+    padding: '6vw 4vw',
     minHeight: 200,
     maxHeight: 450,
     textAlign: 'center',
@@ -115,12 +115,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontWeight: 700
     }
   },
-  navButton: {
-    fontSize: 10
-  },
-  logoutButton: {
-    fontSize: 10,
-    borderRadius: theme.shape.borderRadiusMd,
-    padding: theme.spacing(0.4)
+  link: {
+    ...theme.typography.subtitle2,
+    color: theme.palette.primary.main,
+    marginRight: theme.spacing(2),
+    transition: theme.transitions.create('opacity', {
+      duration: theme.transitions.duration.shortest
+    })
   }
 }));
