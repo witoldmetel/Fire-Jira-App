@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 import { makeStyles } from '@mui/styles';
@@ -7,6 +7,7 @@ import { Close } from '@mui/icons-material';
 
 import { Logo } from 'src/core/components';
 import { useAuth } from 'src/hooks/useAuth';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 export function DashboardNavbar() {
   const classes = useStyles();
@@ -45,6 +46,12 @@ export function DashboardNavbar() {
 
       <Toolbar className={classes.toolbar} disableGutters>
         <Container className={classes.container} maxWidth="lg">
+          <Button className={classes.navButton} component={RouterLink} to={PATH_DASHBOARD.root} variant="text">
+            Home
+          </Button>
+          <Button className={classes.navButton} variant="text">
+            New Project
+          </Button>
           {/* Section divider */}
           <Box sx={{ flexGrow: 1 }} />
 
@@ -107,6 +114,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: 35,
       fontWeight: 700
     }
+  },
+  navButton: {
+    fontSize: 10
   },
   logoutButton: {
     fontSize: 10,
