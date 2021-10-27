@@ -78,9 +78,11 @@ export function RegisterForm() {
     }
   });
 
-  const { errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
+  const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
 
   const handleShowPassword = () => setShowPassword((show) => !show);
+
+  const isSubmitDisabled = !values.email || !values.password || !dirty || !!Object.keys(errors).length || isSubmitting;
 
   return (
     <FormikProvider value={formik}>
@@ -119,7 +121,7 @@ export function RegisterForm() {
             helperText={touched.password && errors.password}
           />
 
-          <Button fullWidth size="large" type="submit" variant="contained" disabled={!dirty || isSubmitting}>
+          <Button fullWidth size="large" type="submit" variant="contained" disabled={isSubmitDisabled}>
             Register
           </Button>
         </Stack>
