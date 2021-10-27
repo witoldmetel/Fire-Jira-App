@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import { TextField, Alert, Stack, Button, IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { ResetPasswordSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
@@ -22,7 +22,7 @@ type ResetPasswordFormProps = {
 };
 
 export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps) {
-  const { resetPassword } = useAuth();
+  const { resetPassword } = useFirebase();
   const { isError, errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

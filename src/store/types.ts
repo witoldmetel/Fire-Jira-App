@@ -15,3 +15,5 @@ export type AuthState = {
   errorMessage: FirebaseError | null;
   user: AuthUser;
 };
+
+export type ProjectState = {};

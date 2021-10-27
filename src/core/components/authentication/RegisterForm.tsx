@@ -5,7 +5,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Stack, TextField, IconButton, InputAdornment, Alert, Button } from '@mui/material';
 import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
 
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { RegisterSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
@@ -20,7 +20,7 @@ type InitialValues = {
 };
 
 export function RegisterForm() {
-  const { register, loginWithGoogle } = useAuth();
+  const { register, loginWithGoogle } = useFirebase();
   const { isError, errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

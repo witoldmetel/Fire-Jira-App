@@ -7,13 +7,13 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { PATH_AUTH } from '../routes/paths';
 import { Page, ResetPasswordForm } from '../core/components';
 
 export default function ResetPasswordPage() {
   const classes = useStyles();
-  const { resetPassword } = useAuth();
+  const { resetPassword } = useFirebase();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

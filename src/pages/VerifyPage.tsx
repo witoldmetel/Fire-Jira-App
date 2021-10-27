@@ -1,12 +1,12 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { Page } from '../core/components';
 
 export default function VerifyPage() {
   const classes = useStyles();
-  const { sendConfirmationEmail } = useAuth();
+  const { sendConfirmationEmail } = useFirebase();
 
   return (
     <Page className={classes.root} title="Verify Email | Fire Jira">

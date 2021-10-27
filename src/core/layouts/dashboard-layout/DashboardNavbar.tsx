@@ -6,13 +6,13 @@ import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box, Typography 
 import { Close } from '@mui/icons-material';
 
 import { Logo } from 'src/core/components';
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { PATH_DASHBOARD } from 'src/routes/paths';
 
 export function DashboardNavbar() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout } = useFirebase();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
