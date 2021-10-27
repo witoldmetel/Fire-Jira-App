@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-    color: theme.palette.grey[0],
+    color: theme.palette.common.white,
     background: '#0a0b0c no-repeat center center',
     backgroundSize: 'cover',
     backgroundImage: 'url(/static/dashboard-cover.jpg)'

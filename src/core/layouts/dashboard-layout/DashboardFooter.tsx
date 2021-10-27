@@ -1,5 +1,9 @@
-import { Box, Container, Typography, Theme, Stack } from '@mui/material';
+import { NavLink as RouterLink } from 'react-router-dom';
+
+import { Box, Container, Typography, Theme, Stack, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
+import { PATH_PAGE } from 'src/routes/paths';
 
 export function DashboardFooter() {
   const classes = useStyles();
@@ -12,9 +16,35 @@ export function DashboardFooter() {
             witoldmetel © 2021 | Fire Jira
           </Typography>
 
-          <Typography variant="caption" component="p">
-            witoldmetel © 2021 | Fire Jira
-          </Typography>
+          <Stack direction="row">
+            <Link className={classes.link} to={PATH_PAGE.about} component={RouterLink} underline="none">
+              About Me
+            </Link>
+            <Link className={classes.link} to={PATH_PAGE.contact} component={RouterLink} underline="none">
+              Contact Me
+            </Link>
+            <Link
+              className={classes.link}
+              component={Link}
+              href="https://firejira-storybook.netlify.app/"
+              target="_blank"
+              rel="noopener"
+              underline="none"
+            >
+              {/* color for storybook link */}
+              <span style={{ color: '#FF4785' }}>Storybook</span>
+            </Link>
+            <Link
+              className={classes.link}
+              component={Link}
+              href="https://github.com/witoldmetel/Fire-Jira-App"
+              target="_blank"
+              rel="noopener"
+              underline="none"
+            >
+              Github
+            </Link>
+          </Stack>
         </Stack>
       </Container>
     </Box>
@@ -25,9 +55,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   footer: {
     padding: '0 4vw',
     position: 'relative',
-    paddingTop: 20,
-    paddingBottom: 60,
-    color: '#fff',
-    background: '#000'
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(8),
+    color: theme.palette.common.white,
+    background: theme.palette.common.black
+  },
+  link: {
+    ...theme.typography.subtitle2,
+    color: theme.palette.primary.main,
+    marginRight: theme.spacing(2),
+    transition: theme.transitions.create('opacity', {
+      duration: theme.transitions.duration.shortest
+    }),
+
+    '&:hover': {
+      opacity: 0.5,
+      textDecoration: 'none'
+    }
   }
 }));

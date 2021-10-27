@@ -15,6 +15,7 @@ export function LogoLayout() {
           <Logo />
         </Link>
       </header>
+
       <Outlet />
     </>
   );
