@@ -29,8 +29,10 @@ export type ProjectState = {
   isError: boolean;
 
   errorMessage?: string | null;
+  projects?: Project[];
 };
 
 export type Project = { name: string; key: string; description?: string };
 
 export type CreateProjectBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;
+export type FetchProjectsBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;
