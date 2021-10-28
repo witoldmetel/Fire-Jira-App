@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-import { ProjectState } from '../../types';
+import { RootState, ProjectState } from '../../types';
 import { createProjectBuilder } from '../project/thunks/create-project';
 
 const initialState: ProjectState = {
@@ -19,3 +19,8 @@ const slice = createSlice({
 
 // Reducer
 export default slice.reducer;
+
+// Selectors
+const getState = (state: RootState) => state;
+
+export const getProjectState = createSelector([getState], (state) => state.project);
