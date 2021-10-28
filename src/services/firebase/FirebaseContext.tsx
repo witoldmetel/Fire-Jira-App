@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import {
@@ -64,6 +63,9 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  /**
+   * AUTH
+   */
   const sendConfirmationEmail = async () => {
     dispatch(startLoading());
 

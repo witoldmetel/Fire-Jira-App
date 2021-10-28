@@ -1,6 +1,6 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { RootState, ProjectState } from '../types';
+import { RootState, ProjectState } from '../../types';
 
 const initialState: ProjectState = {
   isAuthenticated: false,

@@ -1,11 +1,12 @@
-import { store } from '../../store';
-import { startLoading, getUserSuccess, getUserReject, hasError, resetState } from '../auth';
+import { store } from '../../../store';
+import { startLoading, getUserSuccess, getUserReject, hasError, resetState } from '../index';
+import { AuthState } from '../../../types';
 
 describe('auth slice', () => {
   test('get user sucessfully', () => {
     store.dispatch(startLoading());
 
-    let state = store.getState().auth;
+    let state = store.getState().auth as AuthState;
 
     expect(state.isLoading).toBeTruthy();
     expect(state.isAuthenticated).toBeFalsy();
@@ -13,7 +14,7 @@ describe('auth slice', () => {
 
     store.dispatch(getUserSuccess({ id: 1, email: 'random@email.com' }));
 
-    state = store.getState().auth;
+    state = store.getState().auth as AuthState;
 
     expect(state.isLoading).toBeFalsy();
     expect(state.isAuthenticated).toBeTruthy();
@@ -24,28 +25,28 @@ describe('auth slice', () => {
   test('user rejected', () => {
     store.dispatch(getUserReject());
 
-    let state = store.getState().auth;
+    let state = store.getState().auth as AuthState;
 
     expect(state.isAuthenticated).toBeFalsy();
     expect(state.user).toBe(null);
   });
 
   test('get error', () => {
-    let state = store.getState().auth;
+    let state = store.getState().auth as AuthState;
 
     expect(state.isError).toBeFalsy();
     expect(state.errorMessage).toBe(null);
 
     store.dispatch(hasError('random error'));
 
-    state = store.getState().auth;
+    state = store.getState().auth as AuthState;
 
     expect(state.isError).toBeTruthy();
     expect(state.errorMessage).toBe('random error');
 
     store.dispatch(resetState());
 
-    state = store.getState().auth;
+    state = store.getState().auth as AuthState;
 
     expect(state.isError).toBeFalsy();
     expect(state.errorMessage).toBe(null);
