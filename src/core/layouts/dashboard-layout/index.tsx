@@ -8,9 +8,7 @@ export function DashboardLayout() {
     <>
       <DashboardNavbar />
 
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
 
       <DashboardFooter />
     </>

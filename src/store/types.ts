@@ -32,7 +32,7 @@ export type ProjectState = {
   projects?: Project[];
 };
 
-export type Project = { name: string; key: string; description?: string };
+export type Project = { id: string; name: string; key: string; description?: string };
 
 export type CreateProjectBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;
 export type FetchProjectsBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;

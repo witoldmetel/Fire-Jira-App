@@ -15,9 +15,12 @@ export const createProject = createAsyncThunk<
   const db = getFirestore();
   const auth = getAuth();
 
+  const projectId = uuidv4();
+
   try {
-    await setDoc(doc(db, 'projects', uuidv4()), {
+    await setDoc(doc(db, 'projects', projectId), {
       ...project,
+      id: projectId,
       key: project.key.toUpperCase(),
       leaderId: auth.currentUser?.uid,
       members: []

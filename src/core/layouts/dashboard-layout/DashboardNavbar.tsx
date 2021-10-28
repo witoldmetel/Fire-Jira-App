@@ -66,6 +66,7 @@ export function DashboardNavbar() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
+    zIndex: 1,
     height: '50%',
     padding: '0 5vw',
     position: 'relative',
