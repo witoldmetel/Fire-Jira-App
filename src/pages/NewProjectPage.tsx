@@ -12,7 +12,7 @@ import { alpha } from '@mui/material/styles';
 import { Page } from 'src/core/components';
 import { createProject } from 'src/store/slices/project/thunks/create-project';
 import { useDispatch, useSelector } from 'src/store/store';
-import { getProjectState } from 'src/store/slices/project';
+import { getProjectState, resetState } from 'src/store/slices/project';
 
 export const NewProjectSchema = Yup.object().shape({
   name: Yup.string().required('Project Name is required'),
@@ -70,6 +70,8 @@ export default function NewProjectPage() {
         setSubmitting(false);
         setErrors({ afterSubmit: error as string });
       }
+
+      dispatch(resetState());
     }
   });
 

@@ -13,12 +13,22 @@ const initialState: ProjectState = {
 const slice = createSlice({
   name: 'project',
   initialState,
-  reducers: {},
+  reducers: {
+    resetState(state) {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.errorMessage = null;
+    }
+  },
   extraReducers: createProjectBuilder
 });
 
 // Reducer
 export default slice.reducer;
+
+// Actions
+export const { resetState } = slice.actions;
 
 // Selectors
 const getState = (state: RootState) => state;
