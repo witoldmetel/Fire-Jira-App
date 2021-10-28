@@ -1,20 +1,20 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState, ProjectState } from '../../types';
+import { ProjectState } from '../../types';
+import { createProjectBuilder } from '../project/thunks/create-project';
 
 const initialState: ProjectState = {
-  isAuthenticated: false,
-  isInitialized: false,
   isLoading: false,
+  isSuccess: false,
   isError: false,
-  errorMessage: null,
-  user: null
+  errorMessage: null
 };
 
 const slice = createSlice({
   name: 'project',
   initialState,
-  reducers: {}
+  reducers: {},
+  extraReducers: createProjectBuilder
 });
 
 // Reducer

@@ -1,3 +1,4 @@
+import { ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import { FirebaseError } from 'firebase/app';
 
 import { store } from './store';
@@ -5,6 +6,9 @@ import { store } from './store';
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
+/**
+ * AUTH
+ */
 type AuthUser = null | Record<string, any>;
 
 export type AuthState = {
@@ -16,4 +20,17 @@ export type AuthState = {
   user: AuthUser;
 };
 
-export type ProjectState = {};
+/**
+ * PROJECT
+ */
+export type ProjectState = {
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+
+  errorMessage?: string | null;
+};
+
+export type Project = { name: string; key: string; description?: string };
+
+export type CreateProjectBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;

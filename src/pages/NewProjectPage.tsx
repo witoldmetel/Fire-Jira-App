@@ -9,6 +9,8 @@ import { Close } from '@mui/icons-material';
 import { alpha } from '@mui/material/styles';
 
 import { Page } from 'src/core/components';
+import { createProject } from 'src/store/slices/project/thunks/create-project';
+import { useDispatch } from 'src/store/store';
 
 export const NewProjectSchema = Yup.object().shape({
   name: Yup.string().required('Project Name is required'),
@@ -26,6 +28,7 @@ type InitialValues = {
 
 export default function NewProjectPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const formik = useFormik<InitialValues>({
@@ -37,20 +40,19 @@ export default function NewProjectPage() {
     validationSchema: NewProjectSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
-        // SIMULATE SENDING MESSAGE BECAUSE FIREBASE CLOUD FUNCTIONS ARE NOT FREE ANYMORE :(
-        // @todo: Try Lambda AWS
-        await new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-          enqueueSnackbar('Message sent successfully!', {
-            variant: 'success',
-            action: (key) => (
-              <IconButton size="small" onClick={() => closeSnackbar(key)}>
-                <Close />
-              </IconButton>
-            )
-          });
-          resetForm();
-          setSubmitting(false);
-        });
+        await dispatch(createProject(values));
+        // await new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+        //   enqueueSnackbar('Message sent successfully!', {
+        //     variant: 'success',
+        //     action: (key) => (
+        //       <IconButton size="small" onClick={() => closeSnackbar(key)}>
+        //         <Close />
+        //       </IconButton>
+        //     )
+        //   });
+        //   resetForm();
+        //   setSubmitting(false);
+        // });
       } catch (error) {
         resetForm();
         setSubmitting(false);
@@ -94,6 +96,7 @@ export default function NewProjectPage() {
                     {...getFieldProps('key')}
                     error={Boolean(touched.key && errors.key)}
                     helperText={touched.key && errors.key}
+                    inputProps={{ style: { textTransform: 'uppercase' } }}
                   />
 
                   <TextField
