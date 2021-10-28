@@ -1,5 +1,5 @@
-import { store } from '../../store';
-import { startLoading, getUserSuccess, getUserReject, hasError, resetState } from '../auth';
+import { store } from '../../../store';
+import { startLoading, getUserSuccess, getUserReject, hasError, resetState } from '../index';
 
 describe('auth slice', () => {
   test('get user sucessfully', () => {

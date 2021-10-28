@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import { Button, Box, Tooltip, Container, Typography, Stack, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { fadeIn, fadeInUp, fadeInRight, wrapEnter } from 'src/core/components';
 
 export function LandingTop() {
   const classes = useStyles();
-  const { login } = useAuth();
+  const { login } = useFirebase();
 
   return (
     <>

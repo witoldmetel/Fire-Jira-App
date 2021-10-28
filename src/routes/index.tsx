@@ -35,6 +35,7 @@ const ContactMePage = Loadable(lazy(() => import('../pages/ContactMePage')));
 
 // Dashboard
 const DashboardPage = Loadable(lazy(() => import('../pages/DashboardPage')));
+const NewProjectPage = Loadable(lazy(() => import('../pages/NewProjectPage')));
 
 export function Router() {
   return useRoutes([
@@ -98,7 +99,10 @@ export function Router() {
           <DashboardLayout />
         </AuthGuard>
       ),
-      children: [{ path: PATH_DASHBOARD.root, element: <DashboardPage /> }]
+      children: [
+        { path: PATH_DASHBOARD.root, element: <DashboardPage /> },
+        { path: PATH_DASHBOARD.newProject, element: <NewProjectPage /> }
+      ]
     }
   ]);
 }

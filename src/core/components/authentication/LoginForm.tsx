@@ -17,7 +17,7 @@ import {
 import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
 
 import { PATH_AUTH } from 'src/routes/paths';
-import { useAuth } from 'src/hooks/useAuth';
+import { useFirebase } from 'src/hooks/useFirebase';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
 import { LoginSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
@@ -33,7 +33,7 @@ type InitialValues = {
 };
 
 export function LoginForm() {
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle } = useFirebase();
   const { isError, errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
