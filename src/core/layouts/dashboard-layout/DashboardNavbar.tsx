@@ -1,5 +1,6 @@
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import classnames from 'classnames';
 
 import { makeStyles } from '@mui/styles';
 import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box, Typography } from '@mui/material';
@@ -12,6 +13,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 export function DashboardNavbar() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { logout } = useFirebase();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -44,7 +46,12 @@ export function DashboardNavbar() {
         <Typography variant="h2">The professional progress tracking platform</Typography>
       </Box>
 
-      <Toolbar className={classes.toolbar} disableGutters>
+      <Toolbar
+        className={classnames(classes.toolbar, {
+          [classes.toolbarOffset]: pathname === PATH_DASHBOARD.root
+        })}
+        disableGutters
+      >
         <Container className={classes.container} maxWidth="lg">
           <Button className={classes.link} component={RouterLink} to={PATH_DASHBOARD.root} variant="text">
             Home
@@ -82,6 +89,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: 1040,
     width: '100%',
     padding: '0 5vw'
+  },
+  toolbarOffset: {
+    [theme.breakpoints.up('md')]: {
+      marginBottom: theme.spacing(7)
+    }
   },
   container: {
     display: 'flex',

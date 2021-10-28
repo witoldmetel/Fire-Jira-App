@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-import { Container, Theme, Box, Typography, Button, Card } from '@mui/material';
+import { Theme, Box, Typography, Button, Card } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 
@@ -27,7 +27,6 @@ export default function DashboardPage() {
   return (
     <Page className={classes.root} title="Dashboard | Fire Jira">
       <div className={classes.content}>
-        {/* <Container> */}
         {projects?.length ? (
           <Box className={classes.wrapper}>
             {projects.map((project) => (
@@ -59,7 +58,6 @@ export default function DashboardPage() {
             </Box>
           </MotionContainer>
         )}
-        {/* </Container> */}
       </div>
     </Page>
   );
@@ -67,7 +65,6 @@ export default function DashboardPage() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    // height: '100%',
     zIndex: 100,
     width: '100%',
     flexGrow: 1,
@@ -78,23 +75,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     } 100%)`
   },
   content: {
-    // padding: theme.spacing(14, 0)
     margin: '0 auto',
     maxWidth: 1040,
     width: '100%'
   },
   wrapper: {
-    marginTop: -70,
-    paddingTop: 0,
     display: 'flex',
     flexWrap: 'wrap',
-    margin: ' 0 -20px',
-    padding: '40px 0 0 0'
+    padding: '40px 0 0 0',
+    [theme.breakpoints.up('md')]: {
+      paddingTop: 0,
+      marginTop: -70
+    }
   },
   projectCard: {
     display: 'flex',
-    flex: '1 1 100%',
-    flexDirection: 'row',
     overflow: 'hidden',
     margin: '0 20px 40px',
     minHeight: 300,
@@ -104,6 +99,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: 'rgb(39 44 49 / 6%) 8px 14px 38px, rgb(39 44 49 / 3%) 1px 3px 8px',
     transition: 'all 0.5s ease',
     cursor: 'pointer',
+
+    '&:nth-of-type(6n + 1)': {
+      flex: '1 1 100%',
+      flexDirection: 'row'
+    },
 
     '&:hover': {
       boxShadow: 'rgb(39 44 49 / 7%) 8px 28px 50px, rgb(39 44 49 / 4%) 1px 6px 12px',
