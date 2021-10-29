@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
-import { ContactMeTop, ContactMeForm } from './external';
+import { ContactMeTop, ContactMeForm } from './components';
 
 export default function ContactMePage() {
   const classes = useStyles();

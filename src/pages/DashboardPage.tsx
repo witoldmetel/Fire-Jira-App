@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
-import { Theme, Box, Typography, Button, Card, Avatar, Tooltip } from '@mui/material';
+import { Theme, Box, Typography, Card, Avatar, Tooltip } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 
-import { Page, MotionContainer, bounceIn, LoadingPage } from 'src/core/components';
-import { PATH_DASHBOARD } from 'src/routes/paths';
+import { Page, LoadingPage } from 'src/core/components';
 import { useDispatch, useSelector } from 'src/store/store';
 import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
 import { getProjectState } from 'src/store/slices/project';
 import { formatTimeFromNow } from 'src/utils/time';
+import { EmptyDashboard } from './components';
 
 export default function DashboardPage() {
   const classes = useStyles();
@@ -57,27 +55,7 @@ export default function DashboardPage() {
             ))}
           </Box>
         ) : (
-          // EMPTY STATE
-          <MotionContainer initial="initial" open>
-            <Box className={classes.emptyState}>
-              <motion.div variants={bounceIn}>
-                <Typography variant="h3" paragraph>
-                  You aren't part of any project
-                </Typography>
-              </motion.div>
-              <Typography className={classes.text}>
-                Create a new one or wait for an invite from another project
-              </Typography>
-
-              <motion.div variants={bounceIn}>
-                <Box className={classes.image} component="img" src="/static/alert.svg" />
-              </motion.div>
-
-              <Button component={Link} to={PATH_DASHBOARD.newProject} size="large" variant="contained">
-                Create new project
-              </Button>
-            </Box>
-          </MotionContainer>
+          <EmptyDashboard />
         )}
       </div>
     </Page>
@@ -219,19 +197,5 @@ const useStyles = makeStyles((theme: Theme) => ({
   updateDate: {
     marginLeft: 20,
     color: theme.palette.text.secondary
-  },
-  emptyState: {
-    maxWidth: 850,
-    margin: 'auto',
-    textAlign: 'center',
-    border: `2px dashed ${theme.palette.grey[400]}`,
-    padding: theme.spacing(4)
-  },
-  text: {
-    color: theme.palette.text.secondary
-  },
-  image: {
-    width: 300,
-    height: 300
   }
 }));

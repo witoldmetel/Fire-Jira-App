@@ -6,7 +6,7 @@ import { Theme } from '@mui/material';
 import { Page } from 'src/core/components';
 import { getAuthState } from '../store/slices/auth';
 import { useSelector } from 'src/store/store';
-import { LandingTop, LandingAbout, LandingFeatures } from './external';
+import { LandingTop, LandingAbout, LandingFeatures } from './components';
 import { PATH_DASHBOARD } from 'src/routes/paths';
 
 export default function LandingPage() {

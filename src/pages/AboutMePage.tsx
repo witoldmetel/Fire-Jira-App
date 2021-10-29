@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
 
 import { Page } from 'src/core/components';
-import { AboutMeTop, AboutMeGeneral } from './external';
+import { AboutMeTop, AboutMeGeneral } from './components';
 
 export default function AboutMePage() {
   const classes = useStyles();
