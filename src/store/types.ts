@@ -39,8 +39,11 @@ export type Project = {
   key: string;
   createdAt: Timestamp;
   updatedAt: Timestamp;
+
   description?: string;
 };
+
+export type ProjectPayload = Pick<Project, 'name' | 'key' | 'description'>;
 
 export type CreateProjectBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;
 export type FetchProjectsBuilderState = (builder: ActionReducerMapBuilder<ProjectState>) => void;

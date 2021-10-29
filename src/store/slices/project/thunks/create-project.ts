@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { getFirestore, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-import { CreateProjectBuilderState, Project } from '../../../types';
+import { CreateProjectBuilderState, ProjectPayload } from '../../../types';
 
 export const createProject = createAsyncThunk<
   unknown,
-  Project,
+  ProjectPayload,
   {
     rejectValue: { errorMessage: string };
   }
