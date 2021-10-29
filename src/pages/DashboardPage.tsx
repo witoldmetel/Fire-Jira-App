@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import classnames from 'classnames';
 
 import { Theme, Box, Typography, Card, Avatar, Tooltip } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -24,7 +25,10 @@ export default function DashboardPage() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <Page className={classes.root} title="Dashboard | Fire Jira">
+    <Page
+      className={classnames(classes.root, { [classes.emptyContainer]: !projects?.length })}
+      title="Dashboard | Fire Jira"
+    >
       <div className={classes.content}>
         {projects?.length ? (
           <Box className={classes.wrapper}>
@@ -72,6 +76,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 40%, ${
       theme.palette.grey[300]
     } 100%)`
+  },
+  emptyContainer: {
+    padding: '5vw'
   },
   content: {
     margin: '0 auto',
