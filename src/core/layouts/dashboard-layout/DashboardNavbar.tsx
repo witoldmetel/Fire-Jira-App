@@ -1,5 +1,6 @@
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import classnames from 'classnames';
 
 import { makeStyles } from '@mui/styles';
 import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box, Typography } from '@mui/material';
@@ -8,11 +9,15 @@ import { Close } from '@mui/icons-material';
 import { Logo } from 'src/core/components';
 import { useFirebase } from 'src/hooks/useFirebase';
 import { PATH_DASHBOARD } from 'src/routes/paths';
+import { useSelector } from 'src/store/store';
+import { getProjectState } from 'src/store/slices/project';
 
 export function DashboardNavbar() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { logout } = useFirebase();
+  const { projects } = useSelector(getProjectState);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
@@ -44,7 +49,12 @@ export function DashboardNavbar() {
         <Typography variant="h2">The professional progress tracking platform</Typography>
       </Box>
 
-      <Toolbar className={classes.toolbar} disableGutters>
+      <Toolbar
+        className={classnames(classes.toolbar, {
+          [classes.toolbarOffset]: pathname === PATH_DASHBOARD.root && projects?.length
+        })}
+        disableGutters
+      >
         <Container className={classes.container} maxWidth="lg">
           <Button className={classes.link} component={RouterLink} to={PATH_DASHBOARD.root} variant="text">
             Home
@@ -66,6 +76,7 @@ export function DashboardNavbar() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
+    zIndex: 1,
     height: '50%',
     padding: '0 5vw',
     position: 'relative',
@@ -79,8 +90,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
     margin: '0 auto',
     maxWidth: 1040,
-    width: '100%',
-    padding: '0 5vw'
+    width: '100%'
+  },
+  toolbarOffset: {
+    [theme.breakpoints.up('md')]: {
+      marginBottom: theme.spacing(7)
+    }
   },
   container: {
     display: 'flex',

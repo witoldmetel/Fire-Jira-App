@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 import { CreateProjectBuilderState, Project } from '../../../types';
@@ -15,12 +15,18 @@ export const createProject = createAsyncThunk<
   const db = getFirestore();
   const auth = getAuth();
 
+  const projectId = uuidv4();
+  const date: Timestamp = Timestamp.now();
+
   try {
-    await setDoc(doc(db, 'projects', uuidv4()), {
+    await setDoc(doc(db, 'projects', projectId), {
       ...project,
+      id: projectId,
       key: project.key.toUpperCase(),
       leaderId: auth.currentUser?.uid,
-      members: []
+      members: [],
+      createdAt: date,
+      updatedAt: date
     });
   } catch (error) {
     return rejectWithValue({ errorMessage: 'Failed to create project' });
