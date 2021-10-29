@@ -87,8 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
     margin: '0 auto',
     maxWidth: 1040,
-    width: '100%',
-    padding: '0 5vw'
+    width: '100%'
   },
   toolbarOffset: {
     [theme.breakpoints.up('md')]: {

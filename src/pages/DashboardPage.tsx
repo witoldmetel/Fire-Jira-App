@@ -11,6 +11,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 import { useDispatch, useSelector } from 'src/store/store';
 import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
 import { getProjectState } from 'src/store/slices/project';
+import { relative } from 'path/posix';
 
 export default function DashboardPage() {
   const classes = useStyles();
@@ -31,7 +32,12 @@ export default function DashboardPage() {
           <Box className={classes.wrapper}>
             {projects.map((project) => (
               <Card key={project.id} className={classes.projectCard}>
-                {project.name}
+                <Box className={classes.imageContainer}>
+                  <Box className={classes.imageWrapper}>
+                    <Box className={classes.projectImage} component="img" src="/static/project-cover.jpg" />
+                  </Box>
+                </Box>
+                <Box className={classes.projectContent}>{project.name}</Box>
               </Card>
             ))}
           </Box>
@@ -90,6 +96,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectCard: {
     display: 'flex',
+    flex: '1 1 300px',
+    flexDirection: 'column',
     overflow: 'hidden',
     margin: '0 20px 40px',
     minHeight: 300,
@@ -100,9 +108,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     transition: 'all 0.5s ease',
     cursor: 'pointer',
 
-    '&:nth-of-type(6n + 1)': {
-      flex: '1 1 100%',
-      flexDirection: 'row'
+    [theme.breakpoints.up('md')]: {
+      '&:nth-of-type(6n + 1)': {
+        flex: '1 1 100%',
+        flexDirection: 'row',
+
+        // IMAGE
+        '& > :nth-child(1)': {
+          position: 'relative',
+          flex: '1 1 auto',
+          borderRadius: '5px 0 0 5px',
+
+          '& > :nth-child(1)': {
+            position: 'absolute',
+            height: '100%',
+            width: '100%'
+          }
+        },
+
+        // CONTENT
+        '& > :nth-child(2)': {
+          flex: '0 1 350px'
+        }
+      }
     },
 
     '&:hover': {
@@ -110,6 +138,35 @@ const useStyles = makeStyles((theme: Theme) => ({
       transition: 'all 0.4s ease',
       transform: 'translate3D(0,-1px,0) scale(1.02)'
     }
+  },
+  imageContainer: {
+    position: 'relative',
+    display: 'block',
+    overflow: 'hidden',
+    borderRadius: '5px 5px 0 0'
+  },
+  imageWrapper: {
+    width: 'auto',
+    height: 200,
+    background: '#c5d2d9 no-repeat center center',
+    backgroundSize: 'cover'
+  },
+  projectImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center center',
+    opacity: 1,
+    transition: 'none 0s ease 0s'
+  },
+  projectContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    flexGrow: 1
   },
   emptyState: {
     maxWidth: 850,
