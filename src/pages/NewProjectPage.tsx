@@ -17,7 +17,7 @@ import { getProjectState, resetState } from 'src/store/slices/project';
 export const NewProjectSchema = Yup.object().shape({
   name: Yup.string().required('Project Name is required'),
   key: Yup.string().min(3).max(5).required('Key should be between 3 to 5 chars'),
-  description: Yup.string().max(50)
+  description: Yup.string().max(500)
 });
 
 type InitialValues = {

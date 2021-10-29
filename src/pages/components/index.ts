@@ -6,3 +6,4 @@ export { AboutMeGeneral } from './about-me/AboutMeGeneral';
 export { ContactMeTop } from './contact-me/ContactMeTop';
 export { ContactMeForm } from './contact-me/ContactMeForm';
 export { EmptyDashboard } from './dashboard/EmptyDashboard';
+export { ProjectCard } from './dashboard/ProjectCard';
