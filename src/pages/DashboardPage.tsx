@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-import { Theme, Box, Typography, Button, Card } from '@mui/material';
+import { Theme, Box, Typography, Button, Card, Avatar, Tooltip } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 
@@ -11,7 +11,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 import { useDispatch, useSelector } from 'src/store/store';
 import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
 import { getProjectState } from 'src/store/slices/project';
-import { relative } from 'path/posix';
+import { formatTimeFromNow } from 'src/utils/time';
 
 export default function DashboardPage() {
   const classes = useStyles();
@@ -37,7 +37,22 @@ export default function DashboardPage() {
                     <Box className={classes.projectImage} component="img" src="/static/project-cover.jpg" />
                   </Box>
                 </Box>
-                <Box className={classes.projectContent}>{project.name}</Box>
+                <Box className={classes.projectWrapper}>
+                  <Box className={classes.projectContent}>
+                    <Box>
+                      <Typography>{project.name}</Typography>
+                    </Box>
+                    <Box>{project.name}</Box>
+                  </Box>
+                  <Box className={classes.projectFooter}>
+                    <Tooltip title={project.name} placement="top">
+                      <Avatar className={classes.avatar} alt="project leader" />
+                    </Tooltip>
+                    <Typography className={classes.updateDate}>
+                      Updated: {formatTimeFromNow(project.updatedAt)}
+                    </Typography>
+                  </Box>
+                </Box>
               </Card>
             ))}
           </Box>
@@ -89,6 +104,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     padding: '40px 0 0 0',
+    margin: '0 - 20px',
     [theme.breakpoints.up('md')]: {
       paddingTop: 0,
       marginTop: -70
@@ -162,11 +178,47 @@ const useStyles = makeStyles((theme: Theme) => ({
     opacity: 1,
     transition: 'none 0s ease 0s'
   },
-  projectContent: {
+  projectWrapper: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    flexGrow: 1
+    flexGrow: 1,
+
+    [theme.breakpoints.up('md')]: {
+      '&:nth-of-type(6n + 1)': {
+        flex: '0 1 355px',
+
+        // CONTENT
+        '& > :nth-child(1)': {
+          padding: '30px 40px 0'
+        },
+
+        // FOOTER
+        '& > :nth-child(2)': {
+          padding: '0 40px 30px'
+        }
+      }
+    }
+  },
+  projectContent: {
+    position: 'relative',
+    flexGrow: 1,
+    display: 'block',
+    padding: ' 25px 25px 0'
+  },
+  projectFooter: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    padding: 25
+  },
+  avatar: {
+    width: 30,
+    height: 30
+  },
+  updateDate: {
+    marginLeft: 20,
+    color: theme.palette.text.secondary
   },
   emptyState: {
     maxWidth: 850,

@@ -9,12 +9,15 @@ import { Close } from '@mui/icons-material';
 import { Logo } from 'src/core/components';
 import { useFirebase } from 'src/hooks/useFirebase';
 import { PATH_DASHBOARD } from 'src/routes/paths';
+import { useSelector } from 'src/store/store';
+import { getProjectState } from 'src/store/slices/project';
 
 export function DashboardNavbar() {
   const classes = useStyles();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { logout } = useFirebase();
+  const { projects } = useSelector(getProjectState);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
@@ -48,7 +51,7 @@ export function DashboardNavbar() {
 
       <Toolbar
         className={classnames(classes.toolbar, {
-          [classes.toolbarOffset]: pathname === PATH_DASHBOARD.root
+          [classes.toolbarOffset]: pathname === PATH_DASHBOARD.root && projects?.length
         })}
         disableGutters
       >
