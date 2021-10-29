@@ -60,7 +60,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     margin: '0 auto',
     maxWidth: 1040,
-    width: '100%'
+    width: '100%',
+    minHeight: '60vh'
   },
   wrapper: {
     display: 'flex',

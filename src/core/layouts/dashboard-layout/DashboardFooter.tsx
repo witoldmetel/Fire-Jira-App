@@ -53,8 +53,8 @@ export function DashboardFooter() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   footer: {
-    padding: '0 4vw',
     position: 'relative',
+    padding: '0 4vw',
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(8),
     color: theme.palette.common.white,
