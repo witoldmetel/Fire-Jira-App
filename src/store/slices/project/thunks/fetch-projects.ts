@@ -5,11 +5,11 @@ import { FetchProjectsBuilderState, Project } from '../../../types';
 
 export const fetchProjects = createAsyncThunk<
   Project[],
-  undefined,
+  boolean | undefined,
   {
     rejectValue: { errorMessage: string };
   }
->('project/fetchProjects', async (_, { rejectWithValue }) => {
+>('project/fetchProjects', async (isNext = false, { rejectWithValue }) => {
   const db = getFirestore();
 
   try {
@@ -20,18 +20,28 @@ export const fetchProjects = createAsyncThunk<
     const firstProjects = query(collection(db, 'projects'), orderBy('updatedAt', 'desc'), limit(6));
     const projectSnapshots = await getDocs(firstProjects);
 
-    // // Get the last visible project
-    // const lastVisibleProject = projectSnapshots.docs[projectSnapshots.docs.length - 1];
+    if (isNext) {
+      // Get the last visible project
+      const lastVisibleProject = projectSnapshots.docs[projectSnapshots.docs.length - 1];
 
-    // // Construct a new query starting at this project,
-    // // get the next 6 projects
-    // const next = query(collection(db, 'projects'), orderBy('updatedAt'), startAfter(lastVisibleProject), limit(6));
+      // Construct a new query starting at this project,
+      // get the next 6 projects
+      const nextProjects = query(
+        collection(db, 'projects'),
+        orderBy('updatedAt', 'desc'),
+        startAfter(lastVisibleProject),
+        limit(6)
+      );
+      const nextProjectSnapshots = await getDocs(nextProjects);
 
-    projectSnapshots.forEach((snapshot) => {
-      projects.push(snapshot.data() as Project);
-    });
-
-    console.log(projects);
+      nextProjectSnapshots.forEach((snapshot) => {
+        projects.push(snapshot.data() as Project);
+      });
+    } else {
+      projectSnapshots.forEach((snapshot) => {
+        projects.push(snapshot.data() as Project);
+      });
+    }
 
     return projects;
   } catch (error) {
