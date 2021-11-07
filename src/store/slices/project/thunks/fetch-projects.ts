@@ -4,25 +4,27 @@ import { getFirestore, getDocs, collection, query, orderBy, startAfter, limit } 
 import { FetchProjectsBuilderState, Project } from '../../../types';
 
 export const fetchProjects = createAsyncThunk<
-  Project[],
-  boolean | undefined,
+  { projectCount: number; projects: Project[] },
+  number | undefined,
   {
     rejectValue: { errorMessage: string };
   }
->('project/fetchProjects', async (isNext = false, { rejectWithValue }) => {
+>('project/fetchProjects', async (page, { rejectWithValue }) => {
   const db = getFirestore();
 
   try {
-    // const querySnapshot = await getDocs(collection(db, 'projects'));
     const projects: Project[] = [];
+
+    // Query for all projects
+    const allProjects = await getDocs(query(collection(db, 'projects'), orderBy('updatedAt', 'desc')));
 
     // Query the first page of projects
     const firstProjects = query(collection(db, 'projects'), orderBy('updatedAt', 'desc'), limit(6));
     const projectSnapshots = await getDocs(firstProjects);
 
-    if (isNext) {
+    if (page) {
       // Get the last visible project
-      const lastVisibleProject = projectSnapshots.docs[projectSnapshots.docs.length - 1];
+      const lastVisibleProject = allProjects.docs[Math.ceil(allProjects.docs.length / 6) * page - 1];
 
       // Construct a new query starting at this project,
       // get the next 6 projects
@@ -43,7 +45,7 @@ export const fetchProjects = createAsyncThunk<
       });
     }
 
-    return projects;
+    return { projectCount: allProjects.docs.length, projects };
   } catch (error) {
     return rejectWithValue({ errorMessage: 'Failed to get projects' });
   }
@@ -55,7 +57,8 @@ export const fetchProjectsBuilder: FetchProjectsBuilderState = (builder) => {
   });
   builder.addCase(fetchProjects.fulfilled, (state, { payload }) => {
     state.isLoading = false;
-    state.projects = payload;
+    state.projectCount = payload.projectCount;
+    state.projects = payload.projects;
   });
   builder.addCase(fetchProjects.rejected, (state, { payload }) => {
     state.isLoading = false;
