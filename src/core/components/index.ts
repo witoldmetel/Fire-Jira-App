@@ -6,3 +6,4 @@ export { Page } from './Page';
 export { NotistackProvider } from './NotistackProvider';
 export { MenuPopover } from './MenuPopover';
 export { LoadingPage } from './LoadingPage';
+export { Pagination } from './Pagination';

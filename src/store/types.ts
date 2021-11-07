@@ -30,6 +30,7 @@ export type ProjectState = {
   isError: boolean;
 
   errorMessage?: string | null;
+  projectCount?: number;
   projects?: Project[];
 };
 

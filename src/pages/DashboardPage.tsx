@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import classnames from 'classnames';
 
 import { Theme, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 
-import { Page, LoadingPage } from 'src/core/components';
+import { Page, LoadingPage, Pagination } from 'src/core/components';
 import { useDispatch, useSelector } from 'src/store/store';
 import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
 import { getProjectState } from 'src/store/slices/project';
@@ -14,7 +14,14 @@ import { EmptyDashboard, ProjectCard } from './components';
 export default function DashboardPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { isLoading, projects } = useSelector(getProjectState);
+  const { isLoading, projectCount, projects } = useSelector(getProjectState);
+  const [page, setPage] = useState(1);
+
+  const handleChange = (_: unknown, page: number) => {
+    setPage(page);
+
+    return dispatch(fetchProjects(page));
+  };
 
   useEffect(() => {
     dispatch(fetchProjects());
@@ -30,11 +37,22 @@ export default function DashboardPage() {
     >
       <div className={classes.content}>
         {projects?.length ? (
-          <Box className={classes.wrapper}>
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </Box>
+          <>
+            <Box className={classes.wrapper}>
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </Box>
+            {projectCount && projectCount > 6 && (
+              <Pagination
+                className={classes.pagination}
+                count={projectCount && Math.ceil(projectCount / 6)}
+                page={page}
+                onChange={handleChange}
+                variant="outlined"
+              />
+            )}
+          </>
         ) : (
           <EmptyDashboard />
         )}
@@ -72,5 +90,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: 0,
       marginTop: -70
     }
+  },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '25px 0'
   }
 }));
