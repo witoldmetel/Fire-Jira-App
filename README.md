@@ -4,6 +4,10 @@
 
 Here you have previous version of this app: [Legacy Fire Jira](https://github.com/witoldmetel/Fire-Jira-App-Legacy)
 
+## Demo
+
+https://fire-jira.web.app/
+
 ## Prerequisites
 
 #### Env file
@@ -25,6 +29,17 @@ FIREBASE_MEASUREMENT_ID = '<YOUR_MEASUREMENT_ID>'
 Where values in the brackets should be replaced by described data.
 
 You can take this configuration from `https://firebase.google.com/`
+
+## Deploy
+
+https://firebase.google.com/docs/hosting/quickstart
+
+```
+? What do you want to use as your public directory? dist
+? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+? Set up automatic builds and deploys with GitHub? No
+? File dist/index.html already exists. Overwrite? No
+```
 
 ## Storybook
 
