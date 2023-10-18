@@ -79,6 +79,13 @@
     "vite-tsconfig-paths": "^3.3.14",
     "vitest": "0.24.3"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged & yarn pretty-quick --staged",
+      "pre-push": "yarn tsc &  yarn lint & yarn test",
+      "post-merge": "yarn"
+    }
+  },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "yarn lint",
