@@ -1,8 +1,8 @@
-import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-
+import { makeStyles } from '@mui/styles';
 import { Page } from 'src/core/components';
-import { ContactMeTop, ContactMeForm } from './components';
+
+import { ContactMeForm, ContactMeTop } from './components';
 
 export default function ContactMePage() {
   const classes = useStyles();
@@ -19,11 +19,11 @@ export default function ContactMePage() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: '100%'
+    height: '100%',
   },
   content: {
     overflow: 'hidden',
     position: 'relative',
-    backgroundColor: theme.palette.background.default
-  }
+    backgroundColor: theme.palette.background.default,
+  },
 }));

@@ -1,10 +1,8 @@
-import { motion } from 'framer-motion';
-
-import { Button, Box, Tooltip, Container, Typography, Stack, Theme } from '@mui/material';
+import { Box, Button, Container, Stack, Theme, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
+import { motion } from 'framer-motion';
+import { fadeIn, fadeInRight, fadeInUp, wrapEnter } from 'src/core/components';
 import { useFirebase } from 'src/hooks/useFirebase';
-import { fadeIn, fadeInUp, fadeInRight, wrapEnter } from 'src/core/components';
 
 export function LandingTop() {
   const classes = useStyles();
@@ -81,8 +79,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: '100vh',
       display: 'flex',
       position: 'fixed',
-      alignItems: 'center'
-    }
+      alignItems: 'center',
+    },
   },
   content: {
     zIndex: 10,
@@ -94,15 +92,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(15),
     [theme.breakpoints.up('md')]: {
       margin: 'unset',
-      textAlign: 'left'
-    }
+      textAlign: 'left',
+    },
   },
   overlay: {
     zIndex: 9,
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    position: 'absolute'
+    position: 'absolute',
   },
   backgroundImage: {
     top: 0,
@@ -115,17 +113,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('lg')]: {
       right: '8%',
       width: 'auto',
-      height: '48vh'
-    }
+      height: '48vh',
+    },
   },
   logo: {
     width: 32,
-    height: 32
+    height: 32,
   },
   textPrimary: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   textSecondary: {
-    color: theme.palette.common.white
-  }
+    color: theme.palette.common.white,
+  },
 }));

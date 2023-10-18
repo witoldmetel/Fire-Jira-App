@@ -1,5 +1,5 @@
-import { merge } from 'lodash';
 import { Theme } from '@mui/material/styles';
+import { merge } from 'lodash';
 
 import { Card } from './Card';
 

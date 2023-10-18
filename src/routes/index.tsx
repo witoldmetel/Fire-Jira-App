@@ -1,13 +1,14 @@
-import { Suspense, lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import { MainLayout } from '../core/layouts/main-layout';
-import { LogoLayout } from '../core/layouts/logo-layout';
-import { DashboardLayout } from '../core/layouts/dashboard-layout';
-import { PATH_PAGE, PATH_DASHBOARD } from './paths';
-import { GuestGuard } from '../guards/GuestGuard';
-import { AuthGuard } from '../guards/AuthGuard';
 import { LoadingPage } from '../core/components';
+import { DashboardLayout } from '../core/layouts/dashboard-layout';
+import { LogoLayout } from '../core/layouts/logo-layout';
+import { MainLayout } from '../core/layouts/main-layout';
+import { AuthGuard } from '../guards/AuthGuard';
+import { GuestGuard } from '../guards/GuestGuard';
+
+import { PATH_DASHBOARD, PATH_PAGE } from './paths';
 
 const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: JSX.IntrinsicAttributes) => {
   return (
@@ -52,7 +53,7 @@ export function Router() {
             <GuestGuard>
               <LoginPage />
             </GuestGuard>
-          )
+          ),
         },
         {
           path: 'register',
@@ -60,11 +61,11 @@ export function Router() {
             <GuestGuard>
               <RegisterPage />
             </GuestGuard>
-          )
+          ),
         },
         { path: 'reset-password', element: <ResetPasswordPage /> },
-        { path: 'verify', element: <VerifyPage /> }
-      ]
+        { path: 'verify', element: <VerifyPage /> },
+      ],
     },
 
     /**
@@ -75,8 +76,8 @@ export function Router() {
       element: <LogoLayout />,
       children: [
         { path: '404', element: <UnknownPage /> },
-        { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> }
-      ]
+        { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
+      ],
     },
     {
       path: '/',
@@ -84,8 +85,8 @@ export function Router() {
       children: [
         { path: '/', element: <LandingPage /> },
         { path: 'about-me', element: <AboutMePage /> },
-        { path: 'contact-me', element: <ContactMePage /> }
-      ]
+        { path: 'contact-me', element: <ContactMePage /> },
+      ],
     },
     { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
 
@@ -101,8 +102,8 @@ export function Router() {
       ),
       children: [
         { path: PATH_DASHBOARD.root, element: <DashboardPage /> },
-        { path: PATH_DASHBOARD.newProject, element: <NewProjectPage /> }
-      ]
-    }
+        { path: PATH_DASHBOARD.newProject, element: <NewProjectPage /> },
+      ],
+    },
   ]);
 }

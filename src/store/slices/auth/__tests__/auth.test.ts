@@ -1,5 +1,5 @@
 import { store } from '../../../store';
-import { startLoading, getUserSuccess, getUserReject, hasError, resetState } from '../index';
+import { getUserReject, getUserSuccess, hasError, resetState, startLoading } from '../index';
 
 describe('auth slice', () => {
   test('get user sucessfully', () => {
@@ -24,7 +24,7 @@ describe('auth slice', () => {
   test('user rejected', () => {
     store.dispatch(getUserReject());
 
-    let state = store.getState().auth;
+    const state = store.getState().auth;
 
     expect(state.isAuthenticated).toBeFalsy();
     expect(state.user).toBe(null);

@@ -1,6 +1,6 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { RootState, ProjectState } from '../../types';
+import { ProjectState, RootState } from '../../types';
 import { createProjectBuilder } from '../project/thunks/create-project';
 import { fetchProjectsBuilder } from '../project/thunks/fetch-projects';
 
@@ -8,7 +8,7 @@ const initialState: ProjectState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
-  errorMessage: null
+  errorMessage: null,
 };
 
 const slice = createSlice({
@@ -20,12 +20,12 @@ const slice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.errorMessage = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     fetchProjectsBuilder(builder);
     createProjectBuilder(builder);
-  }
+  },
 });
 
 // Reducer

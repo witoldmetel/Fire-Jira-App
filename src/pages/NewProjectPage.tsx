@@ -1,23 +1,20 @@
 import { useEffect } from 'react';
-import { useFormik, Form, FormikProvider } from 'formik';
-import * as Yup from 'yup';
-
-import { useSnackbar } from 'notistack';
-
-import { Button, Container, Typography, Theme, TextField, Stack, Alert, IconButton } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Close } from '@mui/icons-material';
+import { Alert, Button, Container, IconButton, Stack, TextField, Theme, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-
+import { makeStyles } from '@mui/styles';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 import { Page } from 'src/core/components';
+import { getProjectState, resetState } from 'src/store/slices/project';
 import { createProject } from 'src/store/slices/project/thunks/create-project';
 import { useDispatch, useSelector } from 'src/store/store';
-import { getProjectState, resetState } from 'src/store/slices/project';
+import * as Yup from 'yup';
 
 export const NewProjectSchema = Yup.object().shape({
   name: Yup.string().required('Project Name is required'),
   key: Yup.string().min(3).max(5).required('Key should be between 3 to 5 chars'),
-  description: Yup.string().max(500)
+  description: Yup.string().max(500),
 });
 
 type InitialValues = {
@@ -42,7 +39,7 @@ export default function NewProjectPage() {
           <IconButton size="small" onClick={() => closeSnackbar(key)}>
             <Close />
           </IconButton>
-        )
+        ),
       });
     }
 
@@ -56,7 +53,7 @@ export default function NewProjectPage() {
     initialValues: {
       name: '',
       key: '',
-      description: ''
+      description: '',
     },
     validationSchema: NewProjectSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
@@ -72,7 +69,7 @@ export default function NewProjectPage() {
       }
 
       dispatch(resetState());
-    }
+    },
   });
 
   const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
@@ -145,8 +142,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       theme.palette.grey[300]
     } 100%)`,
     [theme.breakpoints.up('md')]: {
-      textAlign: 'left'
-    }
+      textAlign: 'left',
+    },
   },
   content: {
     maxWidth: 480,
@@ -154,9 +151,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: theme.spacing(12, 0)
+    padding: theme.spacing(12, 0),
   },
   infoBar: {
-    marginBottom: theme.spacing(3)
-  }
+    marginBottom: theme.spacing(3),
+  },
 }));

@@ -26,3 +26,15 @@ yarn-error.log*
 
 .eslintcache
 /.firebase
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+*.iml
+/.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

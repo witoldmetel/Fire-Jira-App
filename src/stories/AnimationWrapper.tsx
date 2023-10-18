@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { motion, MotionProps } from 'framer-motion';
 import { Box } from '@mui/material';
+import { motion, MotionProps } from 'framer-motion';
 
 import Logo from './assets/logo.svg';
 

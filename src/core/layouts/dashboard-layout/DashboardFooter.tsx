@@ -1,8 +1,6 @@
 import { NavLink as RouterLink } from 'react-router-dom';
-
-import { Box, Container, Typography, Theme, Stack, Link } from '@mui/material';
+import { Box, Container, Link, Stack, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
 import { PATH_PAGE } from 'src/routes/paths';
 
 export function DashboardFooter() {
@@ -60,19 +58,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.common.white,
     background: '#0a0b0c no-repeat center center',
     backgroundSize: 'cover',
-    backgroundImage: 'url(/static/overlay.svg)'
+    backgroundImage: 'url(/static/overlay.svg)',
   },
   link: {
     ...theme.typography.subtitle2,
     color: theme.palette.primary.main,
     marginRight: theme.spacing(2),
     transition: theme.transitions.create('opacity', {
-      duration: theme.transitions.duration.shortest
+      duration: theme.transitions.duration.shortest,
     }),
 
     '&:hover': {
       opacity: 0.5,
-      textDecoration: 'none'
-    }
-  }
+      textDecoration: 'none',
+    },
+  },
 }));

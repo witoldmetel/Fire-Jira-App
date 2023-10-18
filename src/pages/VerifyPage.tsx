@@ -1,7 +1,7 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
 import { useFirebase } from 'src/hooks/useFirebase';
+
 import { Page } from '../core/components';
 
 export default function VerifyPage() {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     minHeight: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   content: {
     maxWidth: 480,
@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     minHeight: '100vh',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
-  box: { textAlign: 'center' }
+  box: { textAlign: 'center' },
 }));

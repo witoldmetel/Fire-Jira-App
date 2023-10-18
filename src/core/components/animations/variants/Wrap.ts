@@ -1,21 +1,21 @@
 // https://www.framer.com/docs/transition/#orchestration
 export const wrapEnter = {
   animate: {
-    transition: { staggerChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.1 },
+  },
 };
 
 export const wrapExit = {
   exit: {
-    transition: { staggerChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.1 },
+  },
 };
 
 export const wrapBoth = {
   animate: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.07, delayChildren: 0.1 },
   },
   exit: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-  }
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
 };

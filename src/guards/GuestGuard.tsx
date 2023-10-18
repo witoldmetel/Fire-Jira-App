@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-
-import { getAuthState } from '../store/slices/auth';
-import { PATH_DASHBOARD } from '../routes/paths';
 import { useSelector } from 'src/store/store';
+
+import { PATH_DASHBOARD } from '../routes/paths';
+import { getAuthState } from '../store/slices/auth';
 
 type GuestGuardProps = {
   children: ReactNode;

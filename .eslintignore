@@ -1,4 +1,17 @@
-// .eslintignore
+.eslintrc.cjs
+.prettierrc.js
+.prettierignore
+dist
+node_modules
+*.svelte
+*.snap
+*.d.ts
+coverage
+!.vitepress
+test/core/src/self
+vite.config.ts
+vitest.config.ts
+/*.*
 build/*
 public/*
 src/react-app-env.d.ts
@@ -6,4 +19,3 @@ src/reportWebVitals.ts
 src/service-worker.ts
 src/serviceWorkerRegistration.ts
 src/setupTests.ts
-/*.*

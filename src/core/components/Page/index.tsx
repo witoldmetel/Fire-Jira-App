@@ -1,6 +1,5 @@
 import { forwardRef, ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
-
 import { Box, BoxProps } from '@mui/material';
 
 interface PageProps extends BoxProps {

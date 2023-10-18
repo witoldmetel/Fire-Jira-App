@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
+import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Alert, Button, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { useFormik, Form, FormikProvider } from 'formik';
-
-import { Stack, TextField, IconButton, InputAdornment, Alert, Button } from '@mui/material';
-import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
-
 import { useFirebase } from 'src/hooks/useFirebase';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
-import { RegisterSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
-import { SocialForm } from './SocialForm';
 import { useSelector } from 'src/store/store';
+
+import { SocialForm } from './SocialForm';
+import { RegisterSchema } from './validations';
 
 type InitialValues = {
   email: string;
@@ -41,14 +40,14 @@ export function RegisterForm() {
           <IconButton size="small" onClick={() => closeSnackbar(key)}>
             <Close />
           </IconButton>
-        )
+        ),
       })
     );
 
   const formik = useFormik<InitialValues>({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
@@ -60,7 +59,7 @@ export function RegisterForm() {
               <IconButton size="small" onClick={() => closeSnackbar(key)}>
                 <Close />
               </IconButton>
-            )
+            ),
           })
         );
 
@@ -75,7 +74,7 @@ export function RegisterForm() {
           setErrors({ afterSubmit: errorMessage?.code });
         }
       }
-    }
+    },
   });
 
   const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
@@ -115,7 +114,7 @@ export function RegisterForm() {
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}

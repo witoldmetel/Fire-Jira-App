@@ -1,28 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useSnackbar } from 'notistack';
 import { Link as RouterLink } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
-
+import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
 import {
-  Button,
-  Link,
-  Stack,
   Alert,
+  Button,
   Checkbox,
-  TextField,
+  FormControlLabel,
   IconButton,
   InputAdornment,
-  FormControlLabel
+  Link,
+  Stack,
+  TextField,
 } from '@mui/material';
-import { Visibility, VisibilityOff, Close } from '@mui/icons-material';
-
-import { PATH_AUTH } from 'src/routes/paths';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 import { useFirebase } from 'src/hooks/useFirebase';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
-import { LoginSchema } from './validations';
+import { PATH_AUTH } from 'src/routes/paths';
 import { getAuthState } from 'src/store/slices/auth';
-import { SocialForm } from './SocialForm';
 import { useSelector } from 'src/store/store';
+
+import { SocialForm } from './SocialForm';
+import { LoginSchema } from './validations';
 
 type InitialValues = {
   email: string;
@@ -54,7 +53,7 @@ export function LoginForm() {
           <IconButton size="small" onClick={() => closeSnackbar(key)}>
             <Close />
           </IconButton>
-        )
+        ),
       })
     );
 
@@ -62,7 +61,7 @@ export function LoginForm() {
     initialValues: {
       email: '',
       password: '',
-      remember: true
+      remember: true,
     },
     validationSchema: LoginSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
@@ -74,7 +73,7 @@ export function LoginForm() {
               <IconButton size="small" onClick={() => closeSnackbar(key)}>
                 <Close />
               </IconButton>
-            )
+            ),
           })
         );
 
@@ -90,7 +89,7 @@ export function LoginForm() {
           setErrors({ afterSubmit: errorMessage?.code });
         }
       }
-    }
+    },
   });
 
   const { errors, touched, values, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
@@ -130,7 +129,7 @@ export function LoginForm() {
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}

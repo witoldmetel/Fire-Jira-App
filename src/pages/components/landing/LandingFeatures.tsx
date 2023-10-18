@@ -1,9 +1,7 @@
-import classnames from 'classnames';
-
-import { Box, Container, Typography, Theme } from '@mui/material';
+import { Box, Container, Theme, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
-
+import classnames from 'classnames';
 import { fadeInUp, MotionInView } from 'src/core/components';
 
 // @todo: Add real screen from the app
@@ -33,7 +31,7 @@ export function LandingFeatures() {
               key={index}
               className={classnames(classes.imageMotion, {
                 [classes.image0]: index === 0,
-                [classes.image9]: index === 9
+                [classes.image9]: index === 9,
               })}
               threshold={index / 15}
               variants={fadeInUp}
@@ -50,7 +48,7 @@ export function LandingFeatures() {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(15),
-    paddingBottom: theme.spacing(10)
+    paddingBottom: theme.spacing(10),
   },
   content: {
     maxWidth: 520,
@@ -59,29 +57,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       zIndex: 11,
       textAlign: 'left',
-      position: 'absolute'
-    }
+      position: 'absolute',
+    },
   },
   text: {
-    textShadow: `4px 4px 16px ${alpha(theme.palette.grey[800], 0.48)}`
+    textShadow: `4px 4px 16px ${alpha(theme.palette.grey[800], 0.48)}`,
   },
   textPrimary: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   imageMotion: {
     position: 'absolute',
     top: 0,
-    left: 0
+    left: 0,
   },
   image0: {
-    zIndex: 8
+    zIndex: 8,
   },
   image9: {
     position: 'relative',
-    zIndex: 9
+    zIndex: 9,
   },
   image: {
     display: 'block',
-    maxWidth: '100%'
-  }
+    maxWidth: '100%',
+  },
 }));

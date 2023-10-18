@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import classnames from 'classnames';
-
-import { Theme, Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Theme } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-
-import { Page, LoadingPage, Pagination } from 'src/core/components';
-import { useDispatch, useSelector } from 'src/store/store';
-import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
+import { makeStyles } from '@mui/styles';
+import classnames from 'classnames';
+import { LoadingPage, Page, Pagination } from 'src/core/components';
 import { getProjectState } from 'src/store/slices/project';
+import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
+import { useDispatch, useSelector } from 'src/store/store';
+
 import { EmptyDashboard, ProjectCard } from './components';
 
 export default function DashboardPage() {
@@ -70,16 +69,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0 4vw',
     backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 40%, ${
       theme.palette.grey[300]
-    } 100%)`
+    } 100%)`,
   },
   emptyContainer: {
-    padding: '5vw'
+    padding: '5vw',
   },
   content: {
     margin: '0 auto',
     maxWidth: 1040,
     width: '100%',
-    minHeight: '60vh'
+    minHeight: '60vh',
   },
   wrapper: {
     display: 'flex',
@@ -88,12 +87,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 - 20px',
     [theme.breakpoints.up('md')]: {
       paddingTop: 0,
-      marginTop: -70
-    }
+      marginTop: -70,
+    },
   },
   pagination: {
     display: 'flex',
     justifyContent: 'center',
-    padding: '25px 0'
-  }
+    padding: '25px 0',
+  },
 }));

@@ -1,7 +1,7 @@
-import { Typography, Button, Divider, Grid } from '@mui/material';
 import { Facebook, Google } from '@mui/icons-material';
-import { makeStyles } from '@mui/styles';
+import { Button, Divider, Grid, Typography } from '@mui/material';
 import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 type SocialFormProps = {
   onGoogleClick: VoidFunction;
@@ -34,16 +34,16 @@ export function SocialForm({ onGoogleClick }: SocialFormProps) {
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
-    borderColor: theme.palette.text.secondary
+    borderColor: theme.palette.text.secondary,
   },
   googleIcon: {
-    color: '#DF3E30'
+    color: '#DF3E30',
   },
   facebookIcon: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   divider: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3)
-  }
+    marginBottom: theme.spacing(3),
+  },
 }));

@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
-
-import { Box, Button, Container, Typography, Stack, IconButton } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
 import { Close } from '@mui/icons-material';
-
+import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
+import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { useSnackbar } from 'notistack';
 import { useFirebase } from 'src/hooks/useFirebase';
-import { PATH_AUTH } from '../routes/paths';
+
 import { Page, ResetPasswordForm } from '../core/components';
+import { PATH_AUTH } from '../routes/paths';
 
 export default function ResetPasswordPage() {
   const classes = useStyles();
@@ -26,7 +25,7 @@ export default function ResetPasswordPage() {
           <IconButton size="small" onClick={() => closeSnackbar(key)}>
             <Close />
           </IconButton>
-        )
+        ),
       })
     );
   };
@@ -98,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     minHeight: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   content: {
     maxWidth: 480,
@@ -106,21 +105,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     minHeight: '100vh',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   firstBox: {
     maxWidth: 480,
-    margin: '0 auto'
+    margin: '0 auto',
   },
   secondaryText: {
     color: theme.palette.text.secondary,
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(5),
   },
   secondBox: { textAlign: 'center' },
   backButton: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   stack: {
-    marginTop: theme.spacing(5)
-  }
+    marginTop: theme.spacing(5),
+  },
 }));

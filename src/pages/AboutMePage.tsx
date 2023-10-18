@@ -1,8 +1,8 @@
-import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-
+import { makeStyles } from '@mui/styles';
 import { Page } from 'src/core/components';
-import { AboutMeTop, AboutMeGeneral } from './components';
+
+import { AboutMeGeneral, AboutMeTop } from './components';
 
 export default function AboutMePage() {
   const classes = useStyles();
@@ -19,11 +19,11 @@ export default function AboutMePage() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: '100%'
+    height: '100%',
   },
   content: {
     overflow: 'hidden',
     position: 'relative',
-    backgroundColor: theme.palette.background.default
-  }
+    backgroundColor: theme.palette.background.default,
+  },
 }));

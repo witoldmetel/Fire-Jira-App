@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-
 import { Breakpoint, Theme, useMediaQuery } from '@mui/material';
 
 type HiddenComponentProps = {

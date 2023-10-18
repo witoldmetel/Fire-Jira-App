@@ -1,13 +1,12 @@
 import { useRef, useState } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
-import classnames from 'classnames';
-
-import { Link, Stack, Theme, IconButton, MenuItem, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
+import { IconButton, Link, MenuItem, Stack, Theme, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import classnames from 'classnames';
+import { MenuPopover } from 'src/core/components';
 
 import { MenuItemProps } from '../types';
-import { MenuPopover } from 'src/core/components';
 
 type MainMenuProps = {
   navConfig: MenuItemProps[];
@@ -102,32 +101,32 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     marginRight: theme.spacing(5),
     transition: theme.transitions.create('opacity', {
-      duration: theme.transitions.duration.shortest
+      duration: theme.transitions.duration.shortest,
     }),
 
     '&:hover': {
       opacity: 0.5,
-      textDecoration: 'none'
-    }
+      textDecoration: 'none',
+    },
   },
   menuButton: {
     color: theme.palette.primary.main,
     padding: 0,
     width: 45,
-    height: 45
+    height: 45,
   },
   openedMenu: {
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
   },
   menu: {
-    width: 250
+    width: 250,
   },
   menuItem: {
     display: 'flex',
     padding: `${theme.spacing(1)} 0`,
 
     '& > :first-child': {
-      marginRight: 15
-    }
-  }
+      marginRight: 15,
+    },
+  },
 }));

@@ -1,16 +1,16 @@
 import { Link as RouterLink } from 'react-router-dom';
-import classnames from 'classnames';
-
+import { AppBar, Box, Button, Container, Theme, Toolbar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { AppBar, Toolbar, Container, Theme, Button, Box } from '@mui/material';
-
-import { Logo, HiddenComponent } from 'src/core/components';
-import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
+import classnames from 'classnames';
+import { HiddenComponent, Logo } from 'src/core/components';
 import { useOffSetTop } from 'src/hooks/useOffSetTop';
+import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
-import { MainMenu } from './MainMenu';
+
 import { mainMenuConfig } from '../constants';
+
+import { MainMenu } from './MainMenu';
 
 export function MainNavbar() {
   const classes = useStyles();
@@ -52,28 +52,28 @@ export function MainNavbar() {
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     boxShadow: 'none',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   toolbar: {
     height: 65,
     transition: theme.transitions.create(['height', 'background-color'], {
       easing: theme.transitions.easing.easeInOut,
-      duration: theme.transitions.duration.shorter
+      duration: theme.transitions.duration.shorter,
     }),
     [theme.breakpoints.up('md')]: {
-      height: 90
-    }
+      height: 90,
+    },
   },
   toolbarOffset: {
     backgroundColor: theme.palette.background.default,
     [theme.breakpoints.up('md')]: {
-      height: 70
-    }
+      height: 70,
+    },
   },
   container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   shadowToolbar: {
     left: 0,
@@ -85,6 +85,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '50%',
     position: 'absolute',
     width: `calc(100% - 48px)`,
-    boxShadow: theme.customShadows.z8
-  }
+    boxShadow: theme.customShadows.z8,
+  },
 }));

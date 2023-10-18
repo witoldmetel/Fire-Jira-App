@@ -1,11 +1,11 @@
-import { Box, Theme, SvgIconTypeMap } from '@mui/material';
+import { Box, SvgIconTypeMap, Theme } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
-
 import { ColorSchema } from 'src/core/theme/types';
 
 type SnackbarIconProps = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   color: ColorSchema;
 };
@@ -19,7 +19,7 @@ export const SnackbarIcon = ({ icon, color }: SnackbarIconProps) => {
       className={classes.root}
       sx={{
         color: `${color}.main`,
-        bgcolor: (theme) => alpha(theme.palette[color].main, 0.16)
+        bgcolor: (theme) => alpha(theme.palette[color].main, 0.16),
       }}
       component="span"
     >
@@ -36,6 +36,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     borderRadius: theme.spacing(1.5),
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));

@@ -1,14 +1,13 @@
 import { ReactNode } from 'react';
-
 import { CssBaseline } from '@mui/material';
-import { createTheme, ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 
-import { shape } from './shape';
-import { palette } from './palette';
-import { typography } from './typography';
 import { breakpoints } from './breakpoints';
-import { shadows, customShadows } from './shadows';
 import { ComponentsOverrides } from './overrides';
+import { palette } from './palette';
+import { customShadows, shadows } from './shadows';
+import { shape } from './shape';
+import { typography } from './typography';
 
 type ThemeConfigProps = {
   children: ReactNode;
@@ -21,7 +20,7 @@ export function ThemeConfig({ children }: ThemeConfigProps) {
     typography,
     breakpoints,
     shadows,
-    customShadows
+    customShadows,
   });
 
   theme.components = ComponentsOverrides(theme);

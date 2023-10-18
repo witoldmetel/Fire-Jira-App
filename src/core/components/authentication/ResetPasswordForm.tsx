@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
+import { Close } from '@mui/icons-material';
+import { Alert, Button, IconButton, Stack, TextField } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-
-import { TextField, Alert, Stack, Button, IconButton } from '@mui/material';
-import { Close } from '@mui/icons-material';
-
 import { useFirebase } from 'src/hooks/useFirebase';
 import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
-import { ResetPasswordSchema } from './validations';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
+
+import { ResetPasswordSchema } from './validations';
 
 type InitialValues = {
   email: string;
@@ -49,7 +48,7 @@ export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps
               <IconButton size="small" onClick={() => closeSnackbar(key)}>
                 <Close />
               </IconButton>
-            )
+            ),
           });
         });
 
@@ -62,7 +61,7 @@ export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps
           setSubmitting(false);
         }
       }
-    }
+    },
   });
 
   const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;

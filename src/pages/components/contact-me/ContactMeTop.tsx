@@ -1,9 +1,7 @@
-import { motion } from 'framer-motion';
-
-import { Box, Container, Typography, Stack, Theme } from '@mui/material';
+import { Box, Container, Stack, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
-import { MotionText, fadeIn, fadeInDown, fadeInRight, wrapEnter } from 'src/core/components';
+import { motion } from 'framer-motion';
+import { fadeIn, fadeInDown, fadeInRight, MotionText, wrapEnter } from 'src/core/components';
 
 export function ContactMeTop() {
   const classes = useStyles();
@@ -53,8 +51,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: '100vh',
       display: 'flex',
       position: 'fixed',
-      alignItems: 'center'
-    }
+      alignItems: 'center',
+    },
   },
   content: {
     zIndex: 10,
@@ -66,22 +64,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(15),
     [theme.breakpoints.up('md')]: {
       margin: 'unset',
-      textAlign: 'left'
-    }
+      textAlign: 'left',
+    },
   },
   info: {
     display: 'inline-flex',
     color: theme.palette.common.white,
     [theme.breakpoints.down('md')]: {
-      justifyContent: 'center'
-    }
+      justifyContent: 'center',
+    },
   },
   overlay: {
     zIndex: 9,
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    position: 'absolute'
+    position: 'absolute',
   },
   backgroundImage: {
     top: 0,
@@ -95,13 +93,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('lg')]: {
       right: '8%',
       width: 'auto',
-      height: '70vh'
-    }
+      height: '70vh',
+    },
   },
   textPrimary: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   textSecondary: {
-    color: theme.palette.common.white
-  }
+    color: theme.palette.common.white,
+  },
 }));

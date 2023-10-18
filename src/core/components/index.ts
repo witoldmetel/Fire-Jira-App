@@ -1,9 +1,9 @@
 export * from './animations';
 export { LoginForm, RegisterForm, ResetPasswordForm } from './authentication';
-export { Logo } from './Logo';
 export { HiddenComponent } from './HiddenComponent';
-export { Page } from './Page';
-export { NotistackProvider } from './NotistackProvider';
-export { MenuPopover } from './MenuPopover';
 export { LoadingPage } from './LoadingPage';
+export { Logo } from './Logo';
+export { MenuPopover } from './MenuPopover';
+export { NotistackProvider } from './NotistackProvider';
+export { Page } from './Page';
 export { Pagination } from './Pagination';

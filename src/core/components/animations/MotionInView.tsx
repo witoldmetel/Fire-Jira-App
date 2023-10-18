@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { motion, useAnimation, MotionProps } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-
 import { Box, BoxProps } from '@mui/material';
+import { motion, MotionProps, useAnimation } from 'framer-motion';
 
 type Props = BoxProps & MotionProps;
 
@@ -12,9 +11,10 @@ interface MotionInViewProps extends Props {
 
 export function MotionInView({ children, variants, transition, threshold, ...other }: MotionInViewProps) {
   const controls = useAnimation();
+  // @todo: Try to get rid of react-intersection-observer
   const [ref, inView] = useInView({
     threshold: threshold || 0,
-    triggerOnce: true
+    triggerOnce: true,
   });
 
   useEffect(() => {

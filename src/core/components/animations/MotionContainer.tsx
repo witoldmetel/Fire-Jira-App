@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
-
 import { Box, BoxProps } from '@mui/material';
+import { motion } from 'framer-motion';
 
 import { wrapEnter } from './index';
 

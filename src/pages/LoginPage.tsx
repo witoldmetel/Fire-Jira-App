@@ -1,11 +1,9 @@
 import { Link as RouterLink } from 'react-router-dom';
-
-import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
+import { Alert, Box, Container, Link, Stack, Tooltip, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
-import { Box, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
-
-import { Page, LoginForm } from '../core/components';
+import { LoginForm, Page } from '../core/components';
 import { PATH_AUTH } from '../routes/paths';
 
 export default function LoginPage() {
@@ -50,8 +48,8 @@ export default function LoginPage() {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
-      display: 'flex'
-    }
+      display: 'flex',
+    },
   },
   content: {
     maxWidth: 480,
@@ -60,25 +58,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: '100vh',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: theme.spacing(12, 0)
+    padding: theme.spacing(12, 0),
   },
   contentStack: {
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(5),
   },
   contentStackBox: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   contentStackBoxTypography: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   authLogo: {
     width: 32,
-    height: 32
+    height: 32,
   },
   infoBar: {
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   registerBar: {
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 }));

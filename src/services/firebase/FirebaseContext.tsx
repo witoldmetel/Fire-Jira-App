@@ -1,25 +1,32 @@
 import { createContext, ReactNode, useEffect } from 'react';
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
-  getAuth,
-  signOut,
-  setPersistence,
-  signInWithEmailAndPassword,
   browserLocalPersistence,
   browserSessionPersistence,
-  onAuthStateChanged,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
+  getAuth,
   GoogleAuthProvider,
+  onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  setPersistence,
+  signInWithEmailAndPassword,
   signInWithPopup,
-  sendEmailVerification
+  signOut,
 } from 'firebase/auth';
-
-import { FirebaseContextType } from './types';
-import { firebaseConfig } from './firebaseConfig';
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import {
+  getUserReject,
+  getUserSuccess,
+  hasError,
+  initializeFirebase,
+  resetState,
+  startLoading,
+} from 'src/store/slices/auth';
 import { useDispatch } from 'src/store/store';
-import { resetState, startLoading, hasError, getUserSuccess, getUserReject } from 'src/store/slices/auth';
+
+import { firebaseConfig } from './firebaseConfig';
+import { FirebaseContextType } from './types';
 
 // check if firebase app has been initialized previously
 // if not, initialize with the config we saved earlier
@@ -34,10 +41,15 @@ const FirebaseContext = createContext<FirebaseContextType | null>(null);
 function FirebaseProvider({ children }: { children: ReactNode }) {
   const dispatch = useDispatch();
   const db = getFirestore();
+  const auth = getAuth();
 
   useEffect(() => {
-    const auth = getAuth();
+    if (auth.app) {
+      dispatch(initializeFirebase());
+    }
+  }, [auth, dispatch]);
 
+  useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userRef = doc(db, 'users', user.uid);
@@ -48,7 +60,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           if (!userSnap.data().isVerified) {
             await setDoc(doc(db, 'users', user.uid), {
               ...userSnap.data(),
-              isVerified: user.emailVerified
+              isVerified: user.emailVerified,
             });
           }
 
@@ -73,7 +85,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
 
     if (auth?.currentUser) {
       return sendEmailVerification(auth.currentUser, {
-        url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''
+        url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? '',
       });
     } else {
       dispatch(hasError('User not found!'));
@@ -92,10 +104,10 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           await setDoc(doc(db, 'users', userCredential.user.uid), {
             id: userCredential.user.uid,
             email: userCredential.user.email,
-            isVerified: userCredential.user.emailVerified
+            isVerified: userCredential.user.emailVerified,
           }).then(async () => {
             sendEmailVerification(userCredential.user, {
-              url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? ''
+              url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? '',
             });
 
             callback();
@@ -133,7 +145,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
 
   const loginWithGoogle = (callback: () => void) => {
     const provider = new GoogleAuthProvider().setCustomParameters({
-      display: 'popup'
+      display: 'popup',
     });
 
     const auth = getAuth();
@@ -143,7 +155,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         try {
           await setDoc(doc(db, 'users', result.user.uid), {
             id: result.user.uid,
-            email: result.user.email
+            email: result.user.email,
           }).then(() => callback());
         } catch (error) {
           dispatch(hasError(error));
@@ -195,7 +207,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         login,
         loginWithGoogle,
         logout,
-        resetPassword
+        resetPassword,
       }}
     >
       {children}

@@ -1,23 +1,21 @@
-import classnames from 'classnames';
-
-import { Box, Grid, Container, Typography, Theme, Card, alpha } from '@mui/material';
+import { alpha, Box, Card, Container, Grid, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
-import { MotionInView, fadeInUp, fadeInRight } from 'src/core/components';
+import classnames from 'classnames';
+import { fadeInRight, fadeInUp, MotionInView } from 'src/core/components';
 
 const CARDS = [
   {
     icon: '/static/spreadsheets.svg',
-    description: 'It helps visualize the actual workflow'
+    description: 'It helps visualize the actual workflow',
   },
   {
     icon: '/static/work_together.svg',
-    description: 'It balances the work and workflow'
+    description: 'It balances the work and workflow',
   },
   {
     icon: '/static/grades.svg',
-    description: 'It encourages leadership roles at all levels'
-  }
+    description: 'It encourages leadership roles at all levels',
+  },
 ];
 
 export function LandingAbout() {
@@ -68,7 +66,7 @@ export function LandingAbout() {
               <MotionInView variants={fadeInUp}>
                 <Card
                   className={classnames(classes.card, {
-                    [classes.cardCenter]: index === 1
+                    [classes.cardCenter]: index === 1,
                   })}
                 >
                   <Box className={classes.cardIcon} component="img" src={card.icon} />
@@ -86,11 +84,13 @@ export function LandingAbout() {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(24, 0),
-    backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 0%, ${theme.palette.grey[300]} 100%)`
+    backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 0%, ${
+      theme.palette.grey[300]
+    } 100%)`,
   },
   grid: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   content: {
     width: '100%',
@@ -98,19 +98,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(10),
     [theme.breakpoints.up('md')]: {
       textAlign: 'left',
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
   topText: {
     marginBottom: theme.spacing(2),
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   middleText: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   bottomText: {
     marginBottom: theme.spacing(5),
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   screen: {
     paddingRight: 2,
@@ -121,22 +121,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxWidth: 320,
       paddingRight: 4,
-      borderRadius: 12
-    }
+      borderRadius: 12,
+    },
   },
   backgroundImage: {
     width: '100%',
     margin: 'auto',
     [theme.breakpoints.up('lg')]: {
       width: 'auto',
-      height: '45vh'
-    }
+      height: '45vh',
+    },
   },
   textPrimary: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   cards: {
-    marginTop: theme.spacing(25)
+    marginTop: theme.spacing(25),
   },
   card: {
     maxWidth: 270,
@@ -147,21 +147,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: `-40px 40px 80px 0 ${alpha(theme.palette.grey[500], 0.48)}`,
     [theme.breakpoints.up('md')]: {
       boxShadow: 'none',
-      backgroundColor: theme.palette.grey[200]
-    }
+      backgroundColor: theme.palette.grey[200],
+    },
   },
   cardCenter: {
     [theme.breakpoints.up('md')]: {
       marginTop: -80,
       backgroundColor: theme.palette.background.paper,
-      boxShadow: `-40px 40px 80px 0 ${alpha(theme.palette.grey[500], 0.4)}`
+      boxShadow: `-40px 40px 80px 0 ${alpha(theme.palette.grey[500], 0.4)}`,
     },
     [theme.breakpoints.down('md')]: {
-      margin: `${theme.spacing(5)} auto`
-    }
+      margin: `${theme.spacing(5)} auto`,
+    },
   },
   cardIcon: {
     width: 200,
-    height: 200
-  }
+    height: 200,
+  },
 }));

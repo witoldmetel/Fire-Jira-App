@@ -1,13 +1,13 @@
 import { Navigate } from 'react-router-dom';
-
-import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
-
+import { makeStyles } from '@mui/styles';
 import { Page } from 'src/core/components';
-import { getAuthState } from '../store/slices/auth';
-import { useSelector } from 'src/store/store';
-import { LandingTop, LandingAbout, LandingFeatures } from './components';
 import { PATH_DASHBOARD } from 'src/routes/paths';
+import { useSelector } from 'src/store/store';
+
+import { getAuthState } from '../store/slices/auth';
+
+import { LandingAbout, LandingFeatures, LandingTop } from './components';
 
 export default function LandingPage() {
   const classes = useStyles();
@@ -30,11 +30,11 @@ export default function LandingPage() {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: '100%'
+    height: '100%',
   },
   content: {
     overflow: 'hidden',
     position: 'relative',
-    backgroundColor: theme.palette.background.default
-  }
+    backgroundColor: theme.palette.background.default,
+  },
 }));

@@ -1,16 +1,14 @@
-import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
-import classnames from 'classnames';
-
-import { makeStyles } from '@mui/styles';
-import { AppBar, Toolbar, Container, Theme, Button, IconButton, Box, Typography } from '@mui/material';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { Close } from '@mui/icons-material';
-
+import { AppBar, Box, Button, Container, IconButton, Theme, Toolbar, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import classnames from 'classnames';
+import { useSnackbar } from 'notistack';
 import { Logo } from 'src/core/components';
 import { useFirebase } from 'src/hooks/useFirebase';
 import { PATH_DASHBOARD } from 'src/routes/paths';
-import { useSelector } from 'src/store/store';
 import { getProjectState } from 'src/store/slices/project';
+import { useSelector } from 'src/store/store';
 
 export function DashboardNavbar() {
   const classes = useStyles();
@@ -29,7 +27,7 @@ export function DashboardNavbar() {
             <IconButton size="small" onClick={() => closeSnackbar(key)}>
               <Close />
             </IconButton>
-          )
+          ),
         })
       ).then(() => {
         navigate('/');
@@ -51,7 +49,7 @@ export function DashboardNavbar() {
 
       <Toolbar
         className={classnames(classes.toolbar, {
-          [classes.toolbarOffset]: pathname === PATH_DASHBOARD.root && projects?.length
+          [classes.toolbarOffset]: pathname === PATH_DASHBOARD.root && projects?.length,
         })}
         disableGutters
       >
@@ -85,22 +83,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.common.white,
     background: '#0a0b0c no-repeat center center',
     backgroundSize: 'cover',
-    backgroundImage: 'url(/static/dashboard-cover.jpg)'
+    backgroundImage: 'url(/static/dashboard-cover.jpg)',
   },
   toolbar: {
     margin: '0 auto',
     maxWidth: 1040,
-    width: '100%'
+    width: '100%',
   },
   toolbarOffset: {
     [theme.breakpoints.up('md')]: {
-      marginBottom: theme.spacing(7)
-    }
+      marginBottom: theme.spacing(7),
+    },
   },
   container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   dashboardTitle: {
     display: 'flex',
@@ -116,8 +114,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(2),
       padding: '5px 0',
       fontSize: 22,
-      fontWeight: 400
-    }
+      fontWeight: 400,
+    },
   },
   logoWrapper: {
     display: 'flex',
@@ -127,15 +125,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& > h1': {
       marginLeft: theme.spacing(2),
       fontSize: 35,
-      fontWeight: 700
-    }
+      fontWeight: 700,
+    },
   },
   link: {
     ...theme.typography.subtitle2,
     color: theme.palette.primary.main,
     marginRight: theme.spacing(2),
     transition: theme.transitions.create('opacity', {
-      duration: theme.transitions.duration.shortest
-    })
-  }
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
 }));

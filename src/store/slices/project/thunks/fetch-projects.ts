@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getFirestore, getDocs, collection, query, orderBy, startAfter, limit } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, limit, orderBy, query, startAfter } from 'firebase/firestore';
 
 import { FetchProjectsBuilderState, Project } from '../../../types';
 

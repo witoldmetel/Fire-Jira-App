@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
-import { SnackbarProvider } from 'notistack';
-
-import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
-import ErrorIcon from '@mui/icons-material/Error';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { SnackbarProvider } from 'notistack';
 
 import { SnackbarIcon } from './SnackbarIcon';
 
@@ -20,7 +19,7 @@ export function NotistackProvider({ children }: NotistackProviderProps) {
   return (
     <SnackbarProvider
       classes={{
-        root: classes.root
+        root: classes.root,
       }}
       dense
       maxSnack={4}
@@ -28,13 +27,13 @@ export function NotistackProvider({ children }: NotistackProviderProps) {
       autoHideDuration={3000}
       anchorOrigin={{
         vertical: 'top',
-        horizontal: 'left'
+        horizontal: 'left',
       }}
       iconVariant={{
         success: <SnackbarIcon icon={CheckCircleIcon} color="success" />,
         error: <SnackbarIcon icon={ErrorIcon} color="error" />,
         warning: <SnackbarIcon icon={WarningIcon} color="warning" />,
-        info: <SnackbarIcon icon={InfoIcon} color="info" />
+        info: <SnackbarIcon icon={InfoIcon} color="info" />,
       }}
     >
       {children}
@@ -56,19 +55,19 @@ const useStyles = makeStyles((theme: Theme) => ({
       '&.SnackbarItem-variantSuccess, &.SnackbarItem-variantError, &.SnackbarItem-variantWarning, &.SnackbarItem-variantInfo':
         {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.background.paper
-        }
+          backgroundColor: theme.palette.background.paper,
+        },
     },
 
     '& .SnackbarItem-message': {
       padding: '0 !important',
-      fontWeight: theme.typography.fontWeightMedium
+      fontWeight: theme.typography.fontWeightMedium,
     },
 
     '& .SnackbarItem-action': {
       marginRight: 0,
       color: theme.palette.action.active,
-      '& svg': { width: 20, height: 20 }
-    }
-  }
+      '& svg': { width: 20, height: 20 },
+    },
+  },
 }));

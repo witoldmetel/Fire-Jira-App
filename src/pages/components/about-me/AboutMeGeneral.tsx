@@ -1,9 +1,7 @@
-import { motion } from 'framer-motion';
-
-import { Box, Grid, Button, Container, Typography, Theme, IconButton, Card, Link, Tooltip, Stack } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Facebook, GitHub, LinkedIn } from '@mui/icons-material';
-
+import { Box, Button, Card, Container, Grid, IconButton, Link, Stack, Theme, Tooltip, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
 import { fadeIn, fadeInRight, MotionInView, wrapEnter } from 'src/core/components';
 
 export function AboutMeGeneral() {
@@ -166,8 +164,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(30),
     paddingBottom: theme.spacing(10),
     [theme.breakpoints.up('md')]: {
-      textAlign: 'left'
-    }
+      textAlign: 'left',
+    },
   },
   content: {
     zIndex: 10,
@@ -179,15 +177,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(15),
     [theme.breakpoints.up('md')]: {
       margin: 'unset',
-      textAlign: 'left'
-    }
+      textAlign: 'left',
+    },
   },
   overlay: {
     zIndex: 9,
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    position: 'absolute'
+    position: 'absolute',
   },
   backgroundImage: {
     top: 0,
@@ -200,53 +198,53 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('lg')]: {
       right: '8%',
       width: 'auto',
-      height: '48vh'
-    }
+      height: '48vh',
+    },
   },
   card: {
     padding: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
       width: '75%',
-      margin: '0 auto'
+      margin: '0 auto',
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      margin: '0 auto'
-    }
+      margin: '0 auto',
+    },
   },
   avatar: {
     width: '100%',
-    borderRadius: theme.shape.borderRadiusMd
+    borderRadius: theme.shape.borderRadiusMd,
   },
   title: {
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   socials: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   logoIcon: {
     width: 20,
-    height: 20
+    height: 20,
   },
   textSecondary: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   logo: {
     width: 32,
-    height: 32
+    height: 32,
   },
   stackTitle: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   stack: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   projectLink: {
-    marginTop: theme.spacing(5)
-  }
+    marginTop: theme.spacing(5),
+  },
 }));

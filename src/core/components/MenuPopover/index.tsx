@@ -13,8 +13,8 @@ export function MenuPopover({ children, sx, ...other }: PopoverProps) {
           boxShadow: (theme) => theme.customShadows.z20,
           border: (theme) => `solid 1px ${theme.palette.grey[500_8]}`,
           width: 200,
-          ...sx
-        }
+          ...sx,
+        },
       }}
       {...other}
     >

@@ -1,11 +1,9 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
-import { Theme, Box, Typography, Button } from '@mui/material';
+import { Box, Button, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
+import { motion } from 'framer-motion';
+import { bounceIn, MotionContainer } from 'src/core/components';
 import { PATH_DASHBOARD } from 'src/routes/paths';
-import { MotionContainer, bounceIn } from 'src/core/components';
 
 export function EmptyDashboard() {
   const classes = useStyles();
@@ -15,7 +13,7 @@ export function EmptyDashboard() {
       <Box className={classes.root}>
         <motion.div variants={bounceIn}>
           <Typography variant="h3" paragraph>
-            You aren't part of any project
+            You aren&apos;t part of any project
           </Typography>
         </motion.div>
         <Typography className={classes.text}>Create a new one or wait for an invite from another project</Typography>
@@ -38,13 +36,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: 'auto',
     textAlign: 'center',
     border: `2px dashed ${theme.palette.grey[400]}`,
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
   },
   text: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   image: {
     width: 300,
-    height: 300
-  }
+    height: 300,
+  },
 }));

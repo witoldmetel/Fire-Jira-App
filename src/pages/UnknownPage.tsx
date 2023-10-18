@@ -1,10 +1,8 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
-import { Container, Theme, Box, Typography, Button } from '@mui/material';
+import { Box, Button, Container, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
-import { Page, MotionContainer, bounceIn } from 'src/core/components';
+import { motion } from 'framer-motion';
+import { bounceIn, MotionContainer, Page } from 'src/core/components';
 
 export default function UnknownPage() {
   const classes = useStyles();
@@ -44,18 +42,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: '100%',
     alignItems: 'center',
     paddingTop: theme.spacing(15),
-    paddingBottom: theme.spacing(10)
+    paddingBottom: theme.spacing(10),
   },
   box: {
     maxWidth: 480,
     margin: 'auto',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   text: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   image: {
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4)
-  }
+    marginBottom: theme.spacing(4),
+  },
 }));

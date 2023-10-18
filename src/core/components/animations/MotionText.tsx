@@ -1,7 +1,6 @@
-import { motion, MotionProps } from 'framer-motion';
-
 import { Box, BoxProps } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { motion, MotionProps } from 'framer-motion';
 
 import { fadeInUp } from './variants/Fade';
 
@@ -29,6 +28,6 @@ const useStyles = makeStyles(() => ({
   wrapper: {
     typography: 'h1',
     overflow: 'hidden',
-    display: 'inline-flex'
-  }
+    display: 'inline-flex',
+  },
 }));

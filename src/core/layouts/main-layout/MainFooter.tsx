@@ -1,8 +1,7 @@
 import { Link } from 'react-scroll';
-import { motion } from 'framer-motion';
-
-import { Box, Container, Typography, Theme, Tooltip } from '@mui/material';
+import { Box, Container, Theme, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
 
 export function MainFooter() {
   const classes = useStyles();
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '40px 0',
     textAlign: 'center',
     position: 'relative',
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
   },
   rocketLogo: {
     marginBottom: theme.spacing(1),
@@ -39,6 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 'auto',
     cursor: 'pointer',
     width: 40,
-    height: 40
-  }
+    height: 40,
+  },
 }));

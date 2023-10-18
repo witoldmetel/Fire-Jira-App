@@ -1,9 +1,9 @@
-import { useState, ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { PATH_AUTH } from 'src/routes/paths';
+import { useSelector } from 'src/store/store';
 
 import { getAuthState } from '../store/slices/auth';
-import { useSelector } from 'src/store/store';
-import { PATH_AUTH } from 'src/routes/paths';
 
 type AuthGuardProps = {
   children: ReactNode;

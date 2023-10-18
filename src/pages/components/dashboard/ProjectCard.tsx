@@ -1,6 +1,5 @@
-import { Theme, Box, Typography, Card, Avatar, Tooltip } from '@mui/material';
+import { Avatar, Box, Card, Theme, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
 import { Project } from 'src/store/types';
 import { formatTimeFromNow } from 'src/utils/time';
 
@@ -65,34 +64,34 @@ const useStyles = makeStyles((theme: Theme) => ({
           '& > :nth-child(1)': {
             position: 'absolute',
             height: '100%',
-            width: '100%'
-          }
+            width: '100%',
+          },
         },
 
         // CONTENT
         '& > :nth-child(2)': {
-          flex: '0 1 350px'
-        }
-      }
+          flex: '0 1 350px',
+        },
+      },
     },
 
     '&:hover': {
       boxShadow: 'rgb(39 44 49 / 7%) 8px 28px 50px, rgb(39 44 49 / 4%) 1px 6px 12px',
       transition: 'all 0.4s ease',
-      transform: 'translate3D(0,-1px,0) scale(1.02)'
-    }
+      transform: 'translate3D(0,-1px,0) scale(1.02)',
+    },
   },
   imageContainer: {
     position: 'relative',
     display: 'block',
     overflow: 'hidden',
-    borderRadius: '5px 5px 0 0'
+    borderRadius: '5px 5px 0 0',
   },
   imageWrapper: {
     width: 'auto',
     height: 200,
     background: '#c5d2d9 no-repeat center center',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
   },
   projectImage: {
     position: 'absolute',
@@ -103,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     objectFit: 'cover',
     objectPosition: 'center center',
     opacity: 1,
-    transition: 'none 0s ease 0s'
+    transition: 'none 0s ease 0s',
   },
   projectWrapper: {
     display: 'flex',
@@ -117,41 +116,41 @@ const useStyles = makeStyles((theme: Theme) => ({
 
         // CONTENT
         '& > :nth-child(1)': {
-          padding: '30px 40px 0'
+          padding: '30px 40px 0',
         },
 
         // FOOTER
         '& > :nth-child(2)': {
-          padding: '0 40px 30px'
-        }
-      }
-    }
+          padding: '0 40px 30px',
+        },
+      },
+    },
   },
   projectContent: {
     position: 'relative',
     flexGrow: 1,
     display: 'block',
-    padding: ' 25px 25px 0'
+    padding: ' 25px 25px 0',
   },
   description: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
     '-webkit-line-clamp': 3 /* number of lines to show */,
-    '-webkit-box-orient': 'vertical'
+    '-webkit-box-orient': 'vertical',
   },
   projectFooter: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    padding: 25
+    padding: 25,
   },
   avatar: {
     width: 30,
-    height: 30
+    height: 30,
   },
   updateDate: {
     marginLeft: 20,
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }));

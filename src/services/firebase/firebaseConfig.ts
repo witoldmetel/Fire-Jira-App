@@ -6,5 +6,5 @@ export const firebaseConfig = {
   storageBucket: process.env.FIREBASE_STORE_BUCKET,
   messagingSenderId: process.env.FIREBASE_MESSAGING_SANDER_ID,
   appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };

@@ -1,11 +1,10 @@
-import { useFormik, Form, FormikProvider } from 'formik';
-import { useSnackbar } from 'notistack';
-
-import { Button, Container, Typography, Theme, TextField, Stack, Alert, IconButton } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Close } from '@mui/icons-material';
+import { Alert, Button, Container, IconButton, Stack, TextField, Theme, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
+import { fadeInUp, MotionInView } from 'src/core/components';
 
-import { MotionInView, fadeInUp } from 'src/core/components';
 import { ContactSchema } from './validations';
 
 type InitialValues = {
@@ -26,7 +25,7 @@ export function ContactMeForm() {
       name: '',
       email: '',
       subject: '',
-      message: ''
+      message: '',
     },
     validationSchema: ContactSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
@@ -40,7 +39,7 @@ export function ContactMeForm() {
               <IconButton size="small" onClick={() => closeSnackbar(key)}>
                 <Close />
               </IconButton>
-            )
+            ),
           });
           resetForm();
           setSubmitting(false);
@@ -50,7 +49,7 @@ export function ContactMeForm() {
         setSubmitting(false);
         setErrors({ afterSubmit: error as string });
       }
-    }
+    },
   });
 
   const { values, errors, touched, handleSubmit, getFieldProps, dirty, isSubmitting } = formik;
@@ -145,8 +144,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(5),
     [theme.breakpoints.up('md')]: {
-      textAlign: 'left'
-    }
+      textAlign: 'left',
+    },
   },
   content: {
     maxWidth: 480,
@@ -154,6 +153,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: theme.spacing(12, 0)
-  }
+    padding: theme.spacing(12, 0),
+  },
 }));
