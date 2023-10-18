@@ -7,7 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "prepare": "husky install",
+    "prepare": "husky install && git update-index --chmod=+x .husky/*",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx src",
