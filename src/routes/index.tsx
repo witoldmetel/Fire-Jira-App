@@ -1,12 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import { LoadingPage } from '../core/components';
 import { DashboardLayout } from '../core/layouts/dashboard-layout';
 import { LogoLayout } from '../core/layouts/logo-layout';
 import { MainLayout } from '../core/layouts/main-layout';
 import { AuthGuard } from '../guards/AuthGuard';
 import { GuestGuard } from '../guards/GuestGuard';
+import { LoadingPage } from '../pages/LoadingPage';
 
 import { PATH_DASHBOARD, PATH_PAGE } from './paths';
 

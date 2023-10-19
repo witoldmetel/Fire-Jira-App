@@ -4,8 +4,9 @@ import { AppBar, Box, Button, Container, IconButton, Theme, Toolbar, Typography 
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
 import { useSnackbar } from 'notistack';
+
 import { Logo } from 'src/core/components';
-import { useFirebase } from 'src/hooks/useFirebase';
+import { useFirebase } from 'src/core/hooks';
 import { PATH_DASHBOARD } from 'src/routes/paths';
 import { getProjectState } from 'src/store/slices/project';
 import { useSelector } from 'src/store/store';

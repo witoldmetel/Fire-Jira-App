@@ -3,12 +3,14 @@ import { Box, Theme } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
-import { LoadingPage, Page, Pagination } from 'src/core/components';
+
+import { Page, Pagination } from 'src/core/components';
 import { getProjectState } from 'src/store/slices/project';
 import { fetchProjects } from 'src/store/slices/project/thunks/fetch-projects';
 import { useDispatch, useSelector } from 'src/store/store';
 
 import { EmptyDashboard, ProjectCard } from './components';
+import { LoadingPage } from './LoadingPage';
 
 export default function DashboardPage() {
   const classes = useStyles();

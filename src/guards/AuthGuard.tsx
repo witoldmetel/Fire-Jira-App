@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+
 import { PATH_AUTH } from 'src/routes/paths';
 import { useSelector } from 'src/store/store';
 
@@ -12,6 +13,7 @@ type AuthGuardProps = {
 export function AuthGuard({ children }: AuthGuardProps) {
   const { isAuthenticated, user } = useSelector(getAuthState);
   const { pathname } = useLocation();
+
   const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
   if (!isAuthenticated) {

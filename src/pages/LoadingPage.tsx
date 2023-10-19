@@ -4,7 +4,7 @@ import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
 
-import { Logo } from '../Logo';
+import { Logo } from 'src/core/components';
 
 export function LoadingPage({ ...other }) {
   const classes = useStyles();

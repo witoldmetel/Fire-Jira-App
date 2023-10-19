@@ -1,6 +1,7 @@
 import { alpha, Box, Card, Container, Grid, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
+
 import { fadeInRight, fadeInUp, MotionInView } from 'src/core/components';
 
 const CARDS = [

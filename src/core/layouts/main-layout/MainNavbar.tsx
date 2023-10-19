@@ -2,8 +2,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Box, Button, Container, Theme, Toolbar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
+
 import { HiddenComponent, Logo } from 'src/core/components';
-import { useOffSetTop } from 'src/hooks/useOffSetTop';
+import { useOffSetTop } from 'src/core/hooks';
 import { PATH_AUTH, PATH_DASHBOARD } from 'src/routes/paths';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';

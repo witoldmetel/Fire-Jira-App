@@ -1,6 +1,7 @@
 import { NavLink as RouterLink } from 'react-router-dom';
 import { Box, Container, Link, Stack, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
 import { PATH_PAGE } from 'src/routes/paths';
 
 export function DashboardFooter() {

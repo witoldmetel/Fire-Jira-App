@@ -1,8 +1,9 @@
 import { Box, Button, Container, Stack, Theme, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
+
 import { fadeIn, fadeInRight, fadeInUp, wrapEnter } from 'src/core/components';
-import { useFirebase } from 'src/hooks/useFirebase';
+import { useFirebase } from 'src/core/hooks';
 
 export function LandingTop() {
   const classes = useStyles();

@@ -2,11 +2,11 @@ import { Box, SvgIconTypeMap, Theme } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+
 import { ColorSchema } from 'src/core/theme/types';
 
 type SnackbarIconProps = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
+  icon: OverridableComponent<SvgIconTypeMap<unknown, 'svg'>>;
   color: ColorSchema;
 };
 
