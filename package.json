@@ -8,6 +8,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "prepare": "husky install",
+    "tsc": "tsc",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx src",
@@ -82,9 +83,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn lint",
-      "yarn prettier --write",
-      "yarn test --watchAll=false --findRelatedTests --bail"
+      "yarn format"
     ]
   },
   "eslintConfig": {

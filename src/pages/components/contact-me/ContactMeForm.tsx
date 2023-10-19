@@ -28,7 +28,7 @@ export function ContactMeForm() {
       message: '',
     },
     validationSchema: ContactSchema,
-    onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
+    onSubmit: async (_, { resetForm, setErrors, setSubmitting }) => {
       try {
         // SIMULATE SENDING MESSAGE BECAUSE FIREBASE CLOUD FUNCTIONS ARE NOT FREE ANYMORE :(
         // @todo: Try Lambda AWS
