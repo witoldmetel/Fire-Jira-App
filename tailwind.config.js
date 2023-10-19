@@ -2,6 +2,7 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   important: '#root',
+  presets: [require('./src/core/theme/tailwind-preset.ts')],
   theme: {
     extend: {},
   },

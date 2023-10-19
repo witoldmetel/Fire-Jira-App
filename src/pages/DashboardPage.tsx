@@ -36,7 +36,6 @@ export default function DashboardPage() {
       className={classnames(classes.root, { [classes.emptyContainer]: !projects?.length })}
       title="Dashboard | Fire Jira"
     >
-      <h1 className="text-2xl font-bold underline text-theme.palette.text.secondary">Hello world!</h1>
       <div className={classes.content}>
         {projects?.length ? (
           <>

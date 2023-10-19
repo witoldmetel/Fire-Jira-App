@@ -1,3 +1,131 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font-base: 16px;
+}
+
+@layer base {
+  /* Common styles for headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  /* h1 */
+  h1 {
+    font-size: 2.5rem; /* pxToRem(40) */
+  }
+
+  /* h2 */
+  h2 {
+    font-size: 2rem; /* pxToRem(32) */
+  }
+
+  /* h3 */
+  h3 {
+    font-size: 1.5rem; /* pxToRem(24) */
+  }
+
+  /* h4 */
+  h4 {
+    font-size: 1.25rem; /* pxToRem(20) */
+  }
+
+  /* h5 */
+  h5 {
+    font-size: 1.125rem; /* pxToRem(18) */
+  }
+
+  /* h6 */
+  h6 {
+    font-size: 1.0625rem; /* pxToRem(17) */
+  }
+
+  /* Media query for screens with a minimum width of 640px (sm) */
+  @media (min-width: 640px) {
+    h1 {
+      font-size: 3.25rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.625rem;
+    }
+  }
+
+  /* Media query for screens with a minimum width of 768px (md) */
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 3.625rem;
+    }
+
+    h2 {
+      font-size: 2.75rem;
+    }
+
+    h3 {
+      font-size: 1.875rem;
+    }
+  }
+
+  /* Media query for screens with a minimum width of 1024px (lg) */
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 4rem;
+    }
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+    }
+  }
+
+  /* Other styles (subtitle1, subtitle2, body1, etc.) */
+  .subtitle1 {
+    font-weight: 600;
+    font-size: 1rem; /* pxToRem(16) */
+  }
+
+  .subtitle2 {
+    font-weight: 600;
+    font-size: 0.875rem; /* pxToRem(14) */
+  }
+
+  body1 {
+    font-size: 1rem; /* pxToRem(16) */
+  }
+
+  body2 {
+    font-size: 0.875rem; /* pxToRem(14) */
+  }
+
+  .caption {
+    font-size: 0.75rem; /* pxToRem(12) */
+  }
+
+  .overline {
+    font-weight: 700;
+    font-size: 0.75rem; /* pxToRem(12) */
+    letter-spacing: 1.1;
+    text-transform: uppercase;
+  }
+
+  .button {
+    font-weight: 700;
+    font-size: 0.875rem; /* pxToRem(14) */
+    text-transform: capitalize;
+  }
+}
