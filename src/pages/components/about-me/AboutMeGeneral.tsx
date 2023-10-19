@@ -2,6 +2,7 @@ import { Facebook, GitHub, LinkedIn } from '@mui/icons-material';
 import { Box, Button, Card, Container, Grid, IconButton, Link, Stack, Theme, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
+
 import { fadeIn, fadeInRight, MotionInView, wrapEnter } from 'src/core/components';
 
 export function AboutMeGeneral() {

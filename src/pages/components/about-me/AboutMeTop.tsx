@@ -1,6 +1,7 @@
 import { Box, Container, Stack, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
+
 import { fadeIn, fadeInDown, fadeInRight, MotionText, wrapEnter } from 'src/core/components';
 
 export function AboutMeTop() {

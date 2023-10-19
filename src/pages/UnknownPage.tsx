@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Container, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
+
 import { bounceIn, MotionContainer, Page } from 'src/core/components';
 
 export default function UnknownPage() {

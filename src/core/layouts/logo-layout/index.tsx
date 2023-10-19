@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
 import { Logo } from 'src/core/components';
 
 export function LogoLayout() {

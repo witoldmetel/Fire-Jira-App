@@ -14,8 +14,8 @@ import {
 } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { useFirebase } from 'src/hooks/useFirebase';
-import { useIsMountedRef } from 'src/hooks/useIsMountedRef';
+
+import { useFirebase, useIsMountedRef } from 'src/core/hooks';
 import { PATH_AUTH } from 'src/routes/paths';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';

@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, Link, MenuItem, Stack, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
+
 import { MenuPopover } from 'src/core/components';
 
 import { MenuItemProps } from '../types';

@@ -1,8 +1,8 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useFirebase } from 'src/hooks/useFirebase';
 
 import { Page } from '../core/components';
+import { useFirebase } from '../core/hooks';
 
 export default function VerifyPage() {
   const classes = useStyles();

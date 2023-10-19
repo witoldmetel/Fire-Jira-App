@@ -1,5 +1,6 @@
 import { Avatar, Box, Card, Theme, Tooltip, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
 import { Project } from 'src/store/types';
 import { formatTimeFromNow } from 'src/utils/time';
 

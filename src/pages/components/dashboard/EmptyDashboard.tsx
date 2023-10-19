@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
+
 import { bounceIn, MotionContainer } from 'src/core/components';
 import { PATH_DASHBOARD } from 'src/routes/paths';
 

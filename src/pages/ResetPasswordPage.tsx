@@ -5,9 +5,9 @@ import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/mate
 import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useSnackbar } from 'notistack';
-import { useFirebase } from 'src/hooks/useFirebase';
 
 import { Page, ResetPasswordForm } from '../core/components';
+import { useFirebase } from '../core/hooks';
 import { PATH_AUTH } from '../routes/paths';
 
 export default function ResetPasswordPage() {

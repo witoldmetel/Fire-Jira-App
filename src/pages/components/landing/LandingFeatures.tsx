@@ -2,6 +2,7 @@ import { Box, Container, Theme, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
+
 import { fadeInUp, MotionInView } from 'src/core/components';
 
 // @todo: Add real screen from the app

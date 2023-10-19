@@ -5,11 +5,12 @@ import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
+import * as Yup from 'yup';
+
 import { Page } from 'src/core/components';
 import { getProjectState, resetState } from 'src/store/slices/project';
 import { createProject } from 'src/store/slices/project/thunks/create-project';
 import { useDispatch, useSelector } from 'src/store/store';
-import * as Yup from 'yup';
 
 export const NewProjectSchema = Yup.object().shape({
   name: Yup.string().required('Project Name is required'),
