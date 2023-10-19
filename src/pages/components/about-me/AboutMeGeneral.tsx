@@ -14,26 +14,26 @@ export function AboutMeGeneral() {
           <Grid item xs={12} md={6} lg={5}>
             <MotionInView variants={fadeIn}>
               <Card className={classes.card}>
-                <Box className={classes.avatar} component="img" src="/static/me.jfif" />
+                <Box
+                  className={classes.avatar}
+                  component="img"
+                  src="https://avatars.githubusercontent.com/u/31034370?v=4"
+                />
                 <Box className={classes.socials}>
-                  <Link
-                    component={IconButton}
-                    href="https://www.facebook.com/Managersky/"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <Facebook className={classes.logoIcon} />
+                  <Link href="https://www.facebook.com/witoldmetel/" target="_blank" rel="noopener">
+                    <IconButton>
+                      <Facebook className={classes.logoIcon} />
+                    </IconButton>
                   </Link>
-                  <Link
-                    component={IconButton}
-                    href="https://www.linkedin.com/in/witoldmetel"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <LinkedIn className={classes.logoIcon} />
+                  <Link href="https://www.linkedin.com/in/witoldmetel" target="_blank" rel="noopener">
+                    <IconButton>
+                      <LinkedIn className={classes.logoIcon} />
+                    </IconButton>
                   </Link>
-                  <Link component={IconButton} href="https://github.com/witoldmetel" target="_blank" rel="noopener">
-                    <GitHub className={classes.logoIcon} />
+                  <Link href="https://github.com/witoldmetel" target="_blank" rel="noopener">
+                    <IconButton>
+                      <GitHub className={classes.logoIcon} />
+                    </IconButton>
                   </Link>
                 </Box>
               </Card>
@@ -49,7 +49,12 @@ export function AboutMeGeneral() {
 
             <MotionInView variants={fadeInRight}>
               <Typography className={classes.textSecondary}>
-                Front-End Developer mostly working in React and Typescript.
+                I&apos;m an experienced Frontend Developer, with over 5 years of experience, working mainly in React and
+                Typescript. Recently, I have been focusing on developing my skills in mobile development (React Native)
+                and backend (Node.js / Prisma). I&apos;m not afraid of difficult challenges and enjoy working with
+                foreign clients. I mainly work in international teams (both small and large), I prefer to work in
+                kanban, but I also have experience in scrum. Honest feedback and code review are crucial for me as a
+                programmer.
               </Typography>
             </MotionInView>
 
@@ -226,6 +231,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
   logoIcon: {
+    color: theme.palette.primary.main,
     width: 20,
     height: 20,
   },

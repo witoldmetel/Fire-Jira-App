@@ -8,7 +8,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "prepare": "husky install",
-    "test": "vitest",
+    "tsc": "tsc",
+    "test": "vitest --run",
     "test:ui": "vitest --ui",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx src",
     "lint:fix": "eslint --fix --ext .js,.ts,.jsx,.tsx src",
@@ -70,7 +71,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "husky": "8.0.1",
+    "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
@@ -82,9 +83,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn lint",
-      "yarn prettier --write",
-      "yarn test --watchAll=false --findRelatedTests --bail"
+      "yarn format"
     ]
   },
   "eslintConfig": {
