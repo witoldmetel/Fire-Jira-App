@@ -8,6 +8,8 @@ import { FirebaseProvider } from './services/firebase/FirebaseContext';
 import { store } from './store/store';
 import App from './App';
 
+import './index.css';
+
 const container = document.getElementById('root');
 const root = createRoot(container!);
 
