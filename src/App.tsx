@@ -4,8 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
 
-import { LoadingPage, NotistackProvider } from './core/components';
+import { NotistackProvider } from './core/components';
 import { ThemeConfig } from './core/theme';
+import { LoadingPage } from './pages/LoadingPage';
 import { Router } from './routes';
 
 function App() {
