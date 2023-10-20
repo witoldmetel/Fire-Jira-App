@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Alert, Button, Divider, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
 
 import { useFirebase, useIsMountedRef } from 'src/core/hooks';
 import { getAuthState } from 'src/store/slices/auth';
@@ -20,29 +19,9 @@ type InitialValues = {
 
 export function RegisterForm() {
   const { register, loginWithGoogle } = useFirebase();
-  const { isError, errorMessage } = useSelector(getAuthState);
+  const { errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
-
-  useEffect(() => {
-    if (isError) {
-      enqueueSnackbar(errorMessage?.code, { variant: 'error' });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError]);
-
-  const googleRegisterHandler = () =>
-    loginWithGoogle(() =>
-      enqueueSnackbar('Register success', {
-        variant: 'success',
-        action: (key) => (
-          <IconButton size="small" onClick={() => closeSnackbar(key)}>
-            <Close />
-          </IconButton>
-        ),
-      })
-    );
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -52,23 +31,12 @@ export function RegisterForm() {
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
-        await register(values.email, values.password, () =>
-          enqueueSnackbar('Register success', {
-            variant: 'success',
-            action: (key) => (
-              <IconButton size="small" onClick={() => closeSnackbar(key)}>
-                <Close />
-              </IconButton>
-            ),
-          })
-        );
+        await register(values.email, values.password);
 
         if (isMountedRef.current) {
           setSubmitting(false);
         }
       } catch (error) {
-        enqueueSnackbar(errorMessage?.code, { variant: 'error' });
-
         if (isMountedRef.current) {
           setSubmitting(false);
           setErrors({ afterSubmit: errorMessage?.code });
@@ -85,7 +53,7 @@ export function RegisterForm() {
 
   return (
     <FormikProvider value={formik}>
-      <SocialForm onGoogleClick={googleRegisterHandler} />
+      <SocialForm onGoogleClick={loginWithGoogle} />
 
       <Divider className="my-6">
         <Typography variant="body2">OR</Typography>

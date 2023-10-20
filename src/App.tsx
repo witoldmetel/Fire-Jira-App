@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { getAuthState } from 'src/store/slices/auth';
 import { useSelector } from 'src/store/store';
 
-import { NotistackProvider } from './core/components';
 import { ThemeConfig } from './core/theme';
 import { LoadingPage } from './pages/LoadingPage';
 import { Router } from './routes';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { isInitialized } = useSelector(getAuthState);
@@ -19,7 +21,14 @@ function App() {
 
   return (
     <ThemeConfig>
-      <NotistackProvider>{isInitialized ? <Router /> : <LoadingPage />}</NotistackProvider>
+      {isInitialized ? (
+        <>
+          <Router />
+          <ToastContainer />
+        </>
+      ) : (
+        <LoadingPage />
+      )}
     </ThemeConfig>
   );
 }

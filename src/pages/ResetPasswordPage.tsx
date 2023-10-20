@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Close } from '@mui/icons-material';
-import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import { Page, ResetPasswordForm } from '../core/components';
 import { useFirebase } from '../core/hooks';
@@ -12,19 +10,9 @@ export default function ResetPasswordPage() {
   const { resetPassword } = useFirebase();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const resendHandler = async () => {
-    await resetPassword?.(email, () =>
-      enqueueSnackbar('Resend email success', {
-        variant: 'success',
-        action: (key) => (
-          <IconButton size="small" onClick={() => closeSnackbar(key)}>
-            <Close />
-          </IconButton>
-        ),
-      })
-    );
+    await resetPassword?.(email);
   };
 
   return (

@@ -1,8 +1,7 @@
-import { Close } from '@mui/icons-material';
-import { Alert, Button, Container, IconButton, Stack, TextField, Theme, Typography } from '@mui/material';
+import { toast } from 'react-toastify';
+import { Alert, Button, Container, Stack, TextField, Theme, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
 
 import { fadeInUp, MotionInView } from 'src/core/components';
 
@@ -19,7 +18,6 @@ type InitialValues = {
 
 export function ContactMeForm() {
   const classes = useStyles();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -34,14 +32,7 @@ export function ContactMeForm() {
         // SIMULATE SENDING MESSAGE BECAUSE FIREBASE CLOUD FUNCTIONS ARE NOT FREE ANYMORE :(
         // @todo: Try Lambda AWS
         await new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-          enqueueSnackbar('Message sent successfully!', {
-            variant: 'success',
-            action: (key) => (
-              <IconButton size="small" onClick={() => closeSnackbar(key)}>
-                <Close />
-              </IconButton>
-            ),
-          });
+          toast.success('Message sent successfully!');
           resetForm();
           setSubmitting(false);
         });

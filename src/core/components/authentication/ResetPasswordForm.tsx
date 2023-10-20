@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { Close } from '@mui/icons-material';
-import { Alert, Button, IconButton, Stack, TextField } from '@mui/material';
+import { Alert, Button, Stack, TextField } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
 
 import { useFirebase, useIsMountedRef } from 'src/core/hooks';
 import { getAuthState } from 'src/store/slices/auth';
@@ -22,16 +19,8 @@ type ResetPasswordFormProps = {
 
 export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps) {
   const { resetPassword } = useFirebase();
-  const { isError, errorMessage } = useSelector(getAuthState);
+  const { errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    if (isError) {
-      enqueueSnackbar(errorMessage?.code, { variant: 'error' });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError]);
 
   const formik = useFormik<InitialValues>({
     initialValues: { email: '' },
@@ -41,15 +30,6 @@ export function ResetPasswordForm({ onSent, onGetEmail }: ResetPasswordFormProps
         resetPassword?.(values.email, () => {
           onSent();
           onGetEmail(formik.values.email);
-
-          enqueueSnackbar('Reset password success', {
-            variant: 'success',
-            action: (key) => (
-              <IconButton size="small" onClick={() => closeSnackbar(key)}>
-                <Close />
-              </IconButton>
-            ),
-          });
         });
 
         if (isMountedRef.current) {
