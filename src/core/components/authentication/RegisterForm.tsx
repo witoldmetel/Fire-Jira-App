@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
-import { Alert, Button, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { Alert, Button, Divider, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 
@@ -86,6 +86,10 @@ export function RegisterForm() {
   return (
     <FormikProvider value={formik}>
       <SocialForm onGoogleClick={googleRegisterHandler} />
+
+      <Divider className="my-6">
+        <Typography variant="body2">OR</Typography>
+      </Divider>
 
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>

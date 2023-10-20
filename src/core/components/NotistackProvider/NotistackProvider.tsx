@@ -13,6 +13,7 @@ type NotistackProviderProps = {
   children: ReactNode;
 };
 
+// @todo: Use other notification library
 export function NotistackProvider({ children }: NotistackProviderProps) {
   const classes = useStyles();
 
