@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Close, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Alert,
   Button,
@@ -15,7 +15,6 @@ import {
   Typography,
 } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
 
 import { useFirebase, useIsMountedRef } from 'src/core/hooks';
 import { PATH_AUTH } from 'src/routes/paths';
@@ -35,29 +34,9 @@ type InitialValues = {
 
 export function LoginForm() {
   const { login, loginWithGoogle } = useFirebase();
-  const { isError, errorMessage } = useSelector(getAuthState);
+  const { errorMessage } = useSelector(getAuthState);
   const isMountedRef = useIsMountedRef();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
-
-  useEffect(() => {
-    if (isError) {
-      enqueueSnackbar(errorMessage?.code, { variant: 'error' });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError]);
-
-  const googleLoginHandler = () =>
-    loginWithGoogle(() =>
-      enqueueSnackbar('Login success', {
-        variant: 'success',
-        action: (key) => (
-          <IconButton size="small" onClick={() => closeSnackbar(key)}>
-            <Close />
-          </IconButton>
-        ),
-      })
-    );
 
   const formik = useFormik<InitialValues>({
     initialValues: {
@@ -68,22 +47,12 @@ export function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: async (values, { resetForm, setErrors, setSubmitting }) => {
       try {
-        await login(values.email, values.password, values.remember, () =>
-          enqueueSnackbar('Login success', {
-            variant: 'success',
-            action: (key) => (
-              <IconButton size="small" onClick={() => closeSnackbar(key)}>
-                <Close />
-              </IconButton>
-            ),
-          })
-        );
+        await login(values.email, values.password, values.remember);
 
         if (isMountedRef.current) {
           setSubmitting(false);
         }
       } catch (error) {
-        enqueueSnackbar(errorMessage?.code, { variant: 'error' });
         resetForm();
 
         if (isMountedRef.current) {
@@ -102,7 +71,7 @@ export function LoginForm() {
 
   return (
     <FormikProvider value={formik}>
-      <SocialForm onGoogleClick={googleLoginHandler} />
+      <SocialForm onGoogleClick={loginWithGoogle} />
 
       <Divider className="my-6">
         <Typography variant="body2">OR</Typography>

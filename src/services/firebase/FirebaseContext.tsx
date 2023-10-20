@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
   browserLocalPersistence,
@@ -68,6 +69,7 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           dispatch(getUserSuccess(userSnap.data()));
         } else {
           dispatch(hasError('User not found!'));
+          toast.error('User not found!');
         }
       } else {
         dispatch(getUserReject());
@@ -85,16 +87,25 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
     const auth = getAuth();
 
     if (auth?.currentUser) {
-      return sendEmailVerification(auth.currentUser, {
+      const emailVerificationPromise = sendEmailVerification(auth.currentUser, {
         url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? '',
       });
+
+      toast.promise(emailVerificationPromise, {
+        pending: 'Verification email is sending',
+        success: 'Email sent successfully 👌',
+        error: 'Email sent rejected 🤯',
+      });
+
+      return emailVerificationPromise;
     } else {
       dispatch(hasError('User not found!'));
       dispatch(resetState());
+      toast.error('User not found!');
     }
   };
 
-  const register = (email: string, password: string, callback: () => void) => {
+  const register = (email: string, password: string) => {
     dispatch(startLoading());
 
     const auth = getAuth();
@@ -107,24 +118,31 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
             email: userCredential.user.email,
             isVerified: userCredential.user.emailVerified,
           }).then(async () => {
-            sendEmailVerification(userCredential.user, {
+            const emailVerificationPromise = sendEmailVerification(userCredential.user, {
               url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT ?? '',
             });
 
-            callback();
+            toast.promise(emailVerificationPromise, {
+              pending: 'Verification email is sending',
+              success: 'Email sent successfully 👌',
+              error: 'Email sent rejected 🤯',
+            });
+
+            return emailVerificationPromise;
           });
         } catch (error) {
           dispatch(hasError(error));
+          toast.error('Registration failed');
         }
       })
-
       .catch((error) => {
         dispatch(hasError(error));
         dispatch(resetState());
+        toast.error('Registration failed');
       });
   };
 
-  const login = (email: string, password: string, remember: boolean, callback?: () => void) => {
+  const login = (email: string, password: string, remember: boolean) => {
     dispatch(startLoading());
 
     const auth = getAuth();
@@ -136,15 +154,23 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
         // if a user forgets to sign out.
         // ...
         // New sign-in will be persisted with session persistence.
-        return signInWithEmailAndPassword(auth, email, password).then(() => callback && callback());
+        const signInEmailPromise = signInWithEmailAndPassword(auth, email, password);
+
+        toast.promise(signInEmailPromise, {
+          success: 'You are logged in 👌',
+          error: 'Login error 🤯',
+        });
+
+        return signInEmailPromise;
       })
       .catch((error) => {
         dispatch(hasError(error));
         dispatch(resetState());
+        toast.error('Login error');
       });
   };
 
-  const loginWithGoogle = (callback: () => void) => {
+  const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider().setCustomParameters({
       display: 'popup',
     });
@@ -157,44 +183,51 @@ function FirebaseProvider({ children }: { children: ReactNode }) {
           await setDoc(doc(db, 'users', result.user.uid), {
             id: result.user.uid,
             email: result.user.email,
-          }).then(() => callback());
+          });
+
+          toast.success('You are logged in 👌');
         } catch (error) {
           dispatch(hasError(error));
+          toast.error('Login error');
         }
       })
       .catch((error) => {
         dispatch(hasError(error));
         dispatch(resetState());
+        toast.error('Login error');
       });
   };
 
-  const logout = async (callback: () => void) => {
+  const logout = async () => {
     dispatch(startLoading());
 
     const auth = getAuth();
 
     await signOut(auth)
       .then(() => {
-        callback();
+        toast.success('You have logged out ');
       })
       .catch((error) => {
         dispatch(hasError(error));
+        toast.error('Logout error');
       });
 
     dispatch(resetState());
   };
 
-  const resetPassword = async (email: string, callback: () => void) => {
+  const resetPassword = async (email: string, callback?: () => void) => {
     dispatch(startLoading());
 
     const auth = getAuth();
 
     await sendPasswordResetEmail(auth, email)
       .then(() => {
-        callback();
+        callback?.();
+        toast.success('Reset password email wast sent');
       })
       .catch((error) => {
         dispatch(hasError(error));
+        toast.error('Password reset error');
       });
 
     dispatch(resetState());

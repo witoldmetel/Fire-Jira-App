@@ -1,9 +1,7 @@
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import { Close } from '@mui/icons-material';
-import { AppBar, Box, Button, Container, IconButton, Theme, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Container, Theme, Toolbar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import classnames from 'classnames';
-import { useSnackbar } from 'notistack';
 
 import { Logo } from 'src/core/components';
 import { useFirebase } from 'src/core/hooks';
@@ -17,25 +15,9 @@ export function DashboardNavbar() {
   const { pathname } = useLocation();
   const { logout } = useFirebase();
   const { projects } = useSelector(getProjectState);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
-    try {
-      await logout(() =>
-        enqueueSnackbar('Logout success', {
-          variant: 'success',
-          action: (key) => (
-            <IconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Close />
-            </IconButton>
-          ),
-        })
-      ).then(() => {
-        navigate('/');
-      });
-    } catch (error) {
-      enqueueSnackbar('Unable to logout', { variant: 'error' });
-    }
+    await logout().finally(() => navigate('/'));
   };
 
   return (

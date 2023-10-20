@@ -1,16 +1,13 @@
-import { useEffect } from 'react';
-import { Close } from '@mui/icons-material';
-import { Alert, Button, Container, IconButton, Stack, TextField, Theme, Typography } from '@mui/material';
+import { Alert, Button, Container, Stack, TextField, Theme, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 
 import { Page } from 'src/core/components';
-import { getProjectState, resetState } from 'src/store/slices/project';
+import { resetState } from 'src/store/slices/project';
 import { createProject } from 'src/store/slices/project/thunks/create-project';
-import { useDispatch, useSelector } from 'src/store/store';
+import { useDispatch } from 'src/store/store';
 
 export const NewProjectSchema = Yup.object().shape({
   name: Yup.string().required('Project Name is required'),
@@ -29,26 +26,6 @@ type InitialValues = {
 export default function NewProjectPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { isSuccess, isError, errorMessage } = useSelector(getProjectState);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    if (isSuccess) {
-      enqueueSnackbar('Project created successfully!', {
-        variant: 'success',
-        action: (key) => (
-          <IconButton size="small" onClick={() => closeSnackbar(key)}>
-            <Close />
-          </IconButton>
-        ),
-      });
-    }
-
-    if (isError) {
-      enqueueSnackbar(errorMessage, { variant: 'error' });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess, isError]);
 
   const formik = useFormik<InitialValues>({
     initialValues: {

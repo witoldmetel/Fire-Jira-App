@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { createAsyncThunk, nanoid } from '@reduxjs/toolkit';
 import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
@@ -27,7 +28,11 @@ export const createProject = createAsyncThunk<
       createdAt: date,
       updatedAt: date,
     });
+
+    toast.success('Project created successfully!');
   } catch (error) {
+    toast.error('Failed to create project');
+
     return rejectWithValue({ errorMessage: 'Failed to create project' });
   }
 });
