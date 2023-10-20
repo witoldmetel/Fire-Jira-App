@@ -1,18 +1,16 @@
 import { Box, Button, Container, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import { Page } from '../core/components';
 import { useFirebase } from '../core/hooks';
 
 export default function VerifyPage() {
-  const classes = useStyles();
   const { sendConfirmationEmail } = useFirebase();
 
   return (
-    <Page className={classes.root} title="Verify Email | Fire Jira">
+    <Page className="flex min-h-screen items-center justify-center" title="Verify Email | Fire Jira">
       <Container>
-        <div className={classes.content}>
-          <Box className={classes.box}>
+        <div className="max-w-480 mx-auto flex min-h-screen flex-col justify-center">
+          <Box className="text-center">
             <Typography variant="h3" gutterBottom>
               Go to your email inbox and please verify your email
             </Typography>
@@ -26,21 +24,3 @@ export default function VerifyPage() {
     </Page>
   );
 }
-
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    minHeight: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  content: {
-    maxWidth: 480,
-    margin: 'auto',
-    display: 'flex',
-    minHeight: '100vh',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  box: { textAlign: 'center' },
-}));
