@@ -5,12 +5,14 @@ import {
   Alert,
   Button,
   Checkbox,
+  Divider,
   FormControlLabel,
   IconButton,
   InputAdornment,
   Link,
   Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
@@ -101,6 +103,10 @@ export function LoginForm() {
   return (
     <FormikProvider value={formik}>
       <SocialForm onGoogleClick={googleLoginHandler} />
+
+      <Divider className="my-6">
+        <Typography variant="body2">OR</Typography>
+      </Divider>
 
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>

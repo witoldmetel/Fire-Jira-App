@@ -2,7 +2,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureStore, DeepPartial, Reducer } from '@reduxjs/toolkit';
 
-import { NotistackProvider } from '../core/components';
 import { ThemeConfig } from '../core/theme';
 import { FirebaseProvider } from '../services/firebase/FirebaseContext';
 import { rootReducer as reducer } from '../store/rootReducer';
@@ -23,9 +22,7 @@ export const TestWrapper = ({ preloadedState = {}, children }: TestWrapperProps)
     <Provider store={store}>
       <FirebaseProvider>
         <ThemeConfig>
-          <NotistackProvider>
-            <MemoryRouter>{children}</MemoryRouter>
-          </NotistackProvider>
+          <MemoryRouter>{children}</MemoryRouter>
         </ThemeConfig>
       </FirebaseProvider>
     </Provider>
